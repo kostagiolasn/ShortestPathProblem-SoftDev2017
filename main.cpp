@@ -1,4 +1,4 @@
-/* 
+　/* 
  * File:   main.cpp
  * Author: nikos
  *
@@ -8,12 +8,12 @@
 #include <cstdlib>
 
 using namespace std;
-
+　
 /*
  * 
  */
 int main(int argc, char** argv) {
-
+    printf('Test push.\n');
     return 0;
 }
 
