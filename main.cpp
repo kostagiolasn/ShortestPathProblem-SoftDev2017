@@ -1,6 +1,16 @@
+<<<<<<< HEAD
 #include <iostream>
 #include <string>
 #include <cstring>
+=======
+　/* 
+ * File:   main.cpp
+ * Author: nikos
+ *
+ * Created on October 20, 2016, 10:09 PM
+ */
+
+>>>>>>> 6abf377cff4424ec554c767478a877b380c599e3
 #include <cstdlib>
 #include <fstream>
 #include <stdio.h>
@@ -9,7 +19,7 @@
 //#include "index.hpp"
 
 using namespace std;
-
+　
 /*
  * 
  */
@@ -24,6 +34,7 @@ void parseFileGraph(std::string stream);
 void parseFileWorkLoad(std::string stream);
 
 int main(int argc, char** argv) {
+<<<<<<< HEAD
 
     std::string fileGraph;
     std::string fileWorkLoad;
@@ -162,5 +173,9 @@ void parseFileWorkLoad(std::string stream) {
     if(err) {
         throw std::string("Work Load File input : unexpected format, a is : " + queryType);
     }
+=======
+    printf('Test push.\n');
+    return 0;
+>>>>>>> 6abf377cff4424ec554c767478a877b380c599e3
 }
 

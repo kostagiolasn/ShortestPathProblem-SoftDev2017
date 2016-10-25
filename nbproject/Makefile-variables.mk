@@ -7,13 +7,13 @@ CND_BASEDIR=`pwd`
 CND_BUILDDIR=build
 CND_DISTDIR=dist
 # Debug configuration
-CND_PLATFORM_Debug=GNU-Linux-x86
-CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux-x86
-CND_ARTIFACT_NAME_Debug=shortestpathproblem
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/shortestpathproblem
-CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Debug=shortestpathproblem.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/shortestpathproblem.tar
+CND_PLATFORM_Debug=MinGW_1-Windows
+CND_ARTIFACT_DIR_Debug=dist/Debug/MinGW_1-Windows
+CND_ARTIFACT_NAME_Debug=shortestpathproblem-softdev2017
+CND_ARTIFACT_PATH_Debug=dist/Debug/MinGW_1-Windows/shortestpathproblem-softdev2017
+CND_PACKAGE_DIR_Debug=dist/Debug/MinGW_1-Windows/package
+CND_PACKAGE_NAME_Debug=shortestpathproblem-softdev2017.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/MinGW_1-Windows/package/shortestpathproblem-softdev2017.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux-x86
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux-x86
