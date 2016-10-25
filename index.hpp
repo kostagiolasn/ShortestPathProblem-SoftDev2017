@@ -1,10 +1,3 @@
-/* 
- * File:   index.hpp
- * Author: nikos
- *
- * Created on October 23, 2016, 6:46 PM
- */
-
 #ifndef INDEX_HPP
 #define	INDEX_HPP
 
@@ -17,11 +10,15 @@
 #include <cstdlib>
 #include <cassert>
 
+#include "nodeIndex.hpp"
+#include "nodeList.hpp"
+#include "buffer.hpp"
+
 typedef int OK_SUCCESS;
 
 const size_t INITIAL_INDEX_SIZE = 512;
 const size_t INITIAL_BUFFER_SIZE = 512;
-const size_t INITIAL_BUFFER_ARRAY_SIZE = 10;
+const size_t INITIAL_NEIGHBOR_ARRAY_SIZE = 10;
 
 class Index {
     private:
@@ -61,8 +58,6 @@ class Index {
 
     NodeIndex* Index::createNodeIndex() {
         this->index = new NodeIndex*[INITIAL_INDEX_SIZE];
-        for (int i = 0; i < INITIAL_INDEX_SIZE; i++)
-            this->index[i] = NULL;
     }
 
     OK_SUCCESS Index::insertNode(NodeIndex*, uint32_t sourceNodeId, uint32_t targetNodeId) {
