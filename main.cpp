@@ -1,28 +1,19 @@
-<<<<<<< HEAD
-#include <iostream>
-#include <string>
-#include <cstring>
-=======
-　/* 
+/* 
  * File:   main.cpp
  * Author: nikos
  *
- * Created on October 20, 2016, 10:09 PM
+ * Created on October 27, 2016, 4:00 AM
  */
 
->>>>>>> 6abf377cff4424ec554c767478a877b380c599e3
+#include <iostream>
+#include <string>
+#include <cstring>
 #include <cstdlib>
 #include <fstream>
 #include <stdio.h>
 #include <sstream>
 
-//#include "index.hpp"
-
-using namespace std;
-　
-/*
- * 
- */
+#include "index.hpp"
 
 void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fileWorkLoad);
 
@@ -33,8 +24,12 @@ void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fil
 void parseFileGraph(std::string stream);
 void parseFileWorkLoad(std::string stream);
 
+using namespace std;
+
+/*
+ * 
+ */
 int main(int argc, char** argv) {
-<<<<<<< HEAD
 
     std::string fileGraph;
     std::string fileWorkLoad;
@@ -48,11 +43,15 @@ int main(int argc, char** argv) {
     }
     
     // Initialize the class objects here
+    Index indexExternal = new Index(true);
+    Buffer bufferExternal = new Buffer();
+    Index indexInternal = new Index(false);
+    Buffer bufferInternal = new Buffer();
     
     // Parse the file for the graph creation
     try {
         //parseFileGraph(externalIndex, internalIndex, fileGraph);
-        parseFileGraph(fileGraph);
+        parseFileGraph(fileGraph, &indexExternal, &bufferExternal, &indexInternal, &bufferInternal);
     } catch (std::string err) {
         std::cerr << err << std::endl;
         state = 2;
@@ -103,7 +102,7 @@ void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fil
 }
 
 //void parseFileGraph(Index externalIndex, Index internalIndex, std::string stream) {
-void parseFileGraph(std::string stream) {
+void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBuffer, Index* internalIndex, Buffer* internalBuffer) {
     std::string line;
     char a;
     int idSource, idTarget, err;
@@ -128,6 +127,10 @@ void parseFileGraph(std::string stream) {
             }
             cout << idSource << " " << idTarget << endl;
             // Here is where the insertion takes place
+            // In the external index, idTarget must be added as a neighbor to idSource
+            // while in the internal index, idSource must be added as a neighbor to idTarget
+            externalIndex->insertNode(idSource, idTarget, externalBuffer);
+            internalIndex->insertNode(idTarget, idSource, internalBuffer);
         }
     }   
     
@@ -173,9 +176,6 @@ void parseFileWorkLoad(std::string stream) {
     if(err) {
         throw std::string("Work Load File input : unexpected format, a is : " + queryType);
     }
-=======
-    printf('Test push.\n');
-    return 0;
->>>>>>> 6abf377cff4424ec554c767478a877b380c599e3
+
 }
 
