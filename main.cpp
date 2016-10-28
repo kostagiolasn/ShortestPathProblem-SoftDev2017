@@ -18,11 +18,13 @@
 
 void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fileWorkLoad);
 
+void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBuffer, Index* internalIndex, Buffer* internalBuffer);
+
 //void parseFileGraph(Index externalIndex, Index internalIndex, std::string stream);
 
 //void parseFileWorkLoad(Index externalIndex, Index internalIndex, std::string stream);
 
-void parseFileGraph(std::string stream);
+//void parseFileGraph(std::string stream);
 void parseFileWorkLoad(std::string stream);
 
 using namespace std;

@@ -23,10 +23,10 @@ class Buffer {
         Buffer* createBuffer();
         
         // Allocates a new Node in the Buffer ** I believe it means double the buffer **
-        NodeList* allocNewNode(Buffer*);
+        NodeList* allocNewNode();
         
         // No idea !!!
-        NodeList* getListNode(NodeList*);
+        NodeList* getListNode(uint32_t);
         
         // Destroys the buffer
         OK_SUCCESS destroyBuffer(Buffer*);
@@ -96,8 +96,12 @@ class Buffer {
     
     }
     
-    NodeList* Buffer::allocNewNode(Buffer* b) {
-        return &(b->buffer[firstListAvailable]);
+    NodeList* Buffer::getListNode(uint32_t index) {
+        return &(this->buffer[index]);
+    };
+    
+    NodeList* Buffer::allocNewNode() {
+        return &(this->buffer[firstListAvailable]);
     }
         
     //NodeList* Buffer::getListNode(NodeList*);
