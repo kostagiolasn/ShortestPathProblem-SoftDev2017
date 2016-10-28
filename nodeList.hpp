@@ -8,7 +8,7 @@ class NodeList {
         uint32_t* edgeProperty;
         size_t neighborsSize;
         size_t edgePropertySize;
-        size_t offset;
+        uint32_t offset;
         
     public:
         
@@ -23,6 +23,16 @@ class NodeList {
         
         // Checks if edgeProperty array is full
         bool edgePropertyFull();
+        
+        void set_offset(uint32_t);
+        
+        uint32_t get_offset();
+        
+        OK_SUCCESS insertNeighborAtPosition(uint32_t, int);
+        
+        size_t get_neighborsSize();
+        
+        void increment_neighborsSize();
 };
 
     NodeList::NodeList() {
@@ -55,6 +65,28 @@ class NodeList {
     
     bool NodeList::edgePropertyFull() {
         return this->edgePropertySize == INITIAL_NEIGHBOR_ARRAY_SIZE;
+    }
+    
+    void NodeList::set_offset(uint32_t offset) {
+        this->offset = offset;
+    }
+        
+    uint32_t NodeList::get_offset() {
+        return offset;
+    }
+    
+    size_t NodeList::get_neighborsSize() {
+        return neighborsSize;
+    };
+        
+    void NodeList::increment_neighborsSize() {
+        neighborsSize++;
+    }
+    
+    OK_SUCCESS NodeList::insertNeighborAtPosition(uint32_t neighborId, int position) {
+            neighbors[position] = neighborId;
+            increment_neighborsSize();
+            return OK_SUCCESS;
     }
 
 #endif	/* NODELIST_HPP */

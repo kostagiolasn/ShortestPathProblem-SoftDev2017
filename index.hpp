@@ -47,6 +47,9 @@ class Index {
         // Index Destructor
         OK_SUCCESS destroyNodeIndex( NodeIndex* );
         
+        // Doubles the Index
+        OK_SUCCESS doubleIndex();
+        
         // Alters the current size of the index
         void set_currentSize(size_t);
         
@@ -77,6 +80,18 @@ class Index {
 
     NodeIndex* Index::createNodeIndex() {
         this->index = new NodeIndex*[INITIAL_INDEX_SIZE];
+        return this->index;
+    }
+    
+    OK_SUCCESS Index::doubleIndex() {
+        if( realloc(this->index, this->overflowSize*2) != NULL) {
+            
+            this->overflowSize =* 2;
+            
+            return 0;
+        }
+        else
+            return 1;
     }
 
     OK_SUCCESS Index::insertNode(uint32_t sourceNodeId, uint32_t targetNodeId, Buffer* buffer) {
@@ -92,6 +107,11 @@ class Index {
             // of the index, we meet a condition where
             // its size has to be doubled
             
+            if(this->doubleIndex()) {
+                throw std::string("Doubling Index space : An error occurred");
+                return 1;
+            }
+            
         }
         
         // After this, we proceed normally with the rest 
@@ -102,11 +122,93 @@ class Index {
             // if the source node exists in the index, 
             // just add the target node as its neighbor
             
+            // check if there is space in the buffer for a list
+            // to assign to the new node
+            if(!buffer->isFull())
+                // If there is space available, assign the first available list
+                this->index[sourceNodeId]->setListOfNeighbors(buffer->allocNewNode());
+            else {
+                // there is no space in the buffer, therefore we need to double
+                // its size with realloc.
+                
+                if(buffer->doubleBuffer()) {
+                    throw std::string("Doubling Buffer space : An error occurred");
+                    return 1;
+                }
+                
+                // Finally, we need to assign a new node to the new node
+                this->index[sourceNodeId]->setListOfNeighbors(buffer->allocNewNode());
+                
+            }
+            
+            // Either way, we need to increment the firstListAvailable
+            buffer->incrementFirstAvailable();   
+            
+            // Finally, we must add the neighbor in the list of our NodeIndex
+            if(this->index[sourceNodeId]->getListOfNeighbors()->neighborsFull()) {
+                // Neighbor array is full, we need to point to a new list
+                
+                // Check if offset is 0, therefore assign it directly and augment the neighbors' size
+                if(this->index[sourceNodeId]->getListOfNeighbors()->get_offset() == 0) {
+                    this->index[sourceNodeId]->getListOfNeighbors()->set_offset( buffer->get_firstListAvailable() );
+                    
+                    // Finally assign it and augment the neighbors' size
+                    this->index[sourceNodeId]->getListOfNeighbors()->insertNeighborAtPosition(targetNodeId, 
+                            this->index[sourceNodeId]->getListOfNeighbors()->get_neighborsSize());
+                }
+                else {
+                    // If offset is not 0, then it means that we need to go as far as
+                    // needed in order to get an offset of 0
+                    
+                    uint32_t temp_offset = this->index[sourceNodeId]->getListOfNeighbors()->get_offset();
+                    
+                    while(buffer[temp_offset]->getListNode()->get_offset() != 0) {
+                        
+                        temp_offset = buffer[temp_offset]->getListNode()->get_offset();
+                    }
+                    
+                    buffer[temp_offset]->getListNode()->set_offset( buffer->get_firstListAvailable() );
+                    
+                    // Finally assign it and augment the neighbors' size
+                    
+                    buffer[temp_offset]->getListNode()->insertNeighborAtPosition(targetNodeId, 
+                            0);
+                }
+            } else {
+                // If neighbor array isn't full, assign it directly and augment the neighbors' size
+                this->index[sourceNodeId]->getListOfNeighbors()->insertNeighborAtPosition( targetNodeId,
+                        this->index[sourceNodeId]->getListOfNeighbors()->get_neighborsSize() );
+            }
+            
         } else {
             
             // if the source node doesn't exist,
             // add it to the index
             
+            assert( (this->index[sourceNodeId]->setNodeId(sourceNodeId)) == OK_SUCCESS );
+            
+            // check if there is space in the buffer for a list
+            // to assign to the new node
+            if(!buffer->isFull())
+                this->index[sourceNodeId]->setListOfNeighbors(buffer->allocNewNode());
+            else {
+                // there is no space in the buffer, therefore we need to double
+                // its size with realloc.
+                if(buffer->doubleBuffer()) {
+                    throw std::string("Doubling Buffer space : An error occurred");
+                    return 1;
+                }
+                
+                // Finally, we need to assign a new node to the new node
+                this->index[sourceNodeId]->setListOfNeighbors(buffer->allocNewNode());
+                
+            }
+            
+            // Insert the neighbor at the first position
+            this->index[sourceNodeId]->getListOfNeighbors()->insertNeighborAtPosition(targetNodeId, 0);
+            
+            // Either way, we need to increment the firstListAvailable
+            buffer->incrementFirstAvailable();
         }
     }
 

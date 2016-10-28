@@ -31,6 +31,9 @@ class Buffer {
         // Destroys the buffer
         OK_SUCCESS destroyBuffer(Buffer*);
         
+        // Doubles the Buffer
+        OK_SUCCESS doubleBuffer();
+        
         // Alters the current size of the buffer
         void set_currentSize(size_t);
         
@@ -51,10 +54,14 @@ class Buffer {
         // specify the next available list
         void incrementFirstAvailable();
         
+        uint32_t get_firstListAvailable();
+        
         // If the next available list number exceeds
         // the buffer's capacity, then the buffer is 
         // considered full, and its size must be doubled
         bool isFull();
+        
+        
 };
 
     Buffer::Buffer() {
@@ -75,7 +82,21 @@ class Buffer {
         delete buffer;
     }
     
-    NodeList* Buffer::allocNewNode(Buffer*);
+    OK_SUCCESS Buffer::doubleBuffer() {
+        if( realloc(this->buffer, this->overflowSize*2) != NULL) {
+            
+            this->overflowSize =* 2;
+            
+            return 0;
+        }
+        else
+            return 1;
+    
+    }
+    
+    NodeList* Buffer::allocNewNode(Buffer*) {
+        return Buffer->buffer[firstListAvailable];
+    }
         
     NodeList* Buffer::getListNode(NodeList*);
 
@@ -101,6 +122,10 @@ class Buffer {
     
     void Buffer::incrementFirstAvailable() {
         firstListAvailable += 1;
+    }
+    
+    uint32_t Buffer::get_firstListAvailable() {
+        return firstListAvailable;
     }
     
     bool Buffer::isFull() {

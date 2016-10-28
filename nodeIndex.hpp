@@ -24,6 +24,10 @@ class NodeIndex {
         // a specific node
         NodeList* getListOfNeighbors();
         
+        void setListOfNeighbors(NodeList* list) {
+            listOfNeighbors = list;
+        }
+        
         // Checks if node exists in our index, i.e.
         // if its id is there instead of a UINT32_T_MAX
         bool nodeExists();
@@ -44,6 +48,7 @@ class NodeIndex {
     
     OK_SUCCESS NodeIndex::setNodeId(uint32_t id) {
         nodeId = id;
+        return OK_SUCCESS;
     }
 
     NodeList* NodeIndex::getListOfNeighbors() {
