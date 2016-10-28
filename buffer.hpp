@@ -65,17 +65,19 @@ class Buffer {
 };
 
     Buffer::Buffer() {
-        this->buffer = createBuffer();
+        createBuffer();
     }
     
     Buffer* Buffer::createBuffer() {
-        initialSize = INITIAL_INDEX_SIZE;
+        initialSize = 512;
         currentSize = 0;
-        overflowSize = INITIAL_INDEX_SIZE;
+        overflowSize = 512;
         
         firstListAvailable = 0;
         
-        this->buffer = new NodeList*[INITIAL_INDEX_SIZE];
+        this->buffer = new NodeList[512];
+        
+        return this;
     }
     
     OK_SUCCESS Buffer::destroyBuffer( Buffer* buffer ) {
@@ -85,7 +87,7 @@ class Buffer {
     OK_SUCCESS Buffer::doubleBuffer() {
         if( realloc(this->buffer, this->overflowSize*2) != NULL) {
             
-            this->overflowSize =* 2;
+            this->overflowSize *= 2;
             
             return 0;
         }
@@ -94,14 +96,14 @@ class Buffer {
     
     }
     
-    NodeList* Buffer::allocNewNode(Buffer*) {
-        return Buffer->buffer[firstListAvailable];
+    NodeList* Buffer::allocNewNode(Buffer* b) {
+        return &(b->buffer[firstListAvailable]);
     }
         
-    NodeList* Buffer::getListNode(NodeList*);
+    //NodeList* Buffer::getListNode(NodeList*);
 
     Buffer::~Buffer() {
-        destroyBuffer(buffer);
+        destroyBuffer(this);
     }
     
     void Buffer::set_currentSize(size_t currentSize) {

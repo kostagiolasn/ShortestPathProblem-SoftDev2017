@@ -39,11 +39,6 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
-        <ccTool>
-          <incDir>
-            <pElem>;../build/include</pElem>
-          </incDir>
-        </ccTool>
       </compileType>
       <item path="buffer.hpp" ex="false" tool="3" flavor2="0">
       </item>

@@ -1,6 +1,10 @@
 #ifndef NODELIST_HPP
 #define	NODELIST_HPP
 
+#define UINT32_T_MAX 2^32-1
+
+typedef int OK_SUCCESS;
+
 class NodeList {
     
     private:
@@ -37,8 +41,8 @@ class NodeList {
 
     NodeList::NodeList() {
         int i;
-        this->neighbors = new uint32_t*[INITIAL_NEIGHBOR_ARRAY_SIZE];
-        this->edgeProperty = new uint32_t*[INITIAL_NEIGHBOR_ARRAY_SIZE];
+        this->neighbors = new uint32_t[10];
+        this->edgeProperty = new uint32_t[10];
         
         // the default offset is initialized at 0
         this->offset = 0;
@@ -48,7 +52,7 @@ class NodeList {
         // then procceed to initialize the neighbors and edgeProperty arrays 
         // by setting them to UINT32_T_MAX, i.e. 2^32 - 1
         
-        for(i = 0; i < INITIAL_NEIGHBOR_ARRAY_SIZE; i++) {
+        for(i = 0; i < 10; i++) {
             this->neighbors[i] = UINT32_T_MAX;
             this->edgeProperty[i] = UINT32_T_MAX;
         }
@@ -60,11 +64,11 @@ class NodeList {
     }
     
     bool NodeList::neighborsFull() {
-        return this->neighborsSize == INITIAL_NEIGHBOR_ARRAY_SIZE;
+        return this->neighborsSize == 10;
     }
     
     bool NodeList::edgePropertyFull() {
-        return this->edgePropertySize == INITIAL_NEIGHBOR_ARRAY_SIZE;
+        return this->edgePropertySize == 10;
     }
     
     void NodeList::set_offset(uint32_t offset) {
@@ -86,8 +90,9 @@ class NodeList {
     OK_SUCCESS NodeList::insertNeighborAtPosition(uint32_t neighborId, int position) {
             neighbors[position] = neighborId;
             increment_neighborsSize();
-            return OK_SUCCESS;
+            return 0;
     }
 
 #endif	/* NODELIST_HPP */
+
 

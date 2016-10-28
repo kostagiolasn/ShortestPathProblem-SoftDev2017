@@ -2,7 +2,7 @@
  * File:   main.cpp
  * Author: nikos
  *
- * Created on October 27, 2016, 4:00 AM
+ * Created on October 28, 2016, 6:34 AM
  */
 
 #include <iostream>
@@ -12,6 +12,7 @@
 #include <fstream>
 #include <stdio.h>
 #include <sstream>
+#include <stdint.h>
 
 #include "index.hpp"
 
@@ -44,14 +45,14 @@ int main(int argc, char** argv) {
     
     // Initialize the class objects here
     Index indexExternal = new Index(true);
-    Buffer bufferExternal = new Buffer();
+    Buffer* bufferExternal = new Buffer();
     Index indexInternal = new Index(false);
-    Buffer bufferInternal = new Buffer();
+    Buffer* bufferInternal = new Buffer();
     
     // Parse the file for the graph creation
     try {
         //parseFileGraph(externalIndex, internalIndex, fileGraph);
-        parseFileGraph(fileGraph, &indexExternal, &bufferExternal, &indexInternal, &bufferInternal);
+        parseFileGraph(fileGraph, &indexExternal, bufferExternal, &indexInternal, bufferInternal);
     } catch (std::string err) {
         std::cerr << err << std::endl;
         state = 2;
@@ -178,4 +179,5 @@ void parseFileWorkLoad(std::string stream) {
     }
 
 }
+
 

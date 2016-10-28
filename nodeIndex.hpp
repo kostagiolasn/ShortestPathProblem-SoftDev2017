@@ -11,6 +11,8 @@ class NodeIndex {
         //Constructor
         NodeIndex();
         
+        NodeIndex(uint32_t);
+        
         //Destructor
         ~NodeIndex();
 
@@ -48,7 +50,7 @@ class NodeIndex {
     
     OK_SUCCESS NodeIndex::setNodeId(uint32_t id) {
         nodeId = id;
-        return OK_SUCCESS;
+        return 0;
     }
 
     NodeList* NodeIndex::getListOfNeighbors() {

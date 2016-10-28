@@ -8,17 +8,11 @@
 #include <string>
 #include <cstring>
 #include <cstdlib>
-#include <cassert>
 
 #include "nodeIndex.hpp"
-#include "nodeList.hpp"
 #include "buffer.hpp"
 
 typedef int OK_SUCCESS;
-
-const size_t INITIAL_INDEX_SIZE = 512;
-const size_t INITIAL_BUFFER_SIZE = 512;
-const size_t INITIAL_NEIGHBOR_ARRAY_SIZE = 10;
 
 class Index {
     private:
@@ -32,6 +26,7 @@ class Index {
         // Constructor
         Index();
         
+        Index(bool);
         // Destructor
         ~Index();
         
@@ -39,7 +34,7 @@ class Index {
         NodeIndex* createNodeIndex();
         
         // Node Insertion
-        OK_SUCCESS insertNode( NodeIndex*, uint32_t sourceNodeId, uint32_t targetNodeId);
+        OK_SUCCESS insertNode(uint32_t, uint32_t, Buffer*);
         
         // Get Node's List Head
         NodeList* getListHead( NodeIndex*, uint32_t nodeId);
@@ -71,22 +66,22 @@ class Index {
 };
 
     Index::Index(bool ext) {
-        initialSize = INITIAL_INDEX_SIZE;
+        initialSize = 512;
         currentSize = 0;
-        overflowSize = INITIAL_INDEX_SIZE;
+        overflowSize = 512;
         external = ext;
         this->index = createNodeIndex();
     }
 
     NodeIndex* Index::createNodeIndex() {
-        this->index = new NodeIndex*[INITIAL_INDEX_SIZE];
+        this->index = new NodeIndex[512];
         return this->index;
     }
     
     OK_SUCCESS Index::doubleIndex() {
         if( realloc(this->index, this->overflowSize*2) != NULL) {
             
-            this->overflowSize =* 2;
+            this->overflowSize *= 2;
             
             return 0;
         }
@@ -126,7 +121,7 @@ class Index {
             // to assign to the new node
             if(!buffer->isFull())
                 // If there is space available, assign the first available list
-                this->index[sourceNodeId]->setListOfNeighbors(buffer->allocNewNode());
+                this->index[sourceNodeId].setListOfNeighbors(buffer->allocNewNode());
             else {
                 // there is no space in the buffer, therefore we need to double
                 // its size with realloc.
@@ -185,7 +180,7 @@ class Index {
             // if the source node doesn't exist,
             // add it to the index
             
-            assert( (this->index[sourceNodeId]->setNodeId(sourceNodeId)) == OK_SUCCESS );
+            this->index[sourceNodeId]->setNodeId(sourceNodeId);
             
             // check if there is space in the buffer for a list
             // to assign to the new node
@@ -245,4 +240,5 @@ class Index {
     }
 
 #endif	/* INDEX_HPP */
+
 
