@@ -15,6 +15,7 @@
 #include <stdint.h>
 
 #include "index.hpp"
+//#include "bfs.hpp"
 
 void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fileWorkLoad);
 
@@ -68,7 +69,15 @@ int main(int argc, char** argv) {
         std::cerr << err << std::endl;
         state = 3;
     }
+    int i,j;
     
+    
+    for(j = 0; j < 10; j ++){
+        NodeList* a = indexExternal.getListHead(indexExternal.getIndex(), j);
+         cout << a->get_neighborsSize()<< endl;
+       
+    }
+  //  BFS bfs = new BFS(indexInternal.get_currentSize());
     return state;
 }
 

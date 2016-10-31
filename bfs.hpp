@@ -5,6 +5,7 @@
 
 #include "buffer.hpp"
 #include "queue.hpp"
+#include "index.hpp"
 
 class BFS {
     
@@ -16,14 +17,14 @@ class BFS {
     
     public:
         
-        BFS(uint32_t);
+        BFS(size_t);
         ~BFS();
         
-        uint32_t* findShortestPath(Buffer, Index, uint32_t, uint32_t);
+        uint32_t* findShortestPath(Buffer*, Index*, uint32_t, uint32_t);
     
 };
 
-BFS::BFS(uint32_t graphSize){
+BFS::BFS(size_t graphSize){
     this->graphSize = graphSize;
     this->queue = NULL;
     
@@ -54,7 +55,7 @@ uint32_t* BFS::findShortestPath(Buffer *buffer, Index *index, uint32_t startNode
     
     while(visited[targetNodeId] == false){
         uint32_t markedNode = queue->popFront();
-        uint32_t *neighbours = index[markedNode];
+        NodeList *neighbours = index->getListHead(*index, markedNode);
         
         int i;
         for(i = 0; i < 10; i++){
@@ -62,7 +63,7 @@ uint32_t* BFS::findShortestPath(Buffer *buffer, Index *index, uint32_t startNode
                 uint32_t neighbour = neighbours[i];
                 if(visited[neighbour] == false){
                     visited[neighbour] = true;
-                    prev[neighbour] = markedNode;
+                    previousNode[neighbour] = markedNode;
                     queue->pushBack(neighbour);
                     
                 }
