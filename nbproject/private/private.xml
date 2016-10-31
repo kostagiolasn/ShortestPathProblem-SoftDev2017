@@ -7,12 +7,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/feta/Desktop/ShortestPathProblem-SoftDev2017/index.hpp</file>
-            <file>file:/home/feta/Desktop/ShortestPathProblem-SoftDev2017/bfs.hpp</file>
-            <file>file:/home/feta/Desktop/ShortestPathProblem-SoftDev2017/main.cpp</file>
-            <file>file:/home/feta/Desktop/ShortestPathProblem-SoftDev2017/queue.hpp</file>
-            <file>file:/home/feta/Desktop/ShortestPathProblem-SoftDev2017/nodeList.hpp</file>
-            <file>file:/home/feta/Desktop/ShortestPathProblem-SoftDev2017/buffer.hpp</file>
+            <file>file:/home/nikos/NetBeansProjects/ShortestPathProblem/buffer.hpp</file>
+            <file>file:/home/nikos/NetBeansProjects/ShortestPathProblem/nodeList.hpp</file>
+            <file>file:/home/nikos/NetBeansProjects/ShortestPathProblem/main.cpp</file>
+            <file>file:/home/nikos/NetBeansProjects/ShortestPathProblem/nodeIndex.hpp</file>
+            <file>file:/home/nikos/NetBeansProjects/ShortestPathProblem/index.hpp</file>
         </group>
     </open-files>
 </project-private>
