@@ -132,15 +132,24 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
             // Here is where the insertion takes place
             // In the external index, idTarget must be added as a neighbor to idSource
             // while in the internal index, idSource must be added as a neighbor to idTarget
-            externalIndex->insertNode(idSource, idTarget, externalBuffer);
-            internalIndex->insertNode(idTarget, idSource, internalBuffer);
+            if( externalIndex->insertNode(idSource, idTarget, externalBuffer) ) {
+                err = 2;
+                break;
+            }
+            /*if( internalIndex->insertNode(idTarget, idSource, internalBuffer) ) {
+                err = 2;
+                break;
+            }*/
         }
     }   
     
     file.close();
     
-    if(err) {
+    if(err == 1) {
         throw std::string("Graph File input : unexpected format, value for a is :" + a);
+    }
+    else if(err == 2) {
+        throw std::string("Graph File insertion : an error occurred");
     }
 }
 

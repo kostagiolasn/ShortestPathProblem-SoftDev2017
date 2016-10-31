@@ -69,14 +69,31 @@ class Buffer {
     }
     
     Buffer* Buffer::createBuffer() {
-        initialSize = 512;
+        initialSize = 2;
         currentSize = 0;
-        overflowSize = 512;
+        overflowSize = 2;
         
         firstListAvailable = 0;
         
-        this->buffer = new NodeList[512];
+        this->buffer = (NodeList*) malloc(sizeof(NodeList) * overflowSize);
         
+        for(int i = 0; i < overflowSize; i++) {
+            this->buffer[i].initialize_neighbors(overflowSize);
+            this->buffer[i].initialize_edgeProperty(overflowSize);
+
+            // the default offset is initialized at 0
+            this->buffer[i].set_offset(0);
+            this->buffer[i].set_neighborsSize(0);
+
+            // then procceed to initialize the neighbors and edgeProperty arrays 
+            // by setting them to UINT32_T_MAX, i.e. 2^32 - 1
+
+            for(int j = 0; j < 2; j++) {
+                this->buffer[i].insertNeighborAtPosition(UINT32_T_MAX, j);
+            }
+            
+            this->buffer[i].set_neighborsSize(0);
+        }
         return this;
     }
     
@@ -85,7 +102,25 @@ class Buffer {
     }
     
     OK_SUCCESS Buffer::doubleBuffer() {
-        if( realloc(this->buffer, this->overflowSize*2) != NULL) {
+        if( ( this->buffer = (NodeList*) realloc(this->buffer, sizeof(NodeList)*this->overflowSize*2) ) != NULL) {
+            
+            for(int i = this->overflowSize; i < this->overflowSize * 2; i++) {
+                this->buffer[i].initialize_neighbors(this->overflowSize);
+                this->buffer[i].initialize_edgeProperty(this->overflowSize);
+
+                // the default offset is initialized at 0
+                this->buffer[i].set_offset(0);
+                this->buffer[i].set_neighborsSize(0);
+
+                // then procceed to initialize the neighbors and edgeProperty arrays 
+                // by setting them to UINT32_T_MAX, i.e. 2^32 - 1
+
+                for(int j = 0; j < 2; j++) {
+                    this->buffer[i].insertNeighborAtPosition(UINT32_T_MAX, j);
+                }
+                
+                this->buffer[i].set_neighborsSize(0);
+            }
             
             this->overflowSize *= 2;
             
@@ -98,7 +133,7 @@ class Buffer {
     
     NodeList* Buffer::getListNode(uint32_t index) {
         return &(this->buffer[index]);
-    };
+    }
     
     NodeList* Buffer::allocNewNode() {
         return &(this->buffer[firstListAvailable]);
