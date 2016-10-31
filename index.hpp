@@ -63,6 +63,8 @@ class Index {
         // stored as a neighbor of A.
         bool isExternal();
         
+        void print(Buffer*);
+        
 };
 
     Index::Index(bool ext) {
@@ -246,6 +248,30 @@ class Index {
 
     bool Index::isExternal () {
         return this->external;
+    }
+    
+    void Index::print(Buffer* buffer) {
+        
+        for(int i = 0; i < this->get_overflowSize(); i++) {
+            if(this->index[i].nodeExists()) {
+                uint32_t temp_offset = this->index[i].getListOfNeighbors()->get_offset();
+                
+                std::cout << "Index number :" << i << std::endl;
+                std::cout << "Printing neighbors :";
+                for(int j = 0; j < this->index[i].getListOfNeighbors()->get_neighborsSize(); j++) {
+                    std::cout << this->index[i].getListOfNeighbors()->get_neighborAtIndex(j) << std::endl;
+                }
+                std::cout << std::endl;
+                
+                while(buffer->getListNode(temp_offset)->get_offset() != 0) {
+
+                    temp_offset = buffer->getListNode(temp_offset)->get_offset();
+                    for(int j = 0; j < buffer->getListNode(temp_offset)->get_neighborsSize(); j++) {
+                        std::cout << buffer->getListNode(temp_offset)->get_neighborAtIndex(j)  << std::endl;
+                    }
+                }
+            }
+        }
     }
 
 #endif	/* INDEX_HPP */

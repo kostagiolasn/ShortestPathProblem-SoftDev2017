@@ -17,6 +17,8 @@
 #include "index.hpp"
 //#include "bfs.hpp"
 
+void printGraph(Index*, Buffer*);
+
 void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fileWorkLoad);
 
 void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBuffer, Index* internalIndex, Buffer* internalBuffer);
@@ -61,24 +63,22 @@ int main(int argc, char** argv) {
         state = 2;
     }
     
+    printGraph(&indexExternal, bufferExternal);
+    
     // Parse the file containing the queries
-    try {
+    /*try {
         //parseFileWorkLoad(externalIndex, internalIndex, fileWorkLoad);
         parseFileWorkLoad(fileWorkLoad);
     } catch (std::string err) {
         std::cerr << err << std::endl;
         state = 3;
-    }
-    int i,j;
-    
-    
-    for(j = 0; j < 10; j ++){
-        NodeList* a = indexExternal.getListHead(indexExternal.getIndex(), j);
-         cout << a->get_neighborsSize()<< endl;
-       
-    }
-  //  BFS bfs = new BFS(indexInternal.get_currentSize());
+    }*/
+
     return state;
+}
+
+void printGraph(Index* indexExternal, Buffer* bufferExternal) {
+    indexExternal->print(bufferExternal);
 }
 
 void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fileWorkLoad) {

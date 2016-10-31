@@ -44,6 +44,8 @@ class NodeList {
         size_t get_neighborsSize();
         
         void increment_neighborsSize();
+        
+        uint32_t get_neighborAtIndex(int);
 };
 
     NodeList::NodeList() {
@@ -123,6 +125,10 @@ class NodeList {
     OK_SUCCESS NodeList::insertEdgePropertyAtPosition(uint32_t neighborId, int position) {
             edgeProperty[position] = neighborId;
             return 0;
+    }
+    
+    uint32_t NodeList::get_neighborAtIndex(int index) {
+        return neighbors[index];
     }
 
 #endif	/* NODELIST_HPP */
