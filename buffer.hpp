@@ -69,9 +69,9 @@ class Buffer {
     }
     
     Buffer* Buffer::createBuffer() {
-        initialSize = 512;
+        initialSize = 1024;
         currentSize = 0;
-        overflowSize = 512;
+        overflowSize = 1024;
         
         firstListAvailable = 0;
         

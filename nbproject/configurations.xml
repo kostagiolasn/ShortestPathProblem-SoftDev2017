@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="95">
+<configurationDescriptor version="100">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>MyTestSuit1.hpp</itemPath>
       <itemPath>bfs.hpp</itemPath>
       <itemPath>buffer.hpp</itemPath>
       <itemPath>index.hpp</itemPath>
@@ -48,6 +49,8 @@
           <standard>8</standard>
         </ccTool>
       </compileType>
+      <item path="MyTestSuit1.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="bfs.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="buffer.hpp" ex="false" tool="3" flavor2="0">
@@ -83,6 +86,8 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="MyTestSuit1.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="bfs.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="buffer.hpp" ex="false" tool="3" flavor2="0">

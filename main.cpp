@@ -15,7 +15,7 @@
 #include <stdint.h>
 
 #include "index.hpp"
-//#include "bfs.hpp"
+#include "bfs.hpp"
 
 void printGraph(Index*, Buffer*);
 
@@ -28,7 +28,7 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
 //void parseFileWorkLoad(Index externalIndex, Index internalIndex, std::string stream);
 
 //void parseFileGraph(std::string stream);
-void parseFileWorkLoad(std::string stream);
+void parseFileWorkLoad(std::string stream, Index indexInternal, Index indexExternal);
 
 using namespace std;
 
@@ -62,18 +62,19 @@ int main(int argc, char** argv) {
         std::cerr << err << std::endl;
         state = 2;
     }
-    
-    printGraph(&indexExternal, bufferExternal);
+   
+    printGraph(&indexExternal, bufferInternal);
     
     // Parse the file containing the queries
-    /*try {
+   /* try {
         //parseFileWorkLoad(externalIndex, internalIndex, fileWorkLoad);
-        parseFileWorkLoad(fileWorkLoad);
+        parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal);
     } catch (std::string err) {
         std::cerr << err << std::endl;
         state = 3;
     }*/
-
+   
+    
     return state;
 }
 
@@ -145,10 +146,10 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
                 err = 2;
                 break;
             }
-            /*if( internalIndex->insertNode(idTarget, idSource, internalBuffer) ) {
+            if( internalIndex->insertNode(idTarget, idSource, internalBuffer) ) {
                 err = 2;
                 break;
-            }*/
+            }
         }
     }   
     
@@ -162,7 +163,7 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
     }
 }
 
-void parseFileWorkLoad(std::string stream) {
+void parseFileWorkLoad(std::string stream, Index indexInternal, Index indexExternal) {
 //void parseFileWorkLoad(Index externalIndex, Index internalIndex, std::string stream) {
     char queryType;
     int idSource, idTarget, err;
@@ -188,7 +189,11 @@ void parseFileWorkLoad(std::string stream) {
                 break;
             }
             cout << queryType << " " << idSource << " " << idTarget << endl;
-            // Here is where the insertion takes place
+            if(queryType == 'Q'){
+                BFS* bfs = new BFS(10);
+                int edges = bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget);
+                   cout << edges << endl;
+            }
         }
     }   
     
