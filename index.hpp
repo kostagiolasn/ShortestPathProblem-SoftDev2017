@@ -167,8 +167,8 @@ class Index {
                         // the target node as a neighbor there
                         buffer->getListNode(temp_offset)->set_offset( buffer->get_firstListAvailable() );
 
-                        buffer->getListNode(temp_offset)->insertNeighborAtPosition( targetNodeId,
-                            buffer->getListNode(temp_offset)->get_neighborsSize() );
+                        buffer->getListNode(buffer->get_firstListAvailable())->insertNeighborAtPosition( targetNodeId,
+                            buffer->getListNode(buffer->get_firstListAvailable())->get_neighborsSize() );
                     } else {
 
                         // if the buffer is full, we need to double it
@@ -180,8 +180,8 @@ class Index {
                         // and follow up with the same insertion
                         buffer->getListNode(temp_offset)->set_offset( buffer->get_firstListAvailable() );
 
-                        buffer->getListNode(temp_offset)->insertNeighborAtPosition( targetNodeId,
-                            buffer->getListNode(temp_offset)->get_neighborsSize() );
+                        buffer->getListNode(buffer->get_firstListAvailable())->insertNeighborAtPosition( targetNodeId,
+                            buffer->getListNode(buffer->get_firstListAvailable())->get_neighborsSize() );
                     }
 
                     // lastly we need to increment the next available sentinel
@@ -205,8 +205,8 @@ class Index {
                         // the target node as a neighbor there
                         this->index[sourceNodeId].getListOfNeighbors()->set_offset( buffer->get_firstListAvailable() );
 
-                        buffer->getListNode(temp_offset)->insertNeighborAtPosition( targetNodeId,
-                            buffer->getListNode(temp_offset)->get_neighborsSize() );
+                        buffer->getListNode(buffer->get_firstListAvailable())->insertNeighborAtPosition( targetNodeId,
+                            buffer->getListNode(buffer->get_firstListAvailable())->get_neighborsSize() );
                     } else {
 
                         // if the buffer is full, we need to double it
@@ -218,8 +218,8 @@ class Index {
                         // and follow up with the same insertion
                         this->index[sourceNodeId].getListOfNeighbors()->set_offset( buffer->get_firstListAvailable() );
 
-                        buffer->getListNode(temp_offset)->insertNeighborAtPosition( targetNodeId,
-                            buffer->getListNode(temp_offset)->get_neighborsSize() );
+                        buffer->getListNode(buffer->get_firstListAvailable())->insertNeighborAtPosition( targetNodeId,
+                            buffer->getListNode(buffer->get_firstListAvailable())->get_neighborsSize() );
                     }
 
                     // lastly we need to increment the next available sentinel
@@ -311,7 +311,15 @@ class Index {
                 
                 while(buffer->getListNode(temp_offset)->get_offset() != 0) {
 
+                    
+                    for(int j = 0; j < buffer->getListNode(temp_offset)->get_neighborsSize(); j++) {
+                        std::cout << buffer->getListNode(temp_offset)->get_neighborAtIndex(j)  << std::endl;
+                    }
+                    
                     temp_offset = buffer->getListNode(temp_offset)->get_offset();
+                }
+                
+                if(buffer->getListNode(temp_offset)->get_neighborsSize() != 0) {
                     for(int j = 0; j < buffer->getListNode(temp_offset)->get_neighborsSize(); j++) {
                         std::cout << buffer->getListNode(temp_offset)->get_neighborAtIndex(j)  << std::endl;
                     }

@@ -62,8 +62,11 @@ int main(int argc, char** argv) {
         std::cerr << err << std::endl;
         state = 2;
     }
-   
-    printGraph(&indexExternal, bufferInternal);
+
+    
+    printGraph(&indexExternal, bufferExternal);
+    //printGraph(&indexInternal, bufferInternal);
+
     
     // Parse the file containing the queries
    /* try {
@@ -189,11 +192,6 @@ void parseFileWorkLoad(std::string stream, Index indexInternal, Index indexExter
                 break;
             }
             cout << queryType << " " << idSource << " " << idTarget << endl;
-            if(queryType == 'Q'){
-                BFS* bfs = new BFS(10);
-                int edges = bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget);
-                   cout << edges << endl;
-            }
         }
     }   
     

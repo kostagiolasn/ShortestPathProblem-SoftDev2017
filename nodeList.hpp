@@ -8,8 +8,8 @@ typedef int OK_SUCCESS;
 class NodeList {
     
     private:
-        uint32_t* neighbors;
-        uint32_t* edgeProperty;
+        uint32_t neighbors[2] = {UINT32_T_MAX, UINT32_T_MAX};
+        uint32_t edgeProperty[2] = {UINT32_T_MAX, UINT32_T_MAX};
         size_t neighborsSize;
         size_t edgePropertySize;
         uint32_t offset;
@@ -47,30 +47,6 @@ class NodeList {
         
         uint32_t get_neighborAtIndex(int);
 };
-
-    NodeList::NodeList() {
-        int i;
-        this->neighbors = new uint32_t[2];
-        this->edgeProperty = new uint32_t[2];
-        
-        // the default offset is initialized at 0
-        this->offset = 0;
-        this->neighborsSize = 0;
-        this->edgePropertySize = 0;
-        
-        // then procceed to initialize the neighbors and edgeProperty arrays 
-        // by setting them to UINT32_T_MAX, i.e. 2^32 - 1
-        
-        for(i = 0; i < 2; i++) {
-            this->neighbors[i] = UINT32_T_MAX;
-            this->edgeProperty[i] = UINT32_T_MAX;
-        }
-    }
-    
-    NodeList::~NodeList() {
-        delete neighbors;
-        delete edgeProperty;
-    }
     
     bool NodeList::neighborsFull() {
         return this->neighborsSize == 2;
@@ -78,22 +54,6 @@ class NodeList {
     
     bool NodeList::edgePropertyFull() {
         return this->edgePropertySize == 2;
-    }
-    
-    void NodeList::initialize_neighbors(uint32_t size) {
-            this->neighbors = (uint32_t*) malloc(sizeof(uint32_t)*size);
-            
-            //for(int i = 0; i < size; i++) {
-            //    neighbors[i] = UINT32_T_MAX;
-            //}
-    }
-        
-    void NodeList::initialize_edgeProperty(uint32_t size) {
-        this->edgeProperty = (uint32_t*) malloc(sizeof(uint32_t)*size);
-        
-        //for(int i = 0; i < size; i++) {
-        //    edgeProperty[i] = UINT32_T_MAX;
-        //}
     }
     
     void NodeList::set_offset(uint32_t offset) {

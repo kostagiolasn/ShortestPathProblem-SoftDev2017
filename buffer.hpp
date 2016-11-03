@@ -69,17 +69,19 @@ class Buffer {
     }
     
     Buffer* Buffer::createBuffer() {
-        initialSize = 1024;
+
+        initialSize = 2;
         currentSize = 0;
-        overflowSize = 1024;
+        overflowSize = 2;
+
         
         firstListAvailable = 0;
         
         this->buffer = (NodeList*) malloc(sizeof(NodeList) * overflowSize);
         
         for(int i = 0; i < overflowSize; i++) {
-            this->buffer[i].initialize_neighbors(overflowSize);
-            this->buffer[i].initialize_edgeProperty(overflowSize);
+            //this->buffer[i].initialize_neighbors(2);
+            //this->buffer[i].initialize_edgeProperty(2);
 
             // the default offset is initialized at 0
             this->buffer[i].set_offset(0);
@@ -105,8 +107,8 @@ class Buffer {
         if( ( this->buffer = (NodeList*) realloc(this->buffer, sizeof(NodeList)*this->overflowSize*2) ) != NULL) {
             
             for(int i = this->overflowSize; i < this->overflowSize * 2; i++) {
-                this->buffer[i].initialize_neighbors(this->overflowSize);
-                this->buffer[i].initialize_edgeProperty(this->overflowSize);
+                //this->buffer[i].initialize_neighbors(2);
+                //this->buffer[i].initialize_edgeProperty(2);
 
                 // the default offset is initialized at 0
                 this->buffer[i].set_offset(0);
