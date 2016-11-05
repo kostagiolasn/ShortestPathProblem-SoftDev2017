@@ -73,7 +73,7 @@ class Index {
         overflowSize = 8;
         external = ext;
         //this->index = createNodeIndex();
-        this->index = (NodeIndex*) malloc(sizeof(NodeList) * 8);
+        this->index = (NodeIndex*) malloc(sizeof(NodeList) * overflowSize);
         for(int i = 0; i < overflowSize; i++) {
             this->index[i].setListOfNeighbors(NULL);
             this->index[i].setNodeId(UINT32_T_MAX);
@@ -137,6 +137,12 @@ class Index {
             
             uint32_t temp_offset = this->index[sourceNodeId].getListOfNeighbors()->get_offset();
             
+            // If neighbor already exists return.
+            if(buffer->getListNode(temp_offset)->containsNeighbor(targetNodeId)) {
+                std::cout << "Neighbor exists" << std::endl;
+                return 0;
+            }
+            
             if(temp_offset == 0) {
                 inside = false;
             }
@@ -147,6 +153,18 @@ class Index {
                 while(buffer->getListNode(temp_offset)->get_offset() != 0) {
 
                     temp_offset = buffer->getListNode(temp_offset)->get_offset();
+                    
+                    // re-check if neighbor already exists
+                    if(buffer->getListNode(temp_offset)->containsNeighbor(targetNodeId)) {
+                        std::cout << "Neighbor exists" << std::endl;
+                        return 0;
+                    }
+                }
+                
+                // A final check if neighbor exists
+                if(buffer->getListNode(temp_offset)->containsNeighbor(targetNodeId)) {
+                    std::cout << "Neighbor exists" << std::endl;
+                    return 0;
                 }
 
                 // if the aforementioned list has space for new neighbors
