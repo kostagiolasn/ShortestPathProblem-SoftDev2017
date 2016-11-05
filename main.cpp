@@ -65,7 +65,7 @@ int main(int argc, char** argv) {
 
     
     printGraph(&indexExternal, bufferExternal);
-    //printGraph(&indexInternal, bufferInternal);
+    printGraph(&indexInternal, bufferInternal);
 
     
     // Parse the file containing the queries
