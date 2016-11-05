@@ -31,8 +31,10 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph tinyGraph.txt -fWorkLoad </runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph testGraph.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph tinyGraph.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph testGraph2.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph testGraph2.txt -fWorkLoad testWorkload.txt</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}" -fGraph tinyGraph.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommand>
+        <runcommand>"${OUTPUT_PATH}" -fGraph testGraph2.txt -fWorkLoad testWorkload.txt</runcommand>
         <rundir></rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>

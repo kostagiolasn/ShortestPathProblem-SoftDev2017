@@ -1,9 +1,16 @@
-/* 
- * File:   main.cpp
- * Author: nikos
- *
- * Created on October 28, 2016, 6:34 AM
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
+
+/* 
+ * File:   shortestPathTest.cpp
+ * Author: feta
+ *
+ * Created on November 5, 2016, 3:09 PM
+ */
+
 
 #include <iostream>
 #include <string>
@@ -16,33 +23,28 @@
 
 #include "index.hpp"
 #include "bfs.hpp"
-
-void printGraph(Index*, Buffer*);
-
+/*
+ * Simple C++ Test Suite
+ */
 void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fileWorkLoad);
 
 void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBuffer, Index* internalIndex, Buffer* internalBuffer);
+int findShortestPath(uint32_t source, uint32_t target, Index indexInternal, Index indexExternal);
 
-//void parseFileGraph(Index externalIndex, Index internalIndex, std::string stream);
+void testFindShortestPath(uint32_t source, uint32_t target, Index indexInternal, Index indexExternal) {
+    
+    
+    int result = findShortestPath(source, target, indexInternal, indexExternal);
+    if (result != 4) {
+        std::cout << "%TEST_FAILED% time=0 testname=testFindShortestPath (shortestPathTest) message=error message sample" << std::endl;
+    }
+}
 
-//void parseFileWorkLoad(Index externalIndex, Index internalIndex, std::string stream);
-
-//void parseFileGraph(std::string stream);
-void parseFileWorkLoad(std::string stream, Index indexInternal, Index indexExternal);
-
-void findShortestPath(uint32_t source, uint32_t target, Index indexInternal, Index indexExternal);
-
-using namespace std;
-
-/*
- * 
- */
 int main(int argc, char** argv) {
-
     std::string fileGraph;
     std::string fileWorkLoad;
     int state = 0;
-    int a = 2;
+    
     try {
         args_setup(argc, argv, fileGraph, fileWorkLoad);
     } catch (std::string err) {
@@ -64,28 +66,17 @@ int main(int argc, char** argv) {
         std::cerr << err << std::endl;
         state = 2;
     }
-
-    
-    printGraph(&indexExternal, bufferExternal);
-    printGraph(&indexInternal, bufferInternal);
-
-    
-    
-    // Parse the file containing the queries
-    try {
-        //parseFileWorkLoad(externalIndex, internalIndex, fileWorkLoad);
-        parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal);
-    } catch (std::string err) {
-        std::cerr << err << std::endl;
-        state = 3;
-    }
    
-    
-    return state;
-}
+    std::cout << "%SUITE_STARTING% shortestPathTest" << std::endl;
+    std::cout << "%SUITE_STARTED%" << std::endl;
 
-void printGraph(Index* indexExternal, Buffer* bufferExternal) {
-    indexExternal->print(bufferExternal);
+    std::cout << "%TEST_STARTED% testFindShortestPath (shortestPathTest)" << std::endl;
+    testFindShortestPath(1, 10, indexInternal, indexExternal);
+    std::cout << "%TEST_FINISHED% time=0 testFindShortestPath (shortestPathTest)" << std::endl;
+
+    std::cout << "%SUITE_FINISHED% time=0" << std::endl;
+
+    return (EXIT_SUCCESS);
 }
 
 void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fileWorkLoad) {
@@ -170,45 +161,7 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
     }
 }
 
-void parseFileWorkLoad(std::string stream, Index indexInternal, Index indexExternal) {
-//void parseFileWorkLoad(Index externalIndex, Index internalIndex, std::string stream) {
-    char queryType;
-    int idSource, idTarget, err;
-    ifstream file;
-    std::string line;
-    
-    file.open(stream.c_str());
-    
-    while(std::getline(file, line)) {
-        std::istringstream iss(line);
-        
-        queryType = iss.peek();
-        if(queryType == 'F')
-            // Process queries here
-            cout << "F found here" << endl;
-        else {
-            if(isdigit(queryType)) {
-                err = 1;
-                break;
-            } 
-            else if(!(iss >> queryType >> idSource >> idTarget)) {
-                err = 1;
-                break;
-            }
-            cout << queryType << " " << idSource << " " << idTarget << endl;
-            findShortestPath(idSource, idTarget, indexInternal, indexExternal);
-        }
-    }   
-    
-    file.close();
-    
-    if(err) {
-        throw std::string("Work Load File input : unexpected format, a is : " + queryType);
-    }
-
-}
-
-void findShortestPath(uint32_t source, uint32_t target, Index indexInternal, Index indexExternal){
+int findShortestPath(uint32_t source, uint32_t target, Index indexInternal, Index indexExternal){
     BFS* bfs = new BFS(10);
-    cout << bfs->findShortestPath(indexInternal, indexExternal, source, target) << endl;
+    return bfs->findShortestPath(indexInternal, indexExternal, source, target);
 }

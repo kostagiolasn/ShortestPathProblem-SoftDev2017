@@ -1,13 +1,7 @@
 #ifndef INDEX_HPP
 #define	INDEX_HPP
 
-#include <iostream>
-#include <ostream>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <cstring>
-#include <cstdlib>
+
 
 #include "nodeIndex.hpp"
 #include "buffer.hpp"
@@ -69,9 +63,9 @@ class Index {
 };
 
     Index::Index(bool ext) {
-        initialSize = 10;
+        initialSize = 8;
         currentSize = 0;
-        overflowSize = 10;
+        overflowSize = 8;
         external = ext;
         //this->index = createNodeIndex();
         this->index = (NodeIndex*) malloc(sizeof(NodeList) * 8);

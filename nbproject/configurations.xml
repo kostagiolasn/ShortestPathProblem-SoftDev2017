@@ -24,6 +24,12 @@
                    displayName="Test Files"
                    projectFiles="false"
                    kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f3"
+                     displayName="New C++ Simple Test 1"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/newsimpletest3.cpp</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -52,6 +58,21 @@
       </item>
       <item path="buffer.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <folder path="TestFiles/f3">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f3</output>
+        </linkerTool>
+      </folder>
       <item path="index.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
@@ -61,6 +82,8 @@
       <item path="nodeList.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="queue.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/newsimpletest3.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -87,6 +110,21 @@
       </item>
       <item path="buffer.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <folder path="TestFiles/f3">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f3</output>
+        </linkerTool>
+      </folder>
       <item path="index.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
@@ -96,6 +134,8 @@
       <item path="nodeList.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="queue.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/newsimpletest3.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>
