@@ -39,6 +39,7 @@ class Index {
         // Get Node's List Head
         NodeList* getListHead( NodeIndex*, uint32_t nodeId);
         
+        NodeIndex* getNodeIndex();
         // Index Destructor
         OK_SUCCESS destroyNodeIndex( NodeIndex* );
         
@@ -68,9 +69,9 @@ class Index {
 };
 
     Index::Index(bool ext) {
-        initialSize = 8;
+        initialSize = 10;
         currentSize = 0;
-        overflowSize = 8;
+        overflowSize = 10;
         external = ext;
         //this->index = createNodeIndex();
         this->index = (NodeIndex*) malloc(sizeof(NodeList) * overflowSize);
@@ -345,6 +346,9 @@ class Index {
         }
     }
 
+    NodeIndex* Index::getNodeIndex(){
+        return this->index;
+    }
 #endif	/* INDEX_HPP */
 
 
