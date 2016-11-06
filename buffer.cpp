@@ -17,8 +17,7 @@
         initialSize = SIZE_BUFFER;
         currentSize = 0;
         overflowSize = SIZE_BUFFER;
-
-        
+      
         firstListAvailable = 0;
         
         this->buffer = (NodeList*) malloc(sizeof(NodeList) * overflowSize);

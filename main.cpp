@@ -67,20 +67,22 @@ int main(int argc, char** argv) {
     }
 
     
-    printGraph(&indexExternal, bufferExternal);
-    printGraph(&indexInternal, bufferInternal);
+    //printGraph(&indexExternal, bufferExternal);
+    //printGraph(&indexInternal, bufferInternal);
 
     
     
     // Parse the file containing the queries
     /*try {
+    try {
         //parseFileWorkLoad(externalIndex, internalIndex, fileWorkLoad);
        parseFileWorkLoad(fileWorkLoad, &indexInternal, &indexExternal, bufferInternal, bufferExternal);
     } catch (std::string err) {
         std::cerr << err << std::endl;
         state = 3;
     }*/
-    
+    }
+
 
     return state;
 }

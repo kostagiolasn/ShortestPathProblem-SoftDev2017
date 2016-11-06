@@ -7,7 +7,6 @@
 #include "buffer.hpp"
 #include "queue.hpp"
 
-
 #define SIZE_INDEX 8
 
 typedef int OK_SUCCESS;

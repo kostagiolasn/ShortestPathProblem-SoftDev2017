@@ -21,7 +21,7 @@ FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=GNU-Linux-x86
+CND_PLATFORM=GNU-Linux
 CND_DLIB_EXT=so
 CND_CONF=Release
 CND_DISTDIR=dist
@@ -49,6 +49,13 @@ TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
 # Test Files
 TESTFILES= \
 	${TESTDIR}/TestFiles/f1
+<<<<<<< HEAD
+=======
+
+# Test Object Files
+TESTOBJECTFILES= \
+	${TESTDIR}/tests/newsimpletest.o
+>>>>>>> 9e0c38a6344e3dcc890fa287a84d7ca3ce28bc58
 
 # C Compiler Flags
 CFLAGS=
@@ -68,43 +75,72 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/shortestpathproblem
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/shortestpathproblem-softdev2017
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/shortestpathproblem: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/shortestpathproblem-softdev2017: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/shortestpathproblem ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/shortestpathproblem-softdev2017 ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/bfs.o: bfs.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/bfs.o bfs.cpp
+
+<<<<<<< HEAD
 ${OBJECTDIR}/bfs.o: bfs.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/bfs.o bfs.cpp
 
 ${OBJECTDIR}/buffer.o: buffer.cpp 
+=======
+${OBJECTDIR}/buffer.o: buffer.cpp
+>>>>>>> 9e0c38a6344e3dcc890fa287a84d7ca3ce28bc58
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/buffer.o buffer.cpp
 
+<<<<<<< HEAD
 ${OBJECTDIR}/index.o: index.cpp 
+=======
+${OBJECTDIR}/index.o: index.cpp
+>>>>>>> 9e0c38a6344e3dcc890fa287a84d7ca3ce28bc58
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/index.o index.cpp
 
+<<<<<<< HEAD
 ${OBJECTDIR}/main.o: main.cpp 
+=======
+${OBJECTDIR}/main.o: main.cpp
+>>>>>>> 9e0c38a6344e3dcc890fa287a84d7ca3ce28bc58
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
+<<<<<<< HEAD
 ${OBJECTDIR}/nodeIndex.o: nodeIndex.cpp 
+=======
+${OBJECTDIR}/nodeIndex.o: nodeIndex.cpp
+>>>>>>> 9e0c38a6344e3dcc890fa287a84d7ca3ce28bc58
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/nodeIndex.o nodeIndex.cpp
 
+<<<<<<< HEAD
 ${OBJECTDIR}/nodeList.o: nodeList.cpp 
+=======
+${OBJECTDIR}/nodeList.o: nodeList.cpp
+>>>>>>> 9e0c38a6344e3dcc890fa287a84d7ca3ce28bc58
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/nodeList.o nodeList.cpp
 
+<<<<<<< HEAD
 ${OBJECTDIR}/queue.o: queue.cpp 
+=======
+${OBJECTDIR}/queue.o: queue.cpp
+>>>>>>> 9e0c38a6344e3dcc890fa287a84d7ca3ce28bc58
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/queue.o queue.cpp
@@ -113,10 +149,19 @@ ${OBJECTDIR}/queue.o: queue.cpp
 .build-subprojects:
 
 # Build Test Targets
+<<<<<<< HEAD
 .build-tests-conf: .build-conf ${TESTFILES}
 ${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/newsimpletest.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.cc}   -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS} 
+=======
+.build-tests-conf: .build-tests-subprojects .build-conf ${TESTFILES}
+.build-tests-subprojects:
+
+${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/newsimpletest.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${TESTDIR}/TestFiles
+	${LINK.cc} -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS}   
+>>>>>>> 9e0c38a6344e3dcc890fa287a84d7ca3ce28bc58
 
 
 ${TESTDIR}/tests/newsimpletest.o: tests/newsimpletest.cpp 
@@ -228,7 +273,6 @@ ${OBJECTDIR}/queue_nomain.o: ${OBJECTDIR}/queue.o queue.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/shortestpathproblem
 
 # Subprojects
 .clean-subprojects:

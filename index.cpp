@@ -9,9 +9,15 @@
 #include "index.hpp"
 
   Index::Index(bool ext) {
+<<<<<<< HEAD
         initialSize = SIZE_INDEX;
         currentSize = 0;
         overflowSize = SIZE_INDEX;
+=======
+        initialSize = 8;
+        currentSize = 0;
+        overflowSize = 8;
+>>>>>>> 9e0c38a6344e3dcc890fa287a84d7ca3ce28bc58
         external = ext;
         this->index = (NodeIndex*) malloc(sizeof(NodeList) * overflowSize);
         for(int i = 0; i < overflowSize; i++) {
@@ -63,7 +69,8 @@
         
         if(index[sourceNodeId].nodeExists()) {
             
-            std::cout << "Node Exists" << std::endl;
+            //std::cout << "Node Exists" << std::endl;
+            //std::cout << "Node Exists" << std::endl;
             
             // if the source node exists in the index, 
             // just add the target node as its neighbor
@@ -89,14 +96,16 @@
                     
                     // re-check if neighbor already exists
                     if(buffer->getListNode(temp_offset)->containsNeighbor(targetNodeId)) {
-                        std::cout << "Neighbor exists" << std::endl;
+                        //std::cout << "Neighbor exists" << std::endl;
+                        //std::cout << "Neighbor exists" << std::endl;
                         return 0;
                     }
                 }
                 
                 // A final check if neighbor exists
                 if(buffer->getListNode(temp_offset)->containsNeighbor(targetNodeId)) {
-                    std::cout << "Neighbor exists" << std::endl;
+                    //std::cout << "Neighbor exists" << std::endl;
+                    //std::cout << "Neighbor exists" << std::endl;
                     return 0;
                 }
 
@@ -184,7 +193,8 @@
             // if the source node doesn't exist,
             // add it to the index
             
-            std::cout << "Node is new" << std::endl;
+            //std::cout << "Node is new" << std::endl;
+            //std::cout << "Node is new" << std::endl;
             
             this->index[sourceNodeId].setNodeId(sourceNodeId);
             
@@ -214,7 +224,8 @@
             buffer->incrementFirstAvailable();
         }
         
-        std::cout << "Node inserted successfully" << std::endl;
+        //std::cout << "Node inserted successfully" << std::endl;
+       //std::cout << "Node inserted successfully" << std::endl;
         
         return 0;
     }
