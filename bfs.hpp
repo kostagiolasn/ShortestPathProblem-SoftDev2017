@@ -93,12 +93,13 @@ int BFS::findShortestPath(Index indexInternal, Index indexExternal, uint32_t sta
         
         uint32_t markedNodeExt = this->queueExternal->popFront(queueExternal);
         //cout << "External: I popped " << markedNodeExt << endl;     
-        NodeList* neighborsExt = indexExternal.getListHead(indexExternal.getNodeIndex(), markedNodeExt);
+        //NodeList* neighborsExt = indexExternal.getListHead(indexExternal.getNodeIndex(), markedNodeExt);
+        NodeList* neighborsExt = NULL;
      
         uint32_t markedNodeInt = this->queueInternal->popFront(queueInternal);
         //cout << "Internal: I popped " << markedNodeInt << endl;     
-        NodeList* neighborsInt = indexInternal.getListHead(indexInternal.getNodeIndex(), markedNodeInt);
-        
+        //NodeList* neighborsInt = indexInternal.getListHead(indexInternal.getNodeIndex(), markedNodeInt);
+        NodeList* neighborsInt = NULL;
         if(neighborsExt != NULL ){
             
             

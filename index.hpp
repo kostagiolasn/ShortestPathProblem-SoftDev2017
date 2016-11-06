@@ -105,7 +105,7 @@ class Index {
         // of the source node will produce an overflow
         // if we try to access its place on the index
         
-        if(sourceNodeId >= this->get_overflowSize()) {
+        while(sourceNodeId >= this->get_overflowSize()) {
             
             // if the id exceeds the the overflow size
             // of the index, we meet a condition where
@@ -120,7 +120,7 @@ class Index {
         
         // After this, we proceed normally with the rest 
         // of the insertion
-        
+
         if(index[sourceNodeId].nodeExists()) {
             
             std::cout << "Node Exists" << std::endl;
@@ -131,7 +131,7 @@ class Index {
             uint32_t temp_offset = buffer->getListNode(this->index[sourceNodeId].get_offsetNeighbors())->get_offset();
             
             // If neighbor already exists return.
-            if(buffer->getListNode(temp_offset)->containsNeighbor(targetNodeId)) {
+            if(buffer->getListNode(this->index[sourceNodeId].get_offsetNeighbors())->containsNeighbor(targetNodeId)) {
                 std::cout << "Neighbor exists" << std::endl;
                 return 0;
             }
