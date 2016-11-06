@@ -17,6 +17,7 @@
 #include "index.hpp"
 #include "bfs.hpp"
 
+
 void printGraph(Index*, Buffer*);
 
 void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fileWorkLoad);
@@ -72,14 +73,16 @@ int main(int argc, char** argv) {
     
     
     // Parse the file containing the queries
+    /*try {
     try {
         //parseFileWorkLoad(externalIndex, internalIndex, fileWorkLoad);
        parseFileWorkLoad(fileWorkLoad, &indexInternal, &indexExternal, bufferInternal, bufferExternal);
     } catch (std::string err) {
         std::cerr << err << std::endl;
         state = 3;
+    }*/
     }
-    
+
 
     return state;
 }
@@ -144,7 +147,7 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
                 err = 1;
                 break;
             }
-           // cout << idSource << " " << idTarget << endl;
+           cout << idSource << " " << idTarget << endl;
             // Here is where the insertion takes place
             // In the external index, idTarget must be added as a neighbor to idSource
             // while in the internal index, idSource must be added as a neighbor to idTarget

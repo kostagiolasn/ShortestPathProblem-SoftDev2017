@@ -3,13 +3,15 @@
 
 #define UINT32_T_MAX (0xffffffff)
 
+#define SIZE_NEIGHBORS 2
+
 typedef int OK_SUCCESS;
 
 class NodeList {
     
     private:
-        uint32_t neighbors[2] = {UINT32_T_MAX};
-        uint32_t edgeProperty[2] = {UINT32_T_MAX};
+        uint32_t neighbors[SIZE_NEIGHBORS] = {UINT32_T_MAX};
+        uint32_t edgeProperty[SIZE_NEIGHBORS] = {UINT32_T_MAX};
         size_t neighborsSize;
         size_t edgePropertySize;
         uint32_t offset;

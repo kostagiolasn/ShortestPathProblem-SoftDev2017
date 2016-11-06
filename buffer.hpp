@@ -3,6 +3,8 @@
 
 #include "nodeList.hpp"
 
+#define SIZE_BUFFER 2
+
 class Buffer {
 
     private:

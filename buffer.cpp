@@ -14,11 +14,10 @@
     
     Buffer* Buffer::createBuffer() {
 
-        initialSize = 512;
+        initialSize = SIZE_BUFFER;
         currentSize = 0;
-        overflowSize = 512;
-
-        
+        overflowSize = SIZE_BUFFER;
+      
         firstListAvailable = 0;
         
         this->buffer = (NodeList*) malloc(sizeof(NodeList) * overflowSize);
