@@ -3,13 +3,15 @@
 
 #define UINT32_T_MAX (0xffffffff)
 
+#define SIZE_NEIGHBORS 2
+
 typedef int OK_SUCCESS;
 
 class NodeList {
     
     private:
-        uint32_t neighbors[2] = {UINT32_T_MAX};
-        uint32_t edgeProperty[2] = {UINT32_T_MAX};
+        uint32_t neighbors[SIZE_NEIGHBORS] = {UINT32_T_MAX};
+        uint32_t edgeProperty[SIZE_NEIGHBORS] = {UINT32_T_MAX};
         size_t neighborsSize;
         size_t edgePropertySize;
         uint32_t offset;
@@ -48,60 +50,11 @@ class NodeList {
         uint32_t get_neighborAtIndex(int);
                
         bool containsNeighbor(uint32_t);
+        
+        uint32_t* getNeighbors();
 };
     
-    bool NodeList::neighborsFull() {
-        return this->neighborsSize == 2;
-    }
-    
-    bool NodeList::edgePropertyFull() {
-        return this->edgePropertySize == 2;
-    }
-    
-    void NodeList::set_offset(uint32_t offset) {
-        this->offset = offset;
-    }
-        
-    uint32_t NodeList::get_offset() {
-        return offset;
-    }
-    
-    size_t NodeList::get_neighborsSize() {
-        return neighborsSize;
-    }
-    
-    void NodeList::set_neighborsSize(uint32_t size) {
-        this->neighborsSize = size;
-    }
-        
-    void NodeList::increment_neighborsSize() {
-        neighborsSize++;
-    }
-    
-    OK_SUCCESS NodeList::insertNeighborAtPosition(uint32_t neighborId, int position) {
-        neighbors[position] = neighborId;
-        increment_neighborsSize();
-        return 0;
-    }
-    
-    OK_SUCCESS NodeList::insertEdgePropertyAtPosition(uint32_t neighborId, int position) {
-            edgeProperty[position] = neighborId;
-            return 0;
-    }
-    
-    uint32_t NodeList::get_neighborAtIndex(int index) {
-        return neighbors[index];
-    }
-    
-    bool NodeList::containsNeighbor(uint32_t neighborId) {
-        for(int i = 0; i < this->get_neighborsSize(); i++) {
-            if(neighborId == this->get_neighborAtIndex(i)) {
-                return true;
-            }
-        }
-        
-        return false;
-    }
+   
 
 #endif	/* NODELIST_HPP */
 

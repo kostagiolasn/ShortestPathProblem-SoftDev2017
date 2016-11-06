@@ -3,6 +3,8 @@
 
 #include "nodeList.hpp"
 
+#define SIZE_BUFFER 2
+
 class Buffer {
 
     private:
@@ -60,98 +62,10 @@ class Buffer {
         // the buffer's capacity, then the buffer is 
         // considered full, and its size must be doubled
         bool isFull();
+        NodeList* getBuffer();
         
         
 };
-
-    Buffer::Buffer() {
-        createBuffer();
-    }
-    
-    Buffer* Buffer::createBuffer() {
-
-        initialSize = 2;
-        currentSize = 0;
-        overflowSize = 2;
-
-        
-        firstListAvailable = 0;
-        
-        this->buffer = (NodeList*) malloc(sizeof(NodeList) * overflowSize);
-        
-        for(int i = 0; i < overflowSize; i++) {
-
-            // the default offset is initialized at 0
-            this->buffer[i].set_offset(0);
-            this->buffer[i].set_neighborsSize(0);
-        }
-        return this;
-    }
-    
-    OK_SUCCESS Buffer::destroyBuffer( Buffer* buffer ) {
-        delete buffer;
-    }
-    
-    OK_SUCCESS Buffer::doubleBuffer() {
-        if( ( this->buffer = (NodeList*) realloc(this->buffer, sizeof(NodeList)*this->overflowSize*2) ) != NULL) {
-            
-            for(int i = this->overflowSize; i < this->overflowSize * 2; i++) {
-
-                // the default offset is initialized at 0
-                this->buffer[i].set_offset(0);
-                this->buffer[i].set_neighborsSize(0);
-            }
-            
-            this->overflowSize *= 2;
-            
-            return 0;
-        }
-        else
-            return 1;
-    
-    }
-    
-    NodeList* Buffer::getListNode(uint32_t index) {
-        return &(this->buffer[index]);
-    }
-    
-    NodeList* Buffer::allocNewNode() {
-        return &(this->buffer[firstListAvailable]);
-    }
-        
-    //NodeList* Buffer::getListNode(NodeList*);
-
-    Buffer::~Buffer() {
-        destroyBuffer(this);
-    }
-    
-    void Buffer::set_currentSize(size_t currentSize) {
-        this->currentSize = currentSize;
-    }
-
-    size_t Buffer::get_currentSize() {
-        return this->currentSize;
-    }
-
-    void Buffer::set_overflowSize(size_t overflowSize) {
-        this->overflowSize = overflowSize;
-    }
-
-    size_t Buffer::get_overflowSize() {
-        return this->overflowSize;
-    }
-    
-    void Buffer::incrementFirstAvailable() {
-        firstListAvailable += 1;
-    }
-    
-    uint32_t Buffer::get_firstListAvailable() {
-        return firstListAvailable;
-    }
-    
-    bool Buffer::isFull() {
-        return firstListAvailable == overflowSize;
-    }
 
 #endif	/* BUFFER_HPP */
 
