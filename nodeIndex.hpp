@@ -29,6 +29,8 @@ class NodeIndex {
         // Checks if node exists in our index, i.e.
         // if its id is there instead of a UINT32_T_MAX
         bool nodeExists();
+        
+       
 };
     NodeIndex::NodeIndex() {
         // We initialize the node id by using the max value for unsigned integers : 2^32 - 1
@@ -61,5 +63,6 @@ class NodeIndex {
         this->offsetNeighbors = offset;
     }
 
+   
 #endif	/* NODEINDEX_HPP */
 

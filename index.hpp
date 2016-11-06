@@ -5,6 +5,7 @@
 
 #include "nodeIndex.hpp"
 #include "buffer.hpp"
+#include "queue.hpp"
 
 typedef int OK_SUCCESS;
 
@@ -59,6 +60,8 @@ class Index {
         bool isExternal();
         
         void print(Buffer*);
+        Queue* getNeighborsOfNode(Buffer* buffer, uint32_t nodeId);
+        
         
 };
 
@@ -117,7 +120,7 @@ class Index {
         
         if(index[sourceNodeId].nodeExists()) {
             
-            std::cout << "Node Exists" << std::endl;
+            //std::cout << "Node Exists" << std::endl;
             
             // if the source node exists in the index, 
             // just add the target node as its neighbor
@@ -126,7 +129,7 @@ class Index {
             
             // If neighbor already exists return.
             if(buffer->getListNode(temp_offset)->containsNeighbor(targetNodeId)) {
-                std::cout << "Neighbor exists" << std::endl;
+                //std::cout << "Neighbor exists" << std::endl;
                 return 0;
             }
             
@@ -143,14 +146,14 @@ class Index {
                     
                     // re-check if neighbor already exists
                     if(buffer->getListNode(temp_offset)->containsNeighbor(targetNodeId)) {
-                        std::cout << "Neighbor exists" << std::endl;
+                        //std::cout << "Neighbor exists" << std::endl;
                         return 0;
                     }
                 }
                 
                 // A final check if neighbor exists
                 if(buffer->getListNode(temp_offset)->containsNeighbor(targetNodeId)) {
-                    std::cout << "Neighbor exists" << std::endl;
+                    //std::cout << "Neighbor exists" << std::endl;
                     return 0;
                 }
 
@@ -238,7 +241,7 @@ class Index {
             // if the source node doesn't exist,
             // add it to the index
             
-            std::cout << "Node is new" << std::endl;
+            //std::cout << "Node is new" << std::endl;
             
             this->index[sourceNodeId].setNodeId(sourceNodeId);
             
@@ -268,7 +271,7 @@ class Index {
             buffer->incrementFirstAvailable();
         }
         
-        std::cout << "Node inserted successfully" << std::endl;
+        //std::cout << "Node inserted successfully" << std::endl;
         
         return 0;
     }
@@ -335,6 +338,38 @@ class Index {
 
     NodeIndex* Index::getNodeIndex(){
         return this->index;
+    }
+    
+    Queue* Index::getNeighborsOfNode(Buffer* buffer, uint32_t nodeId){
+        int j;
+        Queue* neighbors = new Queue();
+        
+        uint32_t temp_offset = buffer->getListNode(this->index[nodeId].get_offsetNeighbors())->get_offset();
+        
+        for(int j = 0; j < buffer->getListNode(this->index[nodeId].get_offsetNeighbors())->get_neighborsSize(); j++) {
+          
+            neighbors->pushBack(buffer->getListNode(this->index[nodeId].get_offsetNeighbors())->get_neighborAtIndex(j));
+        }
+       
+                
+        while(buffer->getListNode(temp_offset)->get_offset() != 0) {
+
+                    
+            for(int j = 0; j < buffer->getListNode(temp_offset)->get_neighborsSize(); j++) {
+                
+                neighbors->pushBack(buffer->getListNode(temp_offset)->get_neighborAtIndex(j));
+            }
+                    
+            temp_offset = buffer->getListNode(temp_offset)->get_offset();
+        }
+                
+        if(buffer->getListNode(temp_offset)->get_neighborsSize() != 0) {
+            for(int j = 0; j < buffer->getListNode(temp_offset)->get_neighborsSize(); j++) {
+                
+                neighbors->pushBack(buffer->getListNode(temp_offset)->get_neighborAtIndex(j));
+            }
+        }
+        return neighbors;
     }
 #endif	/* INDEX_HPP */
 

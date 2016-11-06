@@ -48,6 +48,8 @@ class NodeList {
         uint32_t get_neighborAtIndex(int);
                
         bool containsNeighbor(uint32_t);
+        
+        uint32_t* getNeighbors();
 };
     
     bool NodeList::neighborsFull() {
@@ -101,6 +103,10 @@ class NodeList {
         }
         
         return false;
+    }
+    
+    uint32_t* NodeList::getNeighbors(){
+        return this->neighbors;
     }
 
 #endif	/* NODELIST_HPP */

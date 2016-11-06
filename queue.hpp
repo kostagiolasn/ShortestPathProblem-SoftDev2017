@@ -14,22 +14,26 @@ class Queue{
     
     private:
         QueueNode* head;
+        size_t size;
        
     public:
         Queue();
         ~Queue();
-        uint32_t popFront(Queue*);
+        uint32_t popFront();
         void pushBack(uint32_t);
         void pushFront(uint32_t);
         void print();
         void printAsPath(uint32_t);
         bool isEmpty();
         uint32_t getQueueSize();
+        size_t getSize();
+        uint32_t getNthNeighbor(uint32_t);
 };
 
 
 Queue::Queue(){
     this->head = NULL;
+    this->size = 0;
    
  }
 
@@ -41,16 +45,16 @@ Queue::~Queue(){
     }
 }
 
-uint32_t Queue::popFront(Queue *q){
+uint32_t Queue::popFront(){
     uint32_t returnValue;
-    if(q->head != NULL){
+    if(this->head != NULL){
         
-        QueueNode* temp = q->head;
+        QueueNode* temp = this->head;
         
-        q->head = q->head->next;
+        this->head = this->head->next;
         returnValue = temp->nodeId;  
         delete temp;
-             
+        this->size--;
 
         return returnValue;
     }
@@ -62,7 +66,7 @@ void Queue::pushBack(uint32_t nodeId){
         this->head = new QueueNode();
         this->head->nodeId = nodeId;
         this->head->next = NULL;
-        
+        this->size++;
         
     }else{
        
@@ -76,6 +80,7 @@ void Queue::pushBack(uint32_t nodeId){
         newNode->next = NULL;
         this->head->next = newNode;
         this->head = temp; 
+        this->size++;
     }
     
 }
@@ -85,11 +90,13 @@ void Queue::pushFront(uint32_t nodeId){
         this->head = new QueueNode();
         this->head->nodeId = nodeId;
         this->head->next = NULL;
+        this->size++;
     }else{
         QueueNode* newNode = new QueueNode();
         newNode->nodeId = nodeId;
         newNode->next = this->head;
         this->head = newNode;
+        this->size++;
         
     }
 }
@@ -117,6 +124,19 @@ bool Queue::isEmpty(){
         return true;
     else 
         return false;
+}
+
+size_t Queue::getSize(){
+    return this->size;
+}
+
+uint32_t Queue::getNthNeighbor(uint32_t n){
+    while(this->head != NULL){
+        if(this->head->nodeId == n)
+            return this->head->nodeId;
+        //cout << this->head->nodeId << endl;
+        this->head = this->head->next;
+    }
 }
 #endif /* QUEUE_HPP */
 

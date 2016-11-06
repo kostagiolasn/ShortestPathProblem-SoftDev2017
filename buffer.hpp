@@ -60,6 +60,7 @@ class Buffer {
         // the buffer's capacity, then the buffer is 
         // considered full, and its size must be doubled
         bool isFull();
+        NodeList* getBuffer();
         
         
 };
@@ -153,5 +154,8 @@ class Buffer {
         return firstListAvailable == overflowSize;
     }
 
+    NodeList* Buffer::getBuffer(){
+        return this->buffer;
+    }
 #endif	/* BUFFER_HPP */
 
