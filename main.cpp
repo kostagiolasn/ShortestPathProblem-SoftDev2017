@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
     std::string fileGraph;
     std::string fileWorkLoad;
     int state = 0;
-    int a = 2;
+    
     try {
         args_setup(argc, argv, fileGraph, fileWorkLoad);
     } catch (std::string err) {
@@ -68,15 +68,15 @@ int main(int argc, char** argv) {
         state = 2;
     }
     cout << "done inserting" << endl;
-    
-    printGraph(&indexExternal, bufferExternal);
-    printGraph(&indexInternal, bufferInternal);
+    //bufferExternal->printBuffer();
+    //printGraph(&indexExternal, bufferExternal);
+    //printGraph(&indexInternal, bufferInternal);
 
     
     
     // Parse the file containing the queries
 
-    indexExternal.getNeighborsOfNode(bufferExternal, 0)->print();
+   // indexExternal.getNeighborsOfNode(bufferExternal, 0)->print();
     try {
         //parseFileWorkLoad(externalIndex, internalIndex, fileWorkLoad);
        parseFileWorkLoad(fileWorkLoad, &indexInternal, &indexExternal, bufferInternal, bufferExternal);
@@ -85,7 +85,7 @@ int main(int argc, char** argv) {
         state = 3;
     }
     
-
+    //indexExternal.getNeighborsOfNode(bufferExternal, 340279)->print();
     /*try {
         try {
             //parseFileWorkLoad(externalIndex, internalIndex, fileWorkLoad);
@@ -178,8 +178,9 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
                 err = 2;
                 break;
             }
+            
             if( internalIndex->insertNode(idTarget, idSource, internalBuffer) ) {
-                err = 2;
+               err = 2;
                 break;
             }
             
@@ -244,6 +245,6 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
 }
 
 int findShortestPath(uint32_t source, uint32_t target, Index* indexInternal, Index* indexExternal, Buffer* bufferInternal, Buffer* bufferExternal){
-   BFS* bfs = new BFS(22);
+   BFS* bfs = new BFS(indexInternal->get_overflowSize() + 1);
    return bfs->findShortestPath(indexInternal, indexExternal, bufferInternal, bufferExternal, source, target);
 }

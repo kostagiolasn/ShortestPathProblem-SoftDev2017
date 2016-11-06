@@ -64,6 +64,8 @@ class Buffer {
         bool isFull();
         NodeList* getBuffer();
         
+        void printBuffer();
+        
         
 };
 

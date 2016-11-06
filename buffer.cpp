@@ -97,3 +97,14 @@
     NodeList* Buffer::getBuffer(){
         return this->buffer;
     }
+    
+    void Buffer::printBuffer(){
+        int i, j;
+        for(i = 0; i < this->get_overflowSize(); i++){
+            for(j = 0; j < 2; j++){
+                std::cout << this->buffer[i].get_neighborAtIndex(j) << " ";
+               
+            }
+            std::cout << "offset of next: " << this->buffer[i].get_offset() << std::endl;
+        }
+    }

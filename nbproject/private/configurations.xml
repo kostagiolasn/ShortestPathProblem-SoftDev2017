@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="95">
+<configurationDescriptor version="100">
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
@@ -27,15 +27,11 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph </runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph tinyGraph.txt -fWorkLoad </runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph testGraph.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph tinyGraph2.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommandpicklistitem>
-<<<<<<< HEAD
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph tinyGraph.txt -fWorkLoad tinyWorkload_FINAL.txt -sIndex 8 -sBuffer 2</runcommandpicklistitem>
-=======
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph smallGraph.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommandpicklistitem>
->>>>>>> 0438304ad6ae3a024f42f2b7a7f30f84ef821c12
+          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph testGraph.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph tinyGraph.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph smallGraph.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph smallGraph.txt -fWorkLoad smallWorkload_FINAL.txt</runcommandpicklistitem>
         </runcommandpicklist>
         <runcommand>"${OUTPUT_PATH}" -fGraph smallGraph.txt -fWorkLoad smallWorkload_FINAL.txt</runcommand>

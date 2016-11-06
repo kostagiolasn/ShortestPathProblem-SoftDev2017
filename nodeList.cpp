@@ -7,8 +7,13 @@
 #include <sstream>
 #include <stdint.h>
 #include "nodeList.hpp"
+#include "bfs.hpp"
 
- bool NodeList::neighborsFull() {
+    NodeList::NodeList(){
+        this->neighborsSize = 0;
+        this->offset = 0;
+    }
+    bool NodeList::neighborsFull() {
         return this->neighborsSize == 2;
     }
     
@@ -38,6 +43,7 @@
     
     OK_SUCCESS NodeList::insertNeighborAtPosition(uint32_t neighborId, int position) {
         neighbors[position] = neighborId;
+        //std::cout << "Added: " << neighborId << " at: " << position<< std::endl;
         increment_neighborsSize();
         return 0;
     }
