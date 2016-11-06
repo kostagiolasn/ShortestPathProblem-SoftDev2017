@@ -71,8 +71,8 @@
             uint32_t temp_offset = buffer->getListNode(this->index[sourceNodeId].get_offsetNeighbors())->get_offset();
             
             // If neighbor already exists return.
-            if(buffer->getListNode(temp_offset)->containsNeighbor(targetNodeId)) {
-                //std::cout << "Neighbor exists" << std::endl;
+             if(buffer->getListNode(this->index[sourceNodeId].get_offsetNeighbors())->containsNeighbor(targetNodeId)) {
+                std::cout << "Neighbor exists" << std::endl;
                 return 0;
             }
             
