@@ -9,15 +9,11 @@
 #include "index.hpp"
 
   Index::Index(bool ext) {
-<<<<<<< HEAD
+
         initialSize = SIZE_INDEX;
         currentSize = 0;
         overflowSize = SIZE_INDEX;
-=======
-        initialSize = 8;
-        currentSize = 0;
-        overflowSize = 8;
->>>>>>> 9e0c38a6344e3dcc890fa287a84d7ca3ce28bc58
+
         external = ext;
         this->index = (NodeIndex*) malloc(sizeof(NodeList) * overflowSize);
         for(int i = 0; i < overflowSize; i++) {
