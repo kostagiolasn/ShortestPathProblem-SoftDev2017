@@ -45,7 +45,7 @@
         // of the source node will produce an overflow
         // if we try to access its place on the index
         
-        if(sourceNodeId >= this->get_overflowSize()) {
+        while(sourceNodeId >= this->get_overflowSize()) {
             
             // if the id exceeds the the overflow size
             // of the index, we meet a condition where
