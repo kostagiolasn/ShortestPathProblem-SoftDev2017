@@ -24,6 +24,8 @@ void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fil
 
 void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBuffer, Index* internalIndex, Buffer* internalBuffer);
 
+void freeVariables(Index* indexExternal, Buffer* bufferExternal, Index* indexInternal, Buffer* bufferInternal);
+
 //void parseFileGraph(Index externalIndex, Index internalIndex, std::string stream);
 
 //void parseFileWorkLoad(Index externalIndex, Index internalIndex, std::string stream);
@@ -67,21 +69,23 @@ int main(int argc, char** argv) {
     }
 
     
-    //printGraph(&indexExternal, bufferExternal);
-    //printGraph(&indexInternal, bufferInternal);
+    printGraph(&indexExternal, bufferExternal);
+    printGraph(&indexInternal, bufferInternal);
 
     
     
     // Parse the file containing the queries
     /*try {
-    try {
-        //parseFileWorkLoad(externalIndex, internalIndex, fileWorkLoad);
-       parseFileWorkLoad(fileWorkLoad, &indexInternal, &indexExternal, bufferInternal, bufferExternal);
-    } catch (std::string err) {
-        std::cerr << err << std::endl;
-        state = 3;
+        try {
+            //parseFileWorkLoad(externalIndex, internalIndex, fileWorkLoad);
+           parseFileWorkLoad(fileWorkLoad, &indexInternal, &indexExternal, bufferInternal, bufferExternal);
+        } catch (std::string err) {
+            std::cerr << err << std::endl;
+            state = 3;
+        }
     }*/
-    }
+    
+    //freeVariables(&indexExternal, bufferExternal, &indexInternal, bufferInternal);
 
 
     return state;
@@ -89,6 +93,13 @@ int main(int argc, char** argv) {
 
 void printGraph(Index* indexExternal, Buffer* bufferExternal) {
     indexExternal->print(bufferExternal);
+}
+
+void freeVariables(Index* indexExternal, Buffer* bufferExternal, Index* indexInternal, Buffer* bufferInternal) {
+    delete(indexExternal);
+    delete(bufferExternal);
+    delete(indexInternal);
+    delete(bufferInternal);
 }
 
 void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fileWorkLoad) {

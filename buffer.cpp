@@ -12,6 +12,10 @@
         createBuffer();
     }
     
+    Buffer::~Buffer() {
+        free(this->buffer);
+    }
+    
     Buffer* Buffer::createBuffer() {
 
         initialSize = SIZE_BUFFER;
@@ -61,13 +65,7 @@
     NodeList* Buffer::allocNewNode() {
         return &(this->buffer[firstListAvailable]);
     }
-        
-    //NodeList* Buffer::getListNode(NodeList*);
-
-    Buffer::~Buffer() {
-        destroyBuffer(this);
-    }
-    
+            
     void Buffer::set_currentSize(size_t currentSize) {
         this->currentSize = currentSize;
     }

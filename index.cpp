@@ -9,15 +9,10 @@
 #include "index.hpp"
 
   Index::Index(bool ext) {
-<<<<<<< HEAD
         initialSize = SIZE_INDEX;
         currentSize = 0;
         overflowSize = SIZE_INDEX;
-=======
-        initialSize = 8;
-        currentSize = 0;
-        overflowSize = 8;
->>>>>>> 9e0c38a6344e3dcc890fa287a84d7ca3ce28bc58
+
         external = ext;
         this->index = (NodeIndex*) malloc(sizeof(NodeList) * overflowSize);
         for(int i = 0; i < overflowSize; i++) {
@@ -25,6 +20,10 @@
             this->index[i].set_offsetNeighbors(0);
         }
     }
+  
+   Index::~Index() {
+       free(this->index);
+   }
     
     OK_SUCCESS Index::doubleIndex() {
         if( ( this->index = (NodeIndex*) realloc(this->index, sizeof(NodeIndex)*this->overflowSize*2) ) != NULL) {
@@ -229,14 +228,6 @@
         
         return 0;
     }
-
-    /*NodeList* Index::getListHead(NodeIndex* index, uint32_t nodeId) {
-        //return index[nodeId].getListOfNeighbors();
-        return NULL;
-    }*/
-    
-    Index::~Index() {
-    }
     
     void Index::set_currentSize(size_t currentSize) {
         this->currentSize = currentSize;
@@ -262,6 +253,10 @@
         
         for(int i = 0; i < this->get_overflowSize(); i++) {
             if(this->index[i].nodeExists()) {
+                
+                if(i == 20) {
+                    std::cout << "edw" << std::endl;
+                }
                 uint32_t temp_offset = buffer->getListNode(this->index[i].get_offsetNeighbors())->get_offset();
                 
                 std::cout << "Index number :" << i << std::endl;
@@ -271,7 +266,8 @@
                 }
                 std::cout << std::endl;
                 
-                while(buffer->getListNode(temp_offset)->get_offset() != 0) {
+                
+                while(temp_offset != 0) {
 
                     
                     for(int j = 0; j < buffer->getListNode(temp_offset)->get_neighborsSize(); j++) {
@@ -281,11 +277,11 @@
                     temp_offset = buffer->getListNode(temp_offset)->get_offset();
                 }
                 
-                if(buffer->getListNode(temp_offset)->get_neighborsSize() != 0) {
+                /*if(buffer->getListNode(temp_offset)->get_neighborsSize() != 0) {
                     for(int j = 0; j < buffer->getListNode(temp_offset)->get_neighborsSize(); j++) {
                         std::cout << buffer->getListNode(temp_offset)->get_neighborAtIndex(j)  << std::endl;
                     }
-                }
+                }*/
             }
         }
     }
