@@ -18,17 +18,23 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>bfs.cpp</itemPath>
+      <itemPath>buffer.cpp</itemPath>
+      <itemPath>index.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
+      <itemPath>nodeIndex.cpp</itemPath>
+      <itemPath>nodeList.cpp</itemPath>
+      <itemPath>queue.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
                    projectFiles="false"
                    kind="TEST_LOGICAL_FOLDER">
-      <logicalFolder name="f3"
-                     displayName="New C++ Simple Test 1"
+      <logicalFolder name="f1"
+                     displayName="New C++ Simple Test"
                      projectFiles="true"
                      kind="TEST">
-        <itemPath>tests/newsimpletest3.cpp</itemPath>
+        <itemPath>tests/newsimpletest.cpp</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -54,11 +60,15 @@
           <standard>8</standard>
         </ccTool>
       </compileType>
+      <item path="bfs.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="bfs.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="buffer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="buffer.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <folder path="TestFiles/f3">
+      <folder path="TestFiles/f1">
         <cTool>
           <incDir>
             <pElem>.</pElem>
@@ -70,20 +80,28 @@
           </incDir>
         </ccTool>
         <linkerTool>
-          <output>${TESTDIR}/TestFiles/f3</output>
+          <output>${TESTDIR}/TestFiles/f1</output>
         </linkerTool>
       </folder>
+      <item path="index.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="index.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="nodeIndex.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="nodeIndex.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="nodeList.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="nodeList.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="queue.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="queue.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="tests/newsimpletest3.cpp" ex="false" tool="1" flavor2="0">
+      <item path="tests/newsimpletest.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -106,11 +124,15 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="bfs.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="bfs.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="buffer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="buffer.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <folder path="TestFiles/f3">
+      <folder path="TestFiles/f1">
         <cTool>
           <incDir>
             <pElem>.</pElem>
@@ -122,20 +144,28 @@
           </incDir>
         </ccTool>
         <linkerTool>
-          <output>${TESTDIR}/TestFiles/f3</output>
+          <output>${TESTDIR}/TestFiles/f1</output>
         </linkerTool>
       </folder>
+      <item path="index.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="index.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="nodeIndex.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="nodeIndex.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="nodeList.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="nodeList.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="queue.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="queue.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="tests/newsimpletest3.cpp" ex="false" tool="1" flavor2="0">
+      <item path="tests/newsimpletest.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>

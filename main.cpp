@@ -30,7 +30,7 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
 //void parseFileGraph(std::string stream);
 void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal, Buffer*, Buffer*);
 
-//void findShortestPath(uint32_t source, uint32_t target, Index indexInternal, Index indexExternal);
+int findShortestPath(uint32_t source, uint32_t target, Index* indexInternal, Index* indexExternal, Buffer* bufferInternal, Buffer* bufferExternal);
 
 using namespace std;
 
@@ -66,8 +66,8 @@ int main(int argc, char** argv) {
     }
 
     
-   // printGraph(&indexExternal, bufferExternal);
-   // printGraph(&indexInternal, bufferInternal);
+    //printGraph(&indexExternal, bufferExternal);
+    //printGraph(&indexInternal, bufferInternal);
 
     
     
@@ -81,11 +81,6 @@ int main(int argc, char** argv) {
     }
     
 
-    BFS* bfs = new BFS(20);
-    cout << "ksekinaw bfs" << endl;
-    cout << "Apotelesma " << bfs->findShortestPath(&indexInternal, &indexExternal, bufferInternal, bufferExternal, 10, 2) << endl;
-    
-    
     return state;
 }
 
@@ -149,7 +144,7 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
                 err = 1;
                 break;
             }
-            cout << idSource << " " << idTarget << endl;
+           // cout << idSource << " " << idTarget << endl;
             // Here is where the insertion takes place
             // In the external index, idTarget must be added as a neighbor to idSource
             // while in the internal index, idSource must be added as a neighbor to idTarget
@@ -190,7 +185,7 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
         queryType = iss.peek();
         if(queryType == 'F'){
             // Process queries here
-            cout << "F found here" << endl;
+           // cout << "F found here" << endl;
         }else {
             if(isdigit(queryType)) {
                 err = 1;
@@ -201,10 +196,10 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
                 break;
             }
           
-            cout << queryType << " " << idSource << " " << idTarget << endl;
+            
             if(queryType == 'Q'){
-                BFS* bfs = new BFS(20);
-                cout << "Apotelesma " << bfs->findShortestPath(indexInternal, indexExternal, bufferInternal, bufferExternal, idSource, idTarget) << endl;
+                cout << queryType << " " << idSource << " " << idTarget << endl;
+               cout << findShortestPath(idSource, idTarget, indexInternal, indexExternal,  bufferInternal, bufferExternal) << endl;
             }
             if(queryType == 'A'){
                 indexInternal->insertNode(idTarget, idSource, bufferInternal);
@@ -222,7 +217,7 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
 
 }
 
-//void findShortestPath(uint32_t source, uint32_t target, Index indexInternal, Index indexExternal){
- //   BFS* bfs = new BFS(10);
- //   cout << bfs->findShortestPath(indexInternal, indexExternal, source, target) << endl;
-//}
+int findShortestPath(uint32_t source, uint32_t target, Index* indexInternal, Index* indexExternal, Buffer* bufferInternal, Buffer* bufferExternal){
+   BFS* bfs = new BFS(22);
+   return bfs->findShortestPath(indexInternal, indexExternal, bufferInternal, bufferExternal, source, target);
+}
