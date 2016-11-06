@@ -50,14 +50,14 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, Buffer* bu
     this->queueExternal->pushBack(startNodeId);
     //cout << "mphka"<< endl;
     visitedExternal[startNodeId] = true;
-    cout << "External: I pushed " << startNodeId << endl;
+    //cout << "External: I pushed " << startNodeId << endl;
     
     //INTERNAL
     this->queueInternal = new Queue();
     this->queueInternal->pushBack(targetNodeId);
     
     visitedInternal[targetNodeId] = true;
-    cout << "Internal: I pushed " << targetNodeId << endl;
+    //cout << "Internal: I pushed " << targetNodeId << endl;
     
     
    
@@ -68,13 +68,13 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, Buffer* bu
         //}
         
         uint32_t markedNodeExt = this->queueExternal->popFront();
-        cout << "External: I popped " << markedNodeExt << endl;     
+        //cout << "External: I popped " << markedNodeExt << endl;     
         Queue* neighborsExt = indexExternal->getNeighborsOfNode(bufferExternal, markedNodeExt);
         //cout << "i got ext neigh " << neighborsExt->isEmpty() << endl;
         //neighborsExt->print();
         
         uint32_t markedNodeInt = this->queueInternal->popFront();
-        cout << "Internal: I popped " << markedNodeInt << endl;     
+        //cout << "Internal: I popped " << markedNodeInt << endl;     
         Queue* neighborsInt = indexInternal->getNeighborsOfNode(bufferInternal, markedNodeInt);
         //cout << "i got int neigh" << endl;
         //neighborsInt->print();
@@ -91,7 +91,7 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, Buffer* bu
                      
                         previousNodeExternal[neighbourExt] = markedNodeExt;
                         queueExternal->pushBack(neighbourExt);
-                        cout << "External: I pushed " << neighbourExt << endl;
+                        //cout << "External: I pushed " << neighbourExt << endl;
                         if(visitedInternal[neighbourExt] == true){
                            
                             met = true;
@@ -137,7 +137,7 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, Buffer* bu
                      
                         previousNodeInternal[neighbourInt] = markedNodeInt;
                         queueInternal->pushBack(neighbourInt);
-                        cout << "Internal: I pushed " << neighbourInt << endl;
+                        //cout << "Internal: I pushed " << neighbourInt << endl;
                         if(visitedExternal[neighbourInt] == true){
                             
                             met = true;
