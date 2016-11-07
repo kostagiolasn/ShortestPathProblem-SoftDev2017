@@ -80,9 +80,10 @@ void Queue::pushFront(uint32_t nodeId){
 }
 
 void Queue::print(){
-    while(this->head != NULL){
-        cout << this->head->nodeId << endl;
-        this->head = this->head->next;
+    QueueNode * temp = this->head;
+    while(temp != NULL){
+        cout << temp->nodeId << endl;
+        temp = temp->next;
     }
 }
 

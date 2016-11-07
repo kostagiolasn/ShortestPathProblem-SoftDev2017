@@ -119,6 +119,10 @@ int main(int argc, char** argv) {
     testFindShortestPath(19, 12, 2, &indexInternal, &indexExternal, bufferInternal, bufferExternal);
     std::cout << "%TEST_FINISHED% time=0 testFindShortestPath (newsimpletest)" << std::endl;
     
+    std::cout << "%TEST_STARTED% testFindShortestPath (newsimpletest)" << std::endl;
+    testFindShortestPath(20, 2, -1, &indexInternal, &indexExternal, bufferInternal, bufferExternal);
+    std::cout << "%TEST_FINISHED% time=0 testFindShortestPath (newsimpletest)" << std::endl;
+    
     std::cout << "%SUITE_FINISHED% time=0" << std::endl;
 
     return (EXIT_SUCCESS);

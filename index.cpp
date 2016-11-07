@@ -297,34 +297,39 @@
         return this->index;
     }
     
-    Queue* Index::getNeighborsOfNode(Buffer* buffer, uint32_t nodeId){
+    Queue* Index::getNeighborsOfNode(Buffer* buffer, uint32_t i){
         int j;
         Queue* neighbors = new Queue();
         
-        uint32_t temp_offset = buffer->getListNode(this->index[nodeId].get_offsetNeighbors())->get_offset();
-        //cout << "Offset is " << temp_offset << endl;
-        for(int j = 0; j < buffer->getListNode(this->index[nodeId].get_offsetNeighbors())->get_neighborsSize(); j++) {
-          
-            neighbors->pushBack(buffer->getListNode(this->index[nodeId].get_offsetNeighbors())->get_neighborAtIndex(j));
-        }
-       
-        //cout << "neighbor size is: " << buffer->getListNode(temp_offset)->get_neighborsSize()<<endl;
-        while(buffer->getListNode(temp_offset)->get_offset() != 0) {
+        
+                
+                uint32_t temp_offset = buffer->getListNode(this->index[i].get_offsetNeighbors())->get_offset();
+                
+               // std::cout << "Index number :" << i << std::endl;
+               // std::cout << "Printing neighbors :";
+                for(int j = 0; j < buffer->getListNode(this->index[i].get_offsetNeighbors())->get_neighborsSize(); j++) {
+                    
+                    neighbors->pushBack(buffer->getListNode(this->index[i].get_offsetNeighbors())->get_neighborAtIndex(j));
+                }
+               // std::cout << std::endl;
+                
+                
+                while(temp_offset != 0) {
 
                     
-            for(int j = 0; j < buffer->getListNode(temp_offset)->get_neighborsSize(); j++) {
-                
-                neighbors->pushBack(buffer->getListNode(temp_offset)->get_neighborAtIndex(j));
-            }
+                    for(int j = 0; j < buffer->getListNode(temp_offset)->get_neighborsSize(); j++) {
+                        neighbors->pushBack(buffer->getListNode(temp_offset)->get_neighborAtIndex(j));
+                    }
                     
-            temp_offset = buffer->getListNode(temp_offset)->get_offset();
-        }
+                    temp_offset = buffer->getListNode(temp_offset)->get_offset();
+                }
                 
-        if(buffer->getListNode(temp_offset)->get_neighborsSize() != 0) {
-            for(int j = 0; j < buffer->getListNode(temp_offset)->get_neighborsSize(); j++) {
+                /*if(buffer->getListNode(temp_offset)->get_neighborsSize() != 0) {
+                    for(int j = 0; j < buffer->getListNode(temp_offset)->get_neighborsSize(); j++) {
+                        std::cout << buffer->getListNode(temp_offset)->get_neighborAtIndex(j)  << std::endl;
+                    }
+                }*/
+            
                 
-                neighbors->pushBack(buffer->getListNode(temp_offset)->get_neighborAtIndex(j));
-            }
-        }
         return neighbors;
     }

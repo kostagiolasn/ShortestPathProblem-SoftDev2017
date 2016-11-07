@@ -67,11 +67,14 @@ int main(int argc, char** argv) {
         std::cerr << err << std::endl;
         state = 2;
     }
-    cout << "done inserting" << endl;
+    
     //bufferExternal->printBuffer();
     //printGraph(&indexExternal, bufferExternal);
     //printGraph(&indexInternal, bufferInternal);
-
+    //cout << "done inserting" << endl;
+    //bufferExternal->printBuffer();
+    
+    //indexExternal.getNeighborsOfNode(bufferExternal, 21);
     
     
     // Parse the file containing the queries
@@ -98,7 +101,7 @@ int main(int argc, char** argv) {
     
     //freeVariables(&indexExternal, bufferExternal, &indexInternal, bufferInternal);
 
-
+    //cout << findShortestPath(14, 17, &indexInternal, &indexExternal,  bufferInternal, bufferExternal) << endl;
 
     return state;
 }
@@ -179,6 +182,7 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
                 break;
             }
             
+            
             if( internalIndex->insertNode(idTarget, idSource, internalBuffer) ) {
                err = 2;
                 break;
@@ -225,7 +229,7 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
           
             
             if(queryType == 'Q'){
-                cout << queryType << " " << idSource << " " << idTarget << endl;
+               //cout << queryType << " " << idSource << " " << idTarget << endl;
                cout << findShortestPath(idSource, idTarget, indexInternal, indexExternal,  bufferInternal, bufferExternal) << endl;
             }
             if(queryType == 'A'){
