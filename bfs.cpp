@@ -71,7 +71,7 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, Buffer* bu
         
         uint32_t markedNodeExt = this->queueExternal->popFront();
         
-        //cout << "External: I popped " << markedNodeExt << endl; 
+        cout << "External: I popped " << markedNodeExt << endl; 
         if(visitedInternal[markedNodeExt] == true){
                           
             edges = previousNodeExternal[markedNodeExt] + previousNodeInternal[markedNodeExt];
@@ -96,26 +96,26 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, Buffer* bu
                         //cout << "to marked ext: "<< markedNodeExt << " exei: "<< previousNodeExternal[markedNodeExt] <<endl;
                         previousNodeExternal[neighbourExt] = previousNodeExternal[markedNodeExt] + 1;
                         queueExternal->pushBack(neighbourExt);
-                        //cout << "External: I pushed " << neighbourExt << endl;
-                        if(visitedInternal[neighbourExt] == true){
+                        cout << "External: I pushed " << neighbourExt << endl;
+                        //if(visitedInternal[neighbourExt] == true){
                           
-                               edges = previousNodeExternal[neighbourExt] + previousNodeInternal[neighbourExt];
+                               //edges = previousNodeExternal[neighbourExt] + previousNodeInternal[neighbourExt];
                           
-                            return edges;
+                            //return edges;
                             
-                        }
+                        //}
                         
                     }
                 }
             }
         }else
             break;
-        //cout << endl;
+        cout << endl;
         if(this->queueInternal->isEmpty())
            break;
         uint32_t markedNodeInt = this->queueInternal->popFront();
         
-        //cout << "Internal: I popped " << markedNodeInt << endl;  
+        cout << "Internal: I popped " << markedNodeInt << endl;  
         if(visitedExternal[markedNodeInt] == true){
                             
                           
@@ -147,20 +147,20 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, Buffer* bu
                      
                         previousNodeInternal[neighbourInt] = previousNodeInternal[markedNodeInt] + 1;
                         queueInternal->pushBack(neighbourInt);
-                        //cout << "Internal: I pushed " << neighbourInt << endl;
-                        if(visitedExternal[neighbourInt] == true){
+                        cout << "Internal: I pushed " << neighbourInt << endl;
+                        //if(visitedExternal[neighbourInt] == true){
                             
                           
-                            edges = previousNodeInternal[neighbourInt] + previousNodeExternal[neighbourInt];
+                            //edges = previousNodeInternal[neighbourInt] + previousNodeExternal[neighbourInt];
                             
-                            return edges;
-                        }
+                            //return edges;
+                        //}
                     }
                 }
             }
         }else
             break;
-        //cout << endl;
+        cout << endl;
     }
     
     return -1;
