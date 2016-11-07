@@ -29,7 +29,7 @@
         for(int i = 0; i < overflowSize; i++) {
 
             // the default offset is initialized at 0
-            this->buffer[i].set_offset(0);
+            this->buffer[i].set_offset(-1);
             this->buffer[i].set_neighborsSize(0);
         }
         return this;
@@ -45,7 +45,7 @@
             for(int i = this->overflowSize; i < this->overflowSize * 2; i++) {
 
                 // the default offset is initialized at 0
-                this->buffer[i].set_offset(0);
+                this->buffer[i].set_offset(-1);
                 this->buffer[i].set_neighborsSize(0);
             }
             

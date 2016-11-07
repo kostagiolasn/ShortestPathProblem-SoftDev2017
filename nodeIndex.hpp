@@ -5,7 +5,7 @@
 
 class NodeIndex {
     private:
-        uint32_t offsetNeighbors;
+        int offsetNeighbors;
         uint32_t nodeId;
     public:
         //Constructor
@@ -22,9 +22,9 @@ class NodeIndex {
         // It sets the node id
         OK_SUCCESS setNodeId(uint32_t);
         
-        uint32_t get_offsetNeighbors();
+        int get_offsetNeighbors();
         
-        void set_offsetNeighbors(uint32_t);
+        void set_offsetNeighbors(int);
         
         // Checks if node exists in our index, i.e.
         // if its id is there instead of a UINT32_T_MAX

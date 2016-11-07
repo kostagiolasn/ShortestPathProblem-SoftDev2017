@@ -69,8 +69,8 @@ int main(int argc, char** argv) {
     }
     
     //bufferExternal->printBuffer();
-    //printGraph(&indexExternal, bufferExternal);
-    //printGraph(&indexInternal, bufferInternal);
+    printGraph(&indexExternal, bufferExternal);
+    printGraph(&indexInternal, bufferInternal);
     //cout << "done inserting" << endl;
     //bufferExternal->printBuffer();
     
@@ -80,13 +80,13 @@ int main(int argc, char** argv) {
     // Parse the file containing the queries
 
    // indexExternal.getNeighborsOfNode(bufferExternal, 0)->print();
-    try {
+    /*try {
         //parseFileWorkLoad(externalIndex, internalIndex, fileWorkLoad);
        parseFileWorkLoad(fileWorkLoad, &indexInternal, &indexExternal, bufferInternal, bufferExternal);
     } catch (std::string err) {
         std::cerr << err << std::endl;
         state = 3;
-    }
+    }*/
     
     //indexExternal.getNeighborsOfNode(bufferExternal, 340279)->print();
     /*try {
@@ -173,7 +173,7 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
                 err = 1;
                 break;
             }
-          // cout << "s: " << idSource << " t: " << idTarget << endl;
+           cout << "s: " << idSource << " t: " << idTarget << endl;
             // Here is where the insertion takes place
             // In the external index, idTarget must be added as a neighbor to idSource
             // while in the internal index, idSource must be added as a neighbor to idTarget
