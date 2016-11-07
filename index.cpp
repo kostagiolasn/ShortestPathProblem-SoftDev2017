@@ -18,7 +18,7 @@
         this->index = (NodeIndex*) malloc(sizeof(NodeList) * overflowSize);
         for(int i = 0; i < overflowSize; i++) {
             this->index[i].setNodeId(UINT32_T_MAX);
-            this->index[i].set_offsetNeighbors(0);
+            this->index[i].set_offsetNeighbors(-1);
         }
     }
   
@@ -31,7 +31,7 @@
             
             for(int i = this->overflowSize; i < this->overflowSize * 2; i++) {
                 this->index[i].setNodeId(UINT32_T_MAX);
-                this->index[i].set_offsetNeighbors(0);
+                this->index[i].set_offsetNeighbors(-1);
                 
             }
             
@@ -75,7 +75,7 @@
             // if the source node exists in the index, 
             // just add the target node as its neighbor
             
-            uint32_t temp_offset = buffer->getListNode(this->index[sourceNodeId].get_offsetNeighbors())->get_offset();
+            int temp_offset = buffer->getListNode(this->index[sourceNodeId].get_offsetNeighbors())->get_offset();
             //cout << "temp offset is " << temp_offset << endl;
             //cout << "neighbors are at offset: "<<temp_offset<<endl;
             // If neighbor already exists return.
@@ -84,7 +84,7 @@
                 return 0;
             }
             
-           if(temp_offset == 0) {
+           if(temp_offset == -1) {
                 inside = false;
            }
             
@@ -92,7 +92,7 @@
                 //std::cout << "mphka inside "<<endl;
                 // find the place in the buffer where the offset is 0 (i.e. where
                 // the chain of lists for the node ends)
-                while(buffer->getListNode(temp_offset)->get_offset() != 0) {
+                while(buffer->getListNode(temp_offset)->get_offset() != -1) {
 
                     temp_offset = buffer->getListNode(temp_offset)->get_offset();
                     
@@ -274,7 +274,7 @@
                 std::cout << std::endl;
                 
                 
-                while(temp_offset != 0) {
+                while(temp_offset != -1) {
 
                     
                     for(int j = 0; j < buffer->getListNode(temp_offset)->get_neighborsSize(); j++) {
@@ -314,7 +314,7 @@
                // std::cout << std::endl;
                 
                 
-                while(temp_offset != 0) {
+                while(temp_offset != -1) {
 
                     
                     for(int j = 0; j < buffer->getListNode(temp_offset)->get_neighborsSize(); j++) {

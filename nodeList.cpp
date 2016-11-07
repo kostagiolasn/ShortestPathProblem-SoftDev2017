@@ -11,21 +11,21 @@
 
     NodeList::NodeList(){
         this->neighborsSize = 0;
-        this->offset = 0;
+        this->offset = -1;
     }
     bool NodeList::neighborsFull() {
-        return this->neighborsSize == 2;
+        return this->neighborsSize == SIZE_NEIGHBORS;
     }
     
     bool NodeList::edgePropertyFull() {
-        return this->edgePropertySize == 2;
+        return this->edgePropertySize == SIZE_NEIGHBORS;
     }
     
-    void NodeList::set_offset(uint32_t offset) {
+    void NodeList::set_offset(int offset) {
         this->offset = offset;
     }
         
-    uint32_t NodeList::get_offset() {
+    int NodeList::get_offset() {
         return offset;
     }
     
