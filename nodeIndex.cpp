@@ -12,7 +12,9 @@ NodeIndex::NodeIndex() {
         nodeId = UINT32_T_MAX;
         offsetNeighbors = -1;
     }
-    
+NodeIndex::~NodeIndex(){
+    std::cout << "kalestike NODE"<< std::endl;
+}
     NodeIndex::NodeIndex(uint32_t id) {
         nodeId = id;
     }

@@ -15,18 +15,22 @@ BFS::BFS(size_t graphSize){
     
     //Space Allocation
     this->visitedInternal = new bool[this->graphSize];
+    this->inQueueInternal = new bool[this->graphSize];
     this->previousNodeInternal = new int[this->graphSize];
     
     this->visitedExternal = new bool[this->graphSize];
+    this->inQueueExternal = new bool[this->graphSize];
     this->previousNodeExternal = new int[this->graphSize];
     //Array Initialization
     int i;
     
     for(i = 0; i < this->graphSize; i++){
         this->visitedInternal[i] = false;
+        this->inQueueInternal[i] = false;
         this->previousNodeInternal[i] = 0;
         
         this->visitedExternal[i] = false;
+        this->inQueueExternal[i] = false;
         this->previousNodeExternal[i] = 0;
     }
     
@@ -34,134 +38,100 @@ BFS::BFS(size_t graphSize){
 }
 
 BFS::~BFS(){
-    delete this->visitedInternal;
-    delete this->previousNodeInternal;
-    
-    delete this->visitedExternal;
-    delete this->previousNodeExternal;
+    delete[] this->visitedInternal;
+    delete[] this->previousNodeInternal;
+    delete[] this->inQueueInternal;
+    delete[] this->visitedExternal;
+    delete[] this->previousNodeExternal;
+    delete[] this->inQueueExternal;
 }
 
 int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, Buffer* bufferInternal, Buffer* bufferExternal, uint32_t startNodeId, uint32_t targetNodeId){
-    bool met = false;
     int edges = 0;
-    //EXTERNAL
-    
+    Queue* neighborsExt = NULL;
+    Queue* neighborsInt = NULL;
     this->queueExternal = new Queue();
     this->queueExternal->pushBack(startNodeId);
-    //cout << "mphka"<< endl;
-    visitedExternal[startNodeId] = true;
-    //cout << "External: I pushed " << startNodeId << endl;
     
-    //INTERNAL
     this->queueInternal = new Queue();
     this->queueInternal->pushBack(targetNodeId);
     
-    visitedInternal[targetNodeId] = true;
-    //cout << "Internal: I pushed " << targetNodeId << endl;
-    
-    
-   
-   while(!met){
-        //if(queueExternal->isEmpty()){
-           // cout << "There is no path between nodes " << startNodeId << " and " << targetNodeId << "." << endl;
-            //return NULL;
-        //}
-        if(this->queueExternal->isEmpty())
-           break;
-        
+    while(!this->queueExternal->isEmpty() && !this->queueInternal->isEmpty()){
         uint32_t markedNodeExt = this->queueExternal->popFront();
+        visitedExternal[markedNodeExt] = true;
         
-        cout << "External: I popped " << markedNodeExt << endl; 
-        if(visitedInternal[markedNodeExt] == true){
-                          
-            edges = previousNodeExternal[markedNodeExt] + previousNodeInternal[markedNodeExt];
-                          
-            return edges;
-                            
+        if(visitedInternal[markedNodeExt] == true){    
+            edges = previousNodeExternal[markedNodeExt] + previousNodeInternal[markedNodeExt]; 
+            delete this->queueInternal;
+            delete this->queueExternal;
+            
+            if(neighborsInt != NULL)
+                delete neighborsInt;
+            if(neighborsExt != NULL)
+                delete neighborsExt;
+            return edges;                  
         }
-            
-        Queue* neighborsExt = indexExternal->getNeighborsOfNode(bufferExternal, markedNodeExt);
-        //cout << "i got ext neigh " << neighborsExt->isEmpty() << endl;
-        //neighborsExt->print();
+        if(neighborsExt != NULL)
+            delete neighborsExt;
+        neighborsExt = indexExternal->getNeighborsOfNode(bufferExternal, markedNodeExt); 
+        
         if(!neighborsExt->isEmpty()){
-            //cout << "Ext: " << markedNodeExt << " has neighs" << endl;
-            
             int i;
             while(!neighborsExt->isEmpty()){
+                
                 uint32_t neighbourExt = neighborsExt->popFront();
                 if(neighbourExt != UINT32_T_MAX){
-                    if(visitedExternal[neighbourExt] == false){
-                        visitedExternal[neighbourExt] = true;
-                        //visitedExternal[neighbourExt] = true;
-                        //cout << "to marked ext: "<< markedNodeExt << " exei: "<< previousNodeExternal[markedNodeExt] <<endl;
+                    if(inQueueExternal[neighbourExt] == false){
                         previousNodeExternal[neighbourExt] = previousNodeExternal[markedNodeExt] + 1;
                         queueExternal->pushBack(neighbourExt);
-                        cout << "External: I pushed " << neighbourExt << endl;
-                        //if(visitedInternal[neighbourExt] == true){
-                          
-                               //edges = previousNodeExternal[neighbourExt] + previousNodeInternal[neighbourExt];
-                          
-                            //return edges;
-                            
-                        //}
-                        
+                        inQueueExternal[neighbourExt] = true;
                     }
                 }
             }
-        }else
-            break;
-        cout << endl;
-        if(this->queueInternal->isEmpty())
-           break;
-        uint32_t markedNodeInt = this->queueInternal->popFront();
+            
+        }
         
-        cout << "Internal: I popped " << markedNodeInt << endl;  
+        uint32_t markedNodeInt = this->queueInternal->popFront();
+        visitedInternal[markedNodeInt] = true;
+          
         if(visitedExternal[markedNodeInt] == true){
-                            
-                          
             edges = previousNodeInternal[markedNodeInt] + previousNodeExternal[markedNodeInt];
-                            
+            delete this->queueInternal;
+            delete this->queueExternal;
+            
+            if(neighborsInt != NULL)
+                delete neighborsInt;
+            if(neighborsExt != NULL)
+                delete neighborsExt;
             return edges;
         }
-                    
-           
-        Queue* neighborsInt = indexInternal->getNeighborsOfNode(bufferInternal, markedNodeInt);
-        //cout << "internal neighs are " <<endl;
-        //neighborsInt->print();
-        //cout << "i got int neigh" << endl;
-        //neighborsInt->print();
-        
-        
+        if(neighborsInt != NULL)
+            delete neighborsInt;         
+        neighborsInt = indexInternal->getNeighborsOfNode(bufferInternal, markedNodeInt);
         
         if(!neighborsInt->isEmpty() ){
-            
-            
             int i;
             while(!neighborsInt->isEmpty()){
+                
                 uint32_t neighbourInt = neighborsInt->popFront();
                 if(neighbourInt != UINT32_T_MAX){
-                   
-                   
-                    if(visitedInternal[neighbourInt] == false){
-                        visitedInternal[neighbourInt] = true;
-                     
+                    if(inQueueInternal[neighbourInt] == false){
                         previousNodeInternal[neighbourInt] = previousNodeInternal[markedNodeInt] + 1;
                         queueInternal->pushBack(neighbourInt);
-                        cout << "Internal: I pushed " << neighbourInt << endl;
-                        //if(visitedExternal[neighbourInt] == true){
-                            
-                          
-                            //edges = previousNodeInternal[neighbourInt] + previousNodeExternal[neighbourInt];
-                            
-                            //return edges;
-                        //}
+                        inQueueInternal[neighbourInt] = true;
                     }
                 }
             }
-        }else
-            break;
-        cout << endl;
+            
+        }
+        
     }
+    delete this->queueInternal;
+    delete this->queueExternal;
     
+    if(neighborsInt != NULL)
+        delete neighborsInt;
+    if(neighborsExt != NULL)
+        delete neighborsExt;
     return -1;
 }

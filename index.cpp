@@ -23,6 +23,7 @@
     }
   
    Index::~Index() {
+       
        free(this->index);
    }
     
@@ -301,7 +302,7 @@
         int j;
         Queue* neighbors = new Queue();
         
-        
+        if(this->index[i].get_offsetNeighbors() != -1){
                 
                 uint32_t temp_offset = buffer->getListNode(this->index[i].get_offsetNeighbors())->get_offset();
                 
@@ -330,6 +331,7 @@
                     }
                 }*/
             
-                
+               //scout << "exei "<< neighbors->getSize() << endl;
+        }
         return neighbors;
     }

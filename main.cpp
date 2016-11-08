@@ -54,54 +54,33 @@ int main(int argc, char** argv) {
     }
     
     // Initialize the class objects here
-    Index indexExternal = new Index(true);
+    Index* indexExternal = new Index(true);
     Buffer* bufferExternal = new Buffer();
-    Index indexInternal = new Index(false);
+    Index* indexInternal = new Index(false);
     Buffer* bufferInternal = new Buffer();
     
     // Parse the file for the graph creation
     try {
-        //parseFileGraph(externalIndex, internalIndex, fileGraph);
-        parseFileGraph(fileGraph, &indexExternal, bufferExternal, &indexInternal, bufferInternal);
+        
+        parseFileGraph(fileGraph, indexExternal, bufferExternal, indexInternal, bufferInternal);
     } catch (std::string err) {
         std::cerr << err << std::endl;
         state = 2;
     }
     
-    //bufferExternal->printBuffer();
-    printGraph(&indexExternal, bufferExternal);
-    printGraph(&indexInternal, bufferInternal);
-    //cout << "done inserting" << endl;
-    //bufferExternal->printBuffer();
     
-    //indexExternal.getNeighborsOfNode(bufferExternal, 21);
-    
-    
-    // Parse the file containing the queries
-
-   // indexExternal.getNeighborsOfNode(bufferExternal, 0)->print();
-    /*try {
-        //parseFileWorkLoad(externalIndex, internalIndex, fileWorkLoad);
-       parseFileWorkLoad(fileWorkLoad, &indexInternal, &indexExternal, bufferInternal, bufferExternal);
+    try {
+      
+       parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, bufferInternal, bufferExternal);
     } catch (std::string err) {
         std::cerr << err << std::endl;
         state = 3;
-    }*/
+    }
+   
     
-    //indexExternal.getNeighborsOfNode(bufferExternal, 340279)->print();
-    /*try {
-        try {
-            //parseFileWorkLoad(externalIndex, internalIndex, fileWorkLoad);
-           parseFileWorkLoad(fileWorkLoad, &indexInternal, &indexExternal, bufferInternal, bufferExternal);
-        } catch (std::string err) {
-            std::cerr << err << std::endl;
-            state = 3;
-        }
-    }*/
-    
-    //freeVariables(&indexExternal, bufferExternal, &indexInternal, bufferInternal);
+    freeVariables(indexExternal, bufferExternal, indexInternal, bufferInternal);
 
-    //cout << findShortestPath(14, 17, &indexInternal, &indexExternal,  bufferInternal, bufferExternal) << endl;
+    
 
     return state;
 }
@@ -111,10 +90,10 @@ void printGraph(Index* indexExternal, Buffer* bufferExternal) {
 }
 
 void freeVariables(Index* indexExternal, Buffer* bufferExternal, Index* indexInternal, Buffer* bufferInternal) {
-    delete(indexExternal);
-    delete(bufferExternal);
-    delete(indexInternal);
-    delete(bufferInternal);
+    delete indexExternal;
+    delete bufferExternal;
+    delete indexInternal;
+    delete bufferInternal;
 }
 
 void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fileWorkLoad) {
@@ -153,7 +132,7 @@ void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fil
 void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBuffer, Index* internalIndex, Buffer* internalBuffer) {
     std::string line;
     char a;
-    int idSource, idTarget, err;
+    int idSource, idTarget, err = 0;
     ifstream file;
 
     file.open(stream.c_str());
@@ -173,7 +152,7 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
                 err = 1;
                 break;
             }
-           cout << "s: " << idSource << " t: " << idTarget << endl;
+           //cout << "s: " << idSource << " t: " << idTarget << endl;
             // Here is where the insertion takes place
             // In the external index, idTarget must be added as a neighbor to idSource
             // while in the internal index, idSource must be added as a neighbor to idTarget
@@ -204,7 +183,7 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
 void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal, Buffer* bufferInternal, Buffer* bufferExternal) {
 //void parseFileWorkLoad(Index externalIndex, Index internalIndex, std::string stream) {
     char queryType;
-    int idSource, idTarget, err;
+    int idSource, idTarget, err = 0;
     ifstream file;
     std::string line;
     
@@ -250,5 +229,7 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
 
 int findShortestPath(uint32_t source, uint32_t target, Index* indexInternal, Index* indexExternal, Buffer* bufferInternal, Buffer* bufferExternal){
    BFS* bfs = new BFS(indexInternal->get_overflowSize() + 1);
-   return bfs->findShortestPath(indexInternal, indexExternal, bufferInternal, bufferExternal, source, target);
+   int result = bfs->findShortestPath(indexInternal, indexExternal, bufferInternal, bufferExternal, source, target);
+   delete bfs;
+   return result;
 }
