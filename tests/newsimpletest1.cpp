@@ -29,7 +29,7 @@ void testStructureSizes(Index* externalIndex, Buffer* externalBuffer, Index* int
 void printGraph(Index*, Buffer*);
 
 void testNeighborsOfNode(Queue* structExternalNeighbors, Queue* trueExternalNeighbors, Queue* structInternalNeighbors, Queue* trueInternalNeighbors) {
-    
+  
     bool successExternal = true;
     bool successInternal = true;
     
@@ -45,7 +45,6 @@ void testNeighborsOfNode(Queue* structExternalNeighbors, Queue* trueExternalNeig
             successExternal = false;
         }
     }
-    
     while( !(structInternalNeighbors->isEmpty() && trueInternalNeighbors->isEmpty()) ) {
         neighbor1 = structInternalNeighbors->popFront();
         neighbor2 = trueInternalNeighbors->popFront();
@@ -55,12 +54,7 @@ void testNeighborsOfNode(Queue* structExternalNeighbors, Queue* trueExternalNeig
             successExternal = false;
         }
     }
-        
-    /*while( !(structInternalNeighbors->isEmpty() && trueInternalNeighbors->isEmpty()) ) {
-        if(structExternalNeighbors->popFront() == trueExternalNeighbors->popFront()) {
-            successInternal = false;
-        }
-    }*/
+    
     
     if(successExternal && successInternal) {
         std::cout << "%TEST_SUCCEEDED% time=0 testname=testNeighborsOfNode (newsimpletest1)" << std::endl;
@@ -109,15 +103,16 @@ int main(int argc, char** argv) {
     trueNeighborsInternalOfOne->pushFront(4);
     
     structNeighborsExternalOfOne = indexExternal.getNeighborsOfNode(bufferExternal, 1);
+    //structNeighborsExternalOfOne->print();
     structNeighborsInternalOfOne = indexInternal.getNeighborsOfNode(bufferInternal, 1);
     std::cout << "%TEST_STARTED% testNeighborsOfNode (newsimpletest1)" << std::endl;
     testNeighborsOfNode(structNeighborsExternalOfOne, trueNeighborsExternalOfOne, structNeighborsInternalOfOne, trueNeighborsInternalOfOne);
     std::cout << "%TEST_FINISHED% time=0 testNeighborsOfNode (newsimpletest1)" << std::endl;
     
-    delete(structNeighborsExternalOfOne);
-    delete(structNeighborsInternalOfOne);
-    delete(trueNeighborsExternalOfOne);
-    delete(trueNeighborsInternalOfOne);
+    delete structNeighborsExternalOfOne;
+    delete structNeighborsInternalOfOne;
+    delete trueNeighborsExternalOfOne;
+    delete trueNeighborsInternalOfOne;
     
     
     Queue* structNeighborsExternalOfTwo = new Queue();
@@ -136,10 +131,10 @@ int main(int argc, char** argv) {
     testNeighborsOfNode(structNeighborsExternalOfTwo, trueNeighborsExternalOfTwo, structNeighborsInternalOfTwo, trueNeighborsInternalOfTwo);
     std::cout << "%TEST_FINISHED% time=0 testNeighborsOfNode (newsimpletest1)" << std::endl;
     
-    delete(structNeighborsExternalOfTwo);
-    delete(structNeighborsInternalOfTwo);
-    delete(trueNeighborsExternalOfTwo);
-    delete(trueNeighborsInternalOfTwo);
+    delete structNeighborsExternalOfTwo;
+    delete structNeighborsInternalOfTwo;
+    delete trueNeighborsExternalOfTwo;
+    delete trueNeighborsInternalOfTwo;
     
     Queue* structNeighborsExternalOfThree = new Queue();
     Queue* structNeighborsInternalOfThree = new Queue();
@@ -157,10 +152,10 @@ int main(int argc, char** argv) {
     testNeighborsOfNode(structNeighborsExternalOfThree, trueNeighborsExternalOfThree, structNeighborsInternalOfThree, trueNeighborsInternalOfThree);
     std::cout << "%TEST_FINISHED% time=0 testNeighborsOfNode (newsimpletest1)" << std::endl;
     
-    delete(structNeighborsExternalOfThree);
-    delete(structNeighborsInternalOfThree);
-    delete(trueNeighborsExternalOfThree);
-    delete(trueNeighborsInternalOfThree);
+    delete structNeighborsExternalOfThree ;
+    delete structNeighborsInternalOfThree ;
+    delete trueNeighborsExternalOfThree ;
+    delete trueNeighborsInternalOfThree ;
     
     Queue* structNeighborsExternalOfFour = new Queue();
     Queue* structNeighborsInternalOfFour = new Queue();
@@ -178,10 +173,10 @@ int main(int argc, char** argv) {
     testNeighborsOfNode(structNeighborsExternalOfFour, trueNeighborsExternalOfFour, structNeighborsInternalOfFour, trueNeighborsInternalOfFour);
     std::cout << "%TEST_FINISHED% time=0 testNeighborsOfNode (newsimpletest1)" << std::endl;
     
-    delete(structNeighborsExternalOfFour);
-    delete(structNeighborsInternalOfFour);
-    delete(trueNeighborsExternalOfFour);
-    delete(trueNeighborsInternalOfFour);
+    delete structNeighborsExternalOfFour;
+    delete structNeighborsInternalOfFour;
+    delete trueNeighborsExternalOfFour;
+    delete trueNeighborsInternalOfFour;
     
     Queue* structNeighborsExternalOfFive = new Queue();
     Queue* structNeighborsInternalOfFive = new Queue();
@@ -199,10 +194,10 @@ int main(int argc, char** argv) {
     testNeighborsOfNode(structNeighborsExternalOfFive, trueNeighborsExternalOfFive, structNeighborsInternalOfFive, trueNeighborsInternalOfFive);
     std::cout << "%TEST_FINISHED% time=0 testNeighborsOfNode (newsimpletest1)" << std::endl;
     
-    delete(structNeighborsExternalOfFive);
-    delete(structNeighborsInternalOfFive);
-    delete(trueNeighborsExternalOfFive);
-    delete(trueNeighborsInternalOfFive);
+    delete structNeighborsExternalOfFive;
+    delete structNeighborsInternalOfFive ;
+    delete trueNeighborsExternalOfFive ;
+    delete trueNeighborsInternalOfFive ;
     
     Queue* structNeighborsExternalOfSix = new Queue();
     Queue* structNeighborsInternalOfSix = new Queue();
@@ -220,10 +215,10 @@ int main(int argc, char** argv) {
     testNeighborsOfNode(structNeighborsExternalOfSix, trueNeighborsExternalOfSix, structNeighborsInternalOfSix, trueNeighborsInternalOfSix);
     std::cout << "%TEST_FINISHED% time=0 testNeighborsOfNode (newsimpletest1)" << std::endl;
     
-    delete(structNeighborsExternalOfSix);
-    delete(structNeighborsInternalOfSix);
-    delete(trueNeighborsExternalOfSix);
-    delete(trueNeighborsInternalOfSix);
+    delete structNeighborsExternalOfSix;
+    delete structNeighborsInternalOfSix;
+    delete trueNeighborsExternalOfSix;
+    delete trueNeighborsInternalOfSix;
     
     Queue* structNeighborsExternalOfSeven = new Queue();
     Queue* structNeighborsInternalOfSeven = new Queue();
@@ -243,10 +238,10 @@ int main(int argc, char** argv) {
     testNeighborsOfNode(structNeighborsExternalOfSeven, trueNeighborsExternalOfSeven, structNeighborsInternalOfSeven, trueNeighborsInternalOfSeven);
     std::cout << "%TEST_FINISHED% time=0 testNeighborsOfNode (newsimpletest1)" << std::endl;
     
-    delete(structNeighborsExternalOfSeven);
-    delete(structNeighborsInternalOfSeven);
-    delete(trueNeighborsExternalOfSeven);
-    delete(trueNeighborsInternalOfSeven);
+    delete structNeighborsExternalOfSeven ;
+    delete structNeighborsInternalOfSeven ;
+    delete trueNeighborsExternalOfSeven;
+    delete trueNeighborsInternalOfSeven;
     
     Queue* structNeighborsExternalOfEight = new Queue();
     Queue* structNeighborsInternalOfEight = new Queue();
@@ -263,10 +258,10 @@ int main(int argc, char** argv) {
     testNeighborsOfNode(structNeighborsExternalOfEight, trueNeighborsExternalOfEight, structNeighborsInternalOfEight, trueNeighborsInternalOfEight);
     std::cout << "%TEST_FINISHED% time=0 testNeighborsOfNode (newsimpletest1)" << std::endl;
     
-    delete(structNeighborsExternalOfEight);
-    delete(structNeighborsInternalOfEight);
-    delete(trueNeighborsExternalOfEight);
-    delete(trueNeighborsInternalOfEight);
+    delete structNeighborsExternalOfEight;
+    delete structNeighborsInternalOfEight ;
+    delete trueNeighborsExternalOfEight ;
+    delete trueNeighborsInternalOfEight ;
     
     Queue* structNeighborsExternalOfNine = new Queue();
     Queue* structNeighborsInternalOfNine = new Queue();
@@ -285,10 +280,10 @@ int main(int argc, char** argv) {
     testNeighborsOfNode(structNeighborsExternalOfNine, trueNeighborsExternalOfNine, structNeighborsInternalOfNine, trueNeighborsInternalOfNine);
     std::cout << "%TEST_FINISHED% time=0 testNeighborsOfNode (newsimpletest1)" << std::endl;
     
-    delete(structNeighborsExternalOfNine);
-    delete(structNeighborsInternalOfNine);
-    delete(trueNeighborsExternalOfNine);
-    delete(trueNeighborsInternalOfNine);
+    delete structNeighborsExternalOfNine;
+    delete structNeighborsInternalOfNine;
+    delete trueNeighborsExternalOfNine;
+    delete trueNeighborsInternalOfNine;
     
     Queue* structNeighborsExternalOfTen = new Queue();
     Queue* structNeighborsInternalOfTen = new Queue();
@@ -307,10 +302,10 @@ int main(int argc, char** argv) {
     testNeighborsOfNode(structNeighborsExternalOfTen, trueNeighborsExternalOfTen, structNeighborsInternalOfTen, trueNeighborsInternalOfTen);
     std::cout << "%TEST_FINISHED% time=0 testNeighborsOfNode (newsimpletest1)" << std::endl;
     
-    delete(structNeighborsExternalOfTen);
-    delete(structNeighborsInternalOfTen);
-    delete(trueNeighborsExternalOfTen);
-    delete(trueNeighborsInternalOfTen);
+    delete structNeighborsExternalOfTen;
+    delete structNeighborsInternalOfTen;
+    delete trueNeighborsExternalOfTen;
+    delete trueNeighborsInternalOfTen;
 
     std::cout << "%SUITE_FINISHED% time=0" << std::endl;
 

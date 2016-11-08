@@ -26,20 +26,13 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
 
 void freeVariables(Index* indexExternal, Buffer* bufferExternal, Index* indexInternal, Buffer* bufferInternal);
 
-//void parseFileGraph(Index externalIndex, Index internalIndex, std::string stream);
-
-//void parseFileWorkLoad(Index externalIndex, Index internalIndex, std::string stream);
-
-//void parseFileGraph(std::string stream);
 void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal, Buffer*, Buffer*);
 
 int findShortestPath(uint32_t source, uint32_t target, Index* indexInternal, Index* indexExternal, Buffer* bufferInternal, Buffer* bufferExternal);
 
 using namespace std;
 
-/*
- * 
- */
+
 int main(int argc, char** argv) {
 
     std::string fileGraph;
@@ -128,7 +121,7 @@ void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fil
     }
 }
 
-//void parseFileGraph(Index externalIndex, Index internalIndex, std::string stream) {
+
 void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBuffer, Index* internalIndex, Buffer* internalBuffer) {
     std::string line;
     char a;
@@ -152,10 +145,7 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
                 err = 1;
                 break;
             }
-           //cout << "s: " << idSource << " t: " << idTarget << endl;
-            // Here is where the insertion takes place
-            // In the external index, idTarget must be added as a neighbor to idSource
-            // while in the internal index, idSource must be added as a neighbor to idTarget
+           
             if( externalIndex->insertNode(idSource, idTarget, externalBuffer) ) {
                 err = 2;
                 break;
@@ -181,7 +171,6 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
 }
 
 void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal, Buffer* bufferInternal, Buffer* bufferExternal) {
-//void parseFileWorkLoad(Index externalIndex, Index internalIndex, std::string stream) {
     char queryType;
     int idSource, idTarget, err = 0;
     ifstream file;
@@ -195,7 +184,6 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
         queryType = iss.peek();
         if(queryType == 'F'){
             // Process queries here
-           // cout << "F found here" << endl;
         }else {
             if(isdigit(queryType)) {
                 err = 1;
@@ -208,7 +196,6 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
           
             
             if(queryType == 'Q'){
-               //cout << queryType << " " << idSource << " " << idTarget << endl;
                cout << findShortestPath(idSource, idTarget, indexInternal, indexExternal,  bufferInternal, bufferExternal) << endl;
             }
             if(queryType == 'A'){
