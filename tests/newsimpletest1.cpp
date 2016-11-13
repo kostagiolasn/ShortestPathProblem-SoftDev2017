@@ -39,8 +39,6 @@ void testNeighborsOfNode(Queue* structExternalNeighbors, Queue* trueExternalNeig
     while( !(structExternalNeighbors->isEmpty() && trueExternalNeighbors->isEmpty()) ) {
         neighbor1 = structExternalNeighbors->popFront();
         neighbor2 = trueExternalNeighbors->popFront();
-        std::cout << "Neighbor 1:" << neighbor1 << endl;
-        std::cout << "Neighbor 2:" << neighbor2 << endl;
         if(neighbor1 != neighbor2) {
             successExternal = false;
         }
@@ -49,8 +47,6 @@ void testNeighborsOfNode(Queue* structExternalNeighbors, Queue* trueExternalNeig
     while( !(structInternalNeighbors->isEmpty() && trueInternalNeighbors->isEmpty()) ) {
         neighbor1 = structInternalNeighbors->popFront();
         neighbor2 = trueInternalNeighbors->popFront();
-        std::cout << "Neighbor 1:" << neighbor1 << endl;
-        std::cout << "Neighbor 2:" << neighbor2 << endl;
         if(neighbor1 != neighbor2) {
             successExternal = false;
         }
