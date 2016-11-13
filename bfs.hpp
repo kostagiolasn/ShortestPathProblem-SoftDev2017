@@ -13,10 +13,12 @@
 class BFS {
     
     private:
-        bool* visitedInternal;      
+        bool* visitedInternal;  
+        bool* inQueueInternal;
         int* previousNodeInternal;
         
         bool* visitedExternal;
+        bool* inQueueExternal;
         int* previousNodeExternal;
         
         Queue* queueInternal;
