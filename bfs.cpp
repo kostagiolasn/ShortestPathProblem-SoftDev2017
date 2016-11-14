@@ -53,16 +53,13 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, Buffer* bu
     this->queueExternal = new Queue();
     this->queueExternal->pushBack(startNodeId);
     inQueueExternal[startNodeId] = true;
-    //visitedExternal[startNodeId] = true;
             
     this->queueInternal = new Queue();
     this->queueInternal->pushBack(targetNodeId);
     inQueueInternal[targetNodeId] = true;
-    //visitedInternal[targetNodeId];
     
     while(!this->queueExternal->isEmpty() && !this->queueInternal->isEmpty()){
         uint32_t markedNodeExt = this->queueExternal->popFront();
-        //cout << "External: I popped: " << markedNodeExt << endl;
         visitedExternal[markedNodeExt] = true;
         inQueueExternal[markedNodeExt] = false;
         
@@ -83,7 +80,6 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, Buffer* bu
                         queueExternal->pushBack(neighbourExt);
                         inQueueExternal[neighbourExt] = true;
                         if(inQueueInternal[neighbourExt] == true){    
-                            //cout << neighbourExt << " is visited in Internal " << endl;
                             edges = previousNodeExternal[neighbourExt] + previousNodeInternal[neighbourExt]; 
                             delete this->queueInternal;
                             delete this->queueExternal;
@@ -94,7 +90,6 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, Buffer* bu
                                 delete neighborsExt;
                             return edges;                  
                         }
-                        //cout << "External: I pushed " << neighbourExt << endl;
                         
                     }
                 }
@@ -103,7 +98,6 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, Buffer* bu
         }
         
         uint32_t markedNodeInt = this->queueInternal->popFront();
-        //cout << "Internal: I popped " << markedNodeInt << endl;
         visitedInternal[markedNodeInt] = true;
         inQueueInternal[markedNodeInt] = false;
         
@@ -120,10 +114,8 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, Buffer* bu
                     if(inQueueInternal[neighbourInt] == false){
                         previousNodeInternal[neighbourInt] = previousNodeInternal[markedNodeInt] + 1;
                         queueInternal->pushBack(neighbourInt);
-                        //cout << "Internal: I pushed " << neighbourInt << endl;
                         inQueueInternal[neighbourInt] = true;
                         if(inQueueExternal[neighbourInt] == true){
-                            //cout << neighbourInt << " is visited in External " << endl;
                             edges = previousNodeInternal[neighbourInt] + previousNodeExternal[neighbourInt];
                             delete this->queueInternal;
                             delete this->queueExternal;

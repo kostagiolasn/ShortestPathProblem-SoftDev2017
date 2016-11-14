@@ -43,7 +43,6 @@
     
     OK_SUCCESS NodeList::insertNeighborAtPosition(uint32_t neighborId, int position) {
         neighbors[position] = neighborId;
-        //std::cout << "Added: " << neighborId << " at: " << position<< std::endl;
         increment_neighborsSize();
         return 0;
     }

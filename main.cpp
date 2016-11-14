@@ -32,7 +32,12 @@ int findShortestPath(uint32_t source, uint32_t target, Index* indexInternal, Ind
 
 using namespace std;
 
-
+struct MyKeyHash {
+    unsigned long operator()(const int& k) const
+    {   
+        return k % 10;
+    }
+};
 int main(int argc, char** argv) {
 
     std::string fileGraph;
@@ -45,6 +50,7 @@ int main(int argc, char** argv) {
         std::cerr << err << std::endl;
         state = 1;
     }
+    
     
     // Initialize the class objects here
     Index* indexExternal = new Index(true);

@@ -14,6 +14,7 @@ class Queue{
     
     private:
         QueueNode* head;
+        QueueNode* tail;
         size_t size;
        
     public:

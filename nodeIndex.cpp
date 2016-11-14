@@ -11,10 +11,8 @@ NodeIndex::NodeIndex() {
         // We initialize the node id by using the max value for unsigned integers : 2^32 - 1
         nodeId = UINT32_T_MAX;
         offsetNeighbors = -1;
+        offsetNeighborsLast = -1;
     }
-NodeIndex::~NodeIndex(){
-    std::cout << "kalestike NODE"<< std::endl;
-}
     NodeIndex::NodeIndex(uint32_t id) {
         nodeId = id;
     }
@@ -38,4 +36,12 @@ NodeIndex::~NodeIndex(){
         
     void NodeIndex::set_offsetNeighbors(int offset) {
         this->offsetNeighbors = offset;
+    }
+    
+    void NodeIndex::set_offsetNeighborsLast(int offset){
+        this->offsetNeighborsLast = offset;
+    }
+    
+    int NodeIndex::get_offsetNeighborsLast(){
+        return this->offsetNeighborsLast;
     }

@@ -11,6 +11,7 @@
 
 Queue::Queue(){
     this->head = NULL;
+    this->tail = NULL;
     this->size = 0;
    
  }
@@ -21,6 +22,8 @@ Queue::~Queue(){
         delete head;
         head = node;
     }
+    this->head = NULL;
+    this->tail = NULL;
 }
 
 uint32_t Queue::popFront(){
@@ -39,39 +42,31 @@ uint32_t Queue::popFront(){
 }
 
 void Queue::pushBack(uint32_t nodeId){
-    
+    QueueNode* newNode = new QueueNode();
+    newNode->nodeId = nodeId;
+    newNode->next = NULL;
     if(this->head == NULL){
-        this->head = new QueueNode();
-        this->head->nodeId = nodeId;
-        this->head->next = NULL;
+        this->head = newNode;
+        this->tail = newNode;
         this->size++;
         
     }else{
-       
-        QueueNode* temp = this->head;
-        while(this->head->next != NULL){
-            this->head = this->head->next;
-        }
-    
-        QueueNode* newNode = new QueueNode();
-        newNode->nodeId = nodeId;
-        newNode->next = NULL;
-        this->head->next = newNode;
-        this->head = temp; 
+        this->tail->next = newNode;
+        this->tail = newNode;
         this->size++;
     }
     
 }
 
 void Queue::pushFront(uint32_t nodeId){
+    QueueNode* newNode = new QueueNode();
+    newNode->nodeId = nodeId;
+    newNode->next = NULL;
     if(this->head == NULL){
-        this->head = new QueueNode();
-        this->head->nodeId = nodeId;
-        this->head->next = NULL;
+        this->head = newNode;
+        this->tail = newNode;
         this->size++;
-    }else{
-        QueueNode* newNode = new QueueNode();
-        newNode->nodeId = nodeId;
+    }else{ 
         newNode->next = this->head;
         this->head = newNode;
         this->size++;
