@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <sstream>
 #include <stdint.h>
+#include <time.h>
 
 #include "index.hpp"
 #include "bfs.hpp"
@@ -39,6 +40,8 @@ struct MyKeyHash {
     }
 };
 int main(int argc, char** argv) {
+
+    clock_t tStart = clock();
 
     std::string fileGraph;
     std::string fileWorkLoad;
@@ -76,10 +79,11 @@ int main(int argc, char** argv) {
         state = 3;
     }
    
-    
+    //indexExternal->print(bufferExternal);
+    printf("Time taken: %.2fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
     freeVariables(indexExternal, bufferExternal, indexInternal, bufferInternal);
 
-    
+
 
     return state;
 }
@@ -151,10 +155,16 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
                 err = 1;
                 break;
             }
+
+            int ret = externalIndex->insertNode(idSource, idTarget, externalBuffer);
            
-            if( externalIndex->insertNode(idSource, idTarget, externalBuffer) ) {
-                err = 2;
-                break;
+            if( ret ) {
+                //std::cout << ret << std::endl;
+                if (ret != 23){
+                    err = 2;
+                    break;
+                }
+                continue;
             }
             
             
@@ -183,7 +193,7 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
     std::string line;
     
     file.open(stream.c_str());
-    
+
     while(std::getline(file, line)) {
         std::istringstream iss(line);
         
@@ -202,7 +212,7 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
           
             
             if(queryType == 'Q'){
-               cout << findShortestPath(idSource, idTarget, indexInternal, indexExternal,  bufferInternal, bufferExternal) << endl;
+                cout << findShortestPath(idSource, idTarget, indexInternal, indexExternal,  bufferInternal, bufferExternal) << endl;
             }
             if(queryType == 'A'){
                 indexInternal->insertNode(idTarget, idSource, bufferInternal);

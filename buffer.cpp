@@ -31,6 +31,7 @@
             // the default offset is initialized at 0
             this->buffer[i].set_offset(-1);
             this->buffer[i].set_neighborsSize(0);
+            this->buffer[i].setDepth(0);
         }
         return this;
     }
@@ -47,6 +48,7 @@
                 // the default offset is initialized at 0
                 this->buffer[i].set_offset(-1);
                 this->buffer[i].set_neighborsSize(0);
+                this->buffer[i].setDepth(0);
             }
             
             this->overflowSize *= 2;
