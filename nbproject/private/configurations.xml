@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="100">
+<configurationDescriptor version="95">
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
@@ -13,6 +13,8 @@
         <gdb_interceptlist>
           <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
         </gdb_interceptlist>
+        <gdb_signals>
+        </gdb_signals>
         <gdb_options>
           <DebugOptions>
           </DebugOptions>
@@ -24,15 +26,15 @@
       </nativedebugger>
       <runprofile version="9">
         <runcommandpicklist>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph tinyGraph.txt -fWorkLoad </runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph testGraph.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph smallGraph.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph smallGraph.txt -fWorkLoad smallWorkload_FINAL.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph testGraph3.txt -fWorkLoad testWorkload_FINAL3.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph testGraph3.txt -fWorkLoad testWorkload_FINAL3txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph smallGraph.txt -fWorkLoad smallWorkload_FINAL2.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph smallGraph.txt -fWorkLoad smallWorkload_FINAL.txt > output.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph testGraph.txt -fWorkLoad testWorkload_FINAL.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph mediumGraph.txt -fWorkLoad mediumWorkload_FINAL.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph smallGraph.txt -fWorkLoad smallWorkload_FINAL.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph tinyGraph.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommandpicklistitem>
         </runcommandpicklist>
         <runcommand>"${OUTPUT_PATH}" -fGraph tinyGraph.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommand>

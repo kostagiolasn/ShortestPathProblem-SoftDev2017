@@ -157,10 +157,27 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
                 break;
             }
             
+            Queue* q1 = externalIndex->getNeighborsOfNode(externalBuffer, idSource);
+            std::cout << "External: Printing neighbors of " << idSource << std::endl;
+            
+            while(!q1->isEmpty()) {
+                uint32_t neighb = q1->popFront();
+                
+                std::cout << "Neighbor : " << neighb << std::endl;
+            }
             
             if( internalIndex->insertNode(idTarget, idSource, internalBuffer) ) {
                err = 2;
                 break;
+            }
+            
+            Queue* q2 = externalIndex->getNeighborsOfNode(internalBuffer, idTarget);
+            std::cout << "Internal: Printing neighbors of " << idTarget << std::endl;
+            
+            while(!q2->isEmpty()) {
+                uint32_t neighb = q2->popFront();
+                
+                std::cout << "Neighbor : " << neighb << std::endl;
             }
             
         }
