@@ -29,6 +29,8 @@ class Queue{
         uint32_t getQueueSize();
         size_t getSize();
         uint32_t getNthNeighbor(uint32_t);
+        void appendQueue(Queue*);
+        QueueNode* getHead();
 };
 
 
