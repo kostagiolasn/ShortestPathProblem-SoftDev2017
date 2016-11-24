@@ -37,11 +37,13 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/bfs.o \
 	${OBJECTDIR}/buffer.o \
+	${OBJECTDIR}/cc.o \
 	${OBJECTDIR}/index.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/nodeIndex.o \
 	${OBJECTDIR}/nodeList.o \
-	${OBJECTDIR}/queue.o
+	${OBJECTDIR}/queue.o \
+	${OBJECTDIR}/updateIndex.o
 
 # Test Directory
 TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
@@ -90,6 +92,11 @@ ${OBJECTDIR}/buffer.o: buffer.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/buffer.o buffer.cpp
 
+${OBJECTDIR}/cc.o: cc.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/cc.o cc.cpp
+
 ${OBJECTDIR}/index.o: index.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -114,6 +121,11 @@ ${OBJECTDIR}/queue.o: queue.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/queue.o queue.cpp
+
+${OBJECTDIR}/updateIndex.o: updateIndex.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/updateIndex.o updateIndex.cpp
 
 # Subprojects
 .build-subprojects:
@@ -167,6 +179,19 @@ ${OBJECTDIR}/buffer_nomain.o: ${OBJECTDIR}/buffer.o buffer.cpp
 	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/buffer_nomain.o buffer.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/buffer.o ${OBJECTDIR}/buffer_nomain.o;\
+	fi
+
+${OBJECTDIR}/cc_nomain.o: ${OBJECTDIR}/cc.o cc.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/cc.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/cc_nomain.o cc.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/cc.o ${OBJECTDIR}/cc_nomain.o;\
 	fi
 
 ${OBJECTDIR}/index_nomain.o: ${OBJECTDIR}/index.o index.cpp 
@@ -232,6 +257,19 @@ ${OBJECTDIR}/queue_nomain.o: ${OBJECTDIR}/queue.o queue.cpp
 	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/queue_nomain.o queue.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/queue.o ${OBJECTDIR}/queue_nomain.o;\
+	fi
+
+${OBJECTDIR}/updateIndex_nomain.o: ${OBJECTDIR}/updateIndex.o updateIndex.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/updateIndex.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/updateIndex_nomain.o updateIndex.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/updateIndex.o ${OBJECTDIR}/updateIndex_nomain.o;\
 	fi
 
 # Run Test Targets

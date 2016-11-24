@@ -16,7 +16,7 @@
 
 #include "index.hpp"
 #include "bfs.hpp"
-
+#include "cc.hpp"
 
 void printGraph(Index*, Buffer*);
 
@@ -26,7 +26,7 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
 
 void freeVariables(Index* indexExternal, Buffer* bufferExternal, Index* indexInternal, Buffer* bufferInternal);
 
-void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal, Buffer*, Buffer*);
+void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal, Buffer*, Buffer*, CC*);
 
 int findShortestPath(uint32_t source, uint32_t target, Index* indexInternal, Index* indexExternal, Buffer* bufferInternal, Buffer* bufferExternal);
 
@@ -67,10 +67,14 @@ int main(int argc, char** argv) {
         state = 2;
     }
     
-    
+    CC* cc = new CC(400000);
+    cout << indexExternal->get_overflowSize() <<endl;
+    cc->findCCAll(indexInternal, indexExternal, bufferInternal, bufferExternal);
     try {
       
-       parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, bufferInternal, bufferExternal);
+      // parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, bufferInternal, bufferExternal, cc);
+      // cc->print();
+
     } catch (std::string err) {
         std::cerr << err << std::endl;
         state = 3;
@@ -176,7 +180,7 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
     }
 }
 
-void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal, Buffer* bufferInternal, Buffer* bufferExternal) {
+void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal, Buffer* bufferInternal, Buffer* bufferExternal, CC* cc) {
     char queryType;
     int idSource, idTarget, err = 0;
     ifstream file;
@@ -202,11 +206,12 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
           
             
             if(queryType == 'Q'){
-               cout << findShortestPath(idSource, idTarget, indexInternal, indexExternal,  bufferInternal, bufferExternal) << endl;
+               //cout << findShortestPath(idSource, idTarget, indexInternal, indexExternal,  bufferInternal, bufferExternal) << endl;
             }
             if(queryType == 'A'){
                 indexInternal->insertNode(idTarget, idSource, bufferInternal);
                 indexExternal->insertNode(idSource, idTarget, bufferExternal);
+                cc->insertNewEdge(idSource, idTarget);
             }
 
         }

@@ -112,3 +112,11 @@ uint32_t Queue::getNthNeighbor(uint32_t n){
         this->head = this->head->next;
     }
 }
+
+void Queue::appendQueue(Queue* queue){
+    this->tail = queue->getHead();
+}
+
+QueueNode* Queue::getHead(){
+    return this->head;
+}
