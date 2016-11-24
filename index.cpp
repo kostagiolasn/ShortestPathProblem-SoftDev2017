@@ -84,102 +84,49 @@
                 inside = false;
            }
             
-            if(inside) {
-                // find the place in the buffer where the offset is 0 (i.e. where
-                // the chain of lists for the node ends)
-                /*while(buffer->getListNode(temp_offset)->get_offset() != -1) {
+            temp_offset = index[sourceNodeId].get_offsetNeighborsLast();
 
-                    temp_offset = buffer->getListNode(temp_offset)->get_offset();
-                    
-                    // re-check if neighbor already exists
-                    if(buffer->getListNode(temp_offset)->containsNeighbor(targetNodeId)) {
-                        return 0;
-                    }
-                }*/
-                temp_offset = index[sourceNodeId].get_offsetNeighborsLast();
-                
-                // A final check if neighbor exists
-                if(buffer->getListNode(temp_offset)->containsNeighbor(targetNodeId)) {
-                    return 0;
-                }
+            // A final check if neighbor exists
+            if(buffer->getListNode(temp_offset)->containsNeighbor(targetNodeId)) {
+                return 0;
+            }
 
-                // if the aforementioned list has space for new neighbors
-                if(!buffer->getListNode(temp_offset)->neighborsFull()) {
+            // if the aforementioned list has space for new neighbors
+            if(!buffer->getListNode(temp_offset)->neighborsFull()) {
 
-                    // go ahead and add the neighbor in the list
-                    buffer->getListNode(temp_offset)->insertNeighborAtPosition( targetNodeId,
-                            buffer->getListNode(temp_offset)->get_neighborsSize() );
+                // go ahead and add the neighbor in the list
+                buffer->getListNode(temp_offset)->insertNeighborAtPosition( targetNodeId,
+                        buffer->getListNode(temp_offset)->get_neighborsSize() );
 
+            } else {
+                // if there isn't, that means that we have to add another list to the chain
+                // therefore, we must check first if the buffer is full
+                if(!buffer->isFull()) {
+
+                    // if it isn't full, the list is already allocated, therefore just add
+                    // the target node as a neighbor there
+                    buffer->getListNode(temp_offset)->set_offset( buffer->get_firstListAvailable() );
+                    index[sourceNodeId].set_offsetNeighborsLast(buffer->get_firstListAvailable());
+                    buffer->getListNode(buffer->get_firstListAvailable())->insertNeighborAtPosition( targetNodeId,
+                    buffer->getListNode(buffer->get_firstListAvailable())->get_neighborsSize() );
                 } else {
-                    // if there isn't, that means that we have to add another list to the chain
-                    // therefore, we must check first if the buffer is full
-                    if(!buffer->isFull()) {
 
-                        // if it isn't full, the list is already allocated, therefore just add
-                        // the target node as a neighbor there
-                        buffer->getListNode(temp_offset)->set_offset( buffer->get_firstListAvailable() );
-                        index[sourceNodeId].set_offsetNeighborsLast(buffer->get_firstListAvailable());
-                        buffer->getListNode(buffer->get_firstListAvailable())->insertNeighborAtPosition( targetNodeId,
-                        buffer->getListNode(buffer->get_firstListAvailable())->get_neighborsSize() );
-                    } else {
-
-                        // if the buffer is full, we need to double it
-                        if(buffer->doubleBuffer()) {
-                            throw std::string("Doubling Buffer space : An error occurred");
-                            return 1;
-                        }
-
-                        // and follow up with the same insertion
-                        buffer->getListNode(temp_offset)->set_offset( buffer->get_firstListAvailable() );
-                        index[sourceNodeId].set_offsetNeighborsLast(buffer->get_firstListAvailable());
-
-                        buffer->getListNode(buffer->get_firstListAvailable())->insertNeighborAtPosition( targetNodeId,
-                            buffer->getListNode(buffer->get_firstListAvailable())->get_neighborsSize() );
+                    // if the buffer is full, we need to double it
+                    if(buffer->doubleBuffer()) {
+                        throw std::string("Doubling Buffer space : An error occurred");
+                        return 1;
                     }
 
-                    // lastly we need to increment the next available sentinel
-                    buffer->incrementFirstAvailable();
-                }
-            }else {
-                //if(!this->index[sourceNodeId].getListOfNeighbors()->neighborsFull()) {
-                if(!buffer->getListNode(this->index[sourceNodeId].get_offsetNeighbors())->neighborsFull()) {
-                    // go ahead and add the neighbor in the list
-                    buffer->getListNode(this->index[sourceNodeId].get_offsetNeighbors())->insertNeighborAtPosition( targetNodeId,
-                    buffer->getListNode(this->index[sourceNodeId].get_offsetNeighbors())->get_neighborsSize() );
-                    //buffer->printBuffer();
-                    
+                    // and follow up with the same insertion
+                    buffer->getListNode(temp_offset)->set_offset( buffer->get_firstListAvailable() );
+                    index[sourceNodeId].set_offsetNeighborsLast(buffer->get_firstListAvailable());
 
-                } else {
-                    //std::cout << "oi geitones einai gematoi " << this->index[sourceNodeId].get_offsetNeighbors() <<  std::endl;
-                    // if there isn't, that means that we have to add another list to the chain
-                    // therefore, we must check first if the buffer is full
-                    if(!buffer->isFull()) {
-
-                        // if it isn't full, the list is already allocated, therefore just add
-                        // the target node as a neighbor there
-                        buffer->getListNode(this->index[sourceNodeId].get_offsetNeighbors())->set_offset( buffer->get_firstListAvailable() );
-                        index[sourceNodeId].set_offsetNeighborsLast(buffer->get_firstListAvailable());
-
-                        buffer->getListNode(buffer->get_firstListAvailable())->insertNeighborAtPosition( targetNodeId,
+                    buffer->getListNode(buffer->get_firstListAvailable())->insertNeighborAtPosition( targetNodeId,
                         buffer->getListNode(buffer->get_firstListAvailable())->get_neighborsSize() );
-                    } else {
-                        // if the buffer is full, we need to double it
-                        if(buffer->doubleBuffer()) {
-                            throw std::string("Doubling Buffer space : An error occurred");
-                            return 1;
-                        }
-
-                        // and follow up with the same insertion
-                        buffer->getListNode(this->index[sourceNodeId].get_offsetNeighbors())->set_offset( buffer->get_firstListAvailable() );
-                        index[sourceNodeId].set_offsetNeighborsLast(buffer->get_firstListAvailable());
-
-                        buffer->getListNode(buffer->get_firstListAvailable())->insertNeighborAtPosition( targetNodeId,
-                            buffer->getListNode(buffer->get_firstListAvailable())->get_neighborsSize() );
-                    }
-
-                    // lastly we need to increment the next available sentinel
-                    buffer->incrementFirstAvailable();
                 }
+
+                // lastly we need to increment the next available sentinel
+                buffer->incrementFirstAvailable();
             }
             
         } else {
