@@ -23,7 +23,7 @@ class CC{
         bool inComponent(uint32_t);
         void findCC(Index*, Index*, Buffer*, Buffer*, uint32_t, uint32_t);
         void findCCAll(Index* , Index* , Buffer* , Buffer*);
-        OK_SUCCESS insertNewEdge(uint32_t, uint32_t);
+        OK_SUCCESS insertNewEdge(uint32_t, uint32_t, Index*);
 
 };
 

@@ -70,13 +70,13 @@ int main(int argc, char** argv) {
         state = 2;
     }
     
-    CC* cc = new CC(400000);
-    cout << indexExternal->get_overflowSize() <<endl;
+    CC* cc = new CC(indexExternal->get_currentSize() + 1);
+    cout << indexExternal->get_currentSize() <<endl;
     cc->findCCAll(indexInternal, indexExternal, bufferInternal, bufferExternal);
     try {
       
-      // parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, bufferInternal, bufferExternal, cc);
-      // cc->print();
+       parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, bufferInternal, bufferExternal, cc);
+       cc->print();
 
     } catch (std::string err) {
         std::cerr << err << std::endl;
@@ -170,13 +170,13 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
                 }
                 continue;
             }
-            
+
             
             if( internalIndex->insertNode(idTarget, idSource, internalBuffer) ) {
                err = 2;
                 break;
             }
-            
+
         }
     }   
     
@@ -221,7 +221,7 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
             if(queryType == 'A'){
                 indexInternal->insertNode(idTarget, idSource, bufferInternal);
                 indexExternal->insertNode(idSource, idTarget, bufferExternal);
-                cc->insertNewEdge(idSource, idTarget);
+                cc->insertNewEdge(idSource, idTarget, indexExternal);
             }
 
         }
