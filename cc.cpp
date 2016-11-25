@@ -84,8 +84,8 @@ void CC::findCCAll(Index* indexInternal, Index* indexExternal, Buffer* bufferInt
 
 OK_SUCCESS CC::insertNewEdge(uint32_t nodeIdS, uint32_t nodeIdE, Index* indexExternal){
     cout << "testing " << nodeIdS << " " << nodeIdE << endl;
-    if(this->ccindex[nodeIdS] != UINT32_T_MAX && nodeIdE > this->graphSize){
-        cout << "to nodeIdE " << nodeIdE << " einai megalutero tou " << this->graphSize << endl;
+    
+    if(this->ccindex[nodeIdS] != UINT32_T_MAX && nodeIdE > this->graphSize && nodeIdS <= this->graphSize){
         if((this->ccindex = (uint32_t*) realloc(this->ccindex, sizeof(uint32_t) * this->graphSize * 2)) != NULL){
             for(int i = this->graphSize; i < this->graphSize*2; i++){
                 this->ccindex[i] = UINT32_T_MAX;
@@ -98,8 +98,11 @@ OK_SUCCESS CC::insertNewEdge(uint32_t nodeIdS, uint32_t nodeIdE, Index* indexExt
         
         
         //diplasiasmos
-    }else if(nodeIdS > this->graphSize && this->ccindex[nodeIdE] != UINT32_T_MAX){
+    }else if(nodeIdS > this->graphSize && nodeIdE <= this->graphSize && this->ccindex[nodeIdE] != UINT32_T_MAX){
         if((this->ccindex = (uint32_t*) realloc(this->ccindex, sizeof(uint32_t) * this->graphSize * 2)) != NULL){
+            for(int i = this->graphSize; i < this->graphSize*2; i++){
+                this->ccindex[i] = UINT32_T_MAX;
+            }
             this->graphSize = this->graphSize * 2;
 
             this->ccindex[nodeIdS] = this->ccindex[nodeIdE];
@@ -108,10 +111,21 @@ OK_SUCCESS CC::insertNewEdge(uint32_t nodeIdS, uint32_t nodeIdE, Index* indexExt
             return -1;
         
         //diplasiasmos
-    }else if(this->ccindex[nodeIdS] != UINT32_T_MAX && this->ccindex[nodeIdE] != UINT32_T_MAX && this->ccindex[nodeIdS] != this->ccindex[nodeIdE]){
-        cout << "Edw " << this->ccindex[nodeIdE] << " graph size " << this->graphSize<< endl;
-      updateIndex->insertNode(this->ccindex[nodeIdS], this->ccindex[nodeIdE]);  
-    }else{
+    }else if(nodeIdS < this->graphSize && nodeIdE < this->graphSize && this->ccindex[nodeIdS] != UINT32_T_MAX && this->ccindex[nodeIdE] != UINT32_T_MAX && this->ccindex[nodeIdS] != this->ccindex[nodeIdE]){
+        updateIndex->insertNode(this->ccindex[nodeIdS], this->ccindex[nodeIdE]);  
+    }else if(nodeIdS > this->graphSize && nodeIdE > this->graphSize){
+        if((this->ccindex = (uint32_t*) realloc(this->ccindex, sizeof(uint32_t) * this->graphSize * 2)) != NULL){
+            for(int i = this->graphSize; i < this->graphSize*2; i++){
+                this->ccindex[i] = UINT32_T_MAX;
+            }
+            this->graphSize = this->graphSize * 2;
+            cout << "the counter is " << this->ccCounter<<  endl;
+            this->ccindex[nodeIdS] = this->ccCounter;
+            this->ccindex[nodeIdE] = this->ccCounter;
+            this->ccCounter = this->ccCounter + 1;
+            return 0;
+        }else
+            return -1;
         //diplasiasmos
     }
 }
