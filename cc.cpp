@@ -82,16 +82,35 @@ void CC::findCCAll(Index* indexInternal, Index* indexExternal, Buffer* bufferInt
     this->ccCounter = ccCounter;
 }
 
-OK_SUCCESS CC::insertNewEdge(uint32_t nodeIdS, uint32_t nodeIdE){
+OK_SUCCESS CC::insertNewEdge(uint32_t nodeIdS, uint32_t nodeIdE, Index* indexExternal){
     cout << "testing " << nodeIdS << " " << nodeIdE << endl;
-    if(this->ccindex[nodeIdS] != UINT32_T_MAX && this->ccindex[nodeIdE] != UINT32_T_MAX && this->ccindex[nodeIdS] != this->ccindex[nodeIdE]){
+    if(this->ccindex[nodeIdS] != UINT32_T_MAX && nodeIdE > this->graphSize){
+        cout << "to nodeIdE " << nodeIdE << " einai megalutero tou " << this->graphSize << endl;
+        if((this->ccindex = (uint32_t*) realloc(this->ccindex, sizeof(uint32_t) * this->graphSize * 2)) != NULL){
+            for(int i = this->graphSize; i < this->graphSize*2; i++){
+                this->ccindex[i] = UINT32_T_MAX;
+            }
+            this->graphSize = this->graphSize * 2;
+            this->ccindex[nodeIdE] = this->ccindex[nodeIdS];
+            return 0;
+        }else
+            return -1;
+        
+        
+        //diplasiasmos
+    }else if(nodeIdS > this->graphSize && this->ccindex[nodeIdE] != UINT32_T_MAX){
+        if((this->ccindex = (uint32_t*) realloc(this->ccindex, sizeof(uint32_t) * this->graphSize * 2)) != NULL){
+            this->graphSize = this->graphSize * 2;
+
+            this->ccindex[nodeIdS] = this->ccindex[nodeIdE];
+            return 0;
+        }else
+            return -1;
+        
+        //diplasiasmos
+    }else if(this->ccindex[nodeIdS] != UINT32_T_MAX && this->ccindex[nodeIdE] != UINT32_T_MAX && this->ccindex[nodeIdS] != this->ccindex[nodeIdE]){
+        cout << "Edw " << this->ccindex[nodeIdE] << " graph size " << this->graphSize<< endl;
       updateIndex->insertNode(this->ccindex[nodeIdS], this->ccindex[nodeIdE]);  
-    }else if(this->ccindex[nodeIdS] != UINT32_T_MAX && this->ccindex[nodeIdE] == UINT32_T_MAX){
-        this->ccindex[nodeIdE] = this->ccindex[nodeIdS];
-        //diplasiasmos
-    }else if(this->ccindex[nodeIdS] == UINT32_T_MAX && this->ccindex[nodeIdE] != UINT32_T_MAX){
-        this->ccindex[nodeIdS] = this->ccindex[nodeIdE];
-        //diplasiasmos
     }else{
         //diplasiasmos
     }

@@ -67,13 +67,13 @@ int main(int argc, char** argv) {
         state = 2;
     }
     
-    CC* cc = new CC(400000);
-    cout << indexExternal->get_overflowSize() <<endl;
+    CC* cc = new CC(indexExternal->get_currentSize() + 1);
+    cout << indexExternal->get_currentSize() <<endl;
     cc->findCCAll(indexInternal, indexExternal, bufferInternal, bufferExternal);
     try {
       
-      // parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, bufferInternal, bufferExternal, cc);
-      // cc->print();
+       parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, bufferInternal, bufferExternal, cc);
+       cc->print();
 
     } catch (std::string err) {
         std::cerr << err << std::endl;
@@ -161,29 +161,16 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
                 break;
             }
             
-            Queue* q1 = externalIndex->getNeighborsOfNode(externalBuffer, idSource);
-            std::cout << "External: Printing neighbors of " << idSource << std::endl;
             
-            while(!q1->isEmpty()) {
-                uint32_t neighb = q1->popFront();
-                
-                std::cout << "Neighbor : " << neighb << std::endl;
-            }
+            
             
             if( internalIndex->insertNode(idTarget, idSource, internalBuffer) ) {
                err = 2;
                 break;
             }
             
-            Queue* q2 = externalIndex->getNeighborsOfNode(internalBuffer, idTarget);
-            std::cout << "Internal: Printing neighbors of " << idTarget << std::endl;
-            
-            while(!q2->isEmpty()) {
-                uint32_t neighb = q2->popFront();
-                
-                std::cout << "Neighbor : " << neighb << std::endl;
-            }
-            
+           
+        
         }
     }   
     
@@ -228,7 +215,7 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
             if(queryType == 'A'){
                 indexInternal->insertNode(idTarget, idSource, bufferInternal);
                 indexExternal->insertNode(idSource, idTarget, bufferExternal);
-                cc->insertNewEdge(idSource, idTarget);
+                cc->insertNewEdge(idSource, idTarget, indexExternal);
             }
 
         }

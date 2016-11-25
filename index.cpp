@@ -130,7 +130,7 @@
             }
             
         } else {
-            
+            this->currentSize++;
             // if the source node doesn't exist,
             // add it to the index
             
