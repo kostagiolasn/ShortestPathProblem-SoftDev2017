@@ -53,6 +53,8 @@ class Index {
         
         // bla bla
         void set_overflowSize(size_t);
+
+        OK_SUCCESS incrementCurrentSize();
         
         // bla bla
         size_t get_overflowSize();

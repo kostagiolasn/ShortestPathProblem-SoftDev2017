@@ -133,6 +133,7 @@ void Queue::appendQueue(Queue* queue){
 
 QueueNode* Queue::getHead(){
     return this->head;
+
 }
 
 uint32_t Queue::getLevelOf(uint32_t nodeId){
@@ -143,4 +144,5 @@ uint32_t Queue::getLevelOf(uint32_t nodeId){
         temp = temp->next;
     }
     return -1;
+
 }

@@ -3,7 +3,7 @@
 
 #define UINT32_T_MAX (0xffffffff)
 
-#define SIZE_NEIGHBORS 2
+#define SIZE_NEIGHBORS 512
 
 typedef int OK_SUCCESS;
 
@@ -15,6 +15,9 @@ class NodeList {
         size_t neighborsSize;
         size_t edgePropertySize;
         int offset;
+        
+        // Local depth of hashing bucket
+        uint32_t depth;
         
     public:
         
@@ -31,6 +34,8 @@ class NodeList {
         bool edgePropertyFull();
         
         void initialize_neighbors(uint32_t);
+
+        void resetNeighbors();
         
         void initialize_edgeProperty(uint32_t);
         
@@ -46,6 +51,11 @@ class NodeList {
         size_t get_neighborsSize();
         
         void increment_neighborsSize();
+
+        void incrementDepth();
+
+        OK_SUCCESS setDepth(uint32_t);
+        uint32_t getDepth();
         
         uint32_t get_neighborAtIndex(int);
                

@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <sstream>
 #include <stdint.h>
+#include <time.h>
 
 #include "index.hpp"
 #include "bfs.hpp"
@@ -38,6 +39,8 @@ struct MyKeyHash {
     }
 };
 int main(int argc, char** argv) {
+
+    clock_t tStart = clock();
 
     std::string fileGraph;
     std::string fileWorkLoad;
@@ -73,12 +76,14 @@ int main(int argc, char** argv) {
     else
         largest = largestExternal;
     CC* cc = new CC(largest + 1);
+
     //cout << indexExternal->getLargestNodeId() <<endl;
     //cc->findCCAll(indexInternal, indexExternal, bufferInternal, bufferExternal);
     //cc->print();
     try {
       
        parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, bufferInternal, bufferExternal, cc);
+
        //cc->print();
 
     } catch (std::string err) {
@@ -86,10 +91,11 @@ int main(int argc, char** argv) {
         state = 3;
     }
    
-    
+    //indexExternal->print(bufferExternal);
+    printf("Time taken: %.2fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
     freeVariables(indexExternal, bufferExternal, indexInternal, bufferInternal);
 
-    
+
 
     return state;
 }
@@ -161,12 +167,18 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
                 err = 1;
                 break;
             }
+
+            int ret = externalIndex->insertNode(idSource, idTarget, externalBuffer);
            
-            if( externalIndex->insertNode(idSource, idTarget, externalBuffer) ) {
-                err = 2;
-                break;
+            if( ret ) {
+                //std::cout << ret << std::endl;
+                if (ret != 23){
+                    err = 2;
+                    break;
+                }
+                continue;
             }
-            
+
             
             
             
@@ -174,9 +186,7 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
                err = 2;
                 break;
             }
-            
-           
-        
+
         }
     }   
     
@@ -197,6 +207,7 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
     std::string line;
     int version = 0;
     file.open(stream.c_str());
+
     uint32_t largestInternal = indexInternal->getLargestNodeId();
     uint32_t largestExternal = indexExternal->getLargestNodeId();
     uint32_t largest;
@@ -205,6 +216,7 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
     else
         largest = largestExternal;
     BFS* bfs = new BFS(largest + 1);
+
     while(std::getline(file, line)) {
         std::istringstream iss(line);
         
