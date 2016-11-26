@@ -40,18 +40,19 @@ void CC::findCC(Index* indexExternal, Index* indexInternal, Buffer* bufferExtern
     for(int i = 0; i < graphSize; i++){
         visited[i] = false;
     }
+    cout << "desmeusa visited " << graphSize  << endl;
     Queue* queue = new Queue();
     queue->pushBack(nodeId);
     
     while(!queue->isEmpty()){
         nodeId = queue->popFront();
         this->ccindex[nodeId] = ccId;
-
+       cout << "ethesa " << nodeId << " -> " << ccId << endl;
         visited[nodeId] = true;
         Queue* neighbors = indexExternal->getNeighborsOfNode(bufferExternal, nodeId);
         Queue* neighbors2 = indexInternal->getNeighborsOfNode(bufferInternal, nodeId);
         
-       
+       cout << "phra geitones tou " << nodeId << endl;
         while(!neighbors->isEmpty()){
             uint32_t neighbor = neighbors->popFront();
             if(!visited[neighbor]){
@@ -84,8 +85,7 @@ void CC::findCCAll(Index* indexInternal, Index* indexExternal, Buffer* bufferInt
 
 OK_SUCCESS CC::insertNewEdge(uint32_t nodeIdS, uint32_t nodeIdE, Index* indexExternal){
     cout << "testing " << nodeIdS << " " << nodeIdE << endl;
-    if(this->ccindex[nodeIdS] != UINT32_T_MAX && nodeIdE > this->graphSize){
-        cout << "to nodeIdE " << nodeIdE << " einai megalutero tou " << this->graphSize << endl;
+    if(nodeIdS <= this->graphSize && this->ccindex[nodeIdS] != UINT32_T_MAX && nodeIdE > this->graphSize ){
         if((this->ccindex = (uint32_t*) realloc(this->ccindex, sizeof(uint32_t) * this->graphSize * 2)) != NULL){
             for(int i = this->graphSize; i < this->graphSize*2; i++){
                 this->ccindex[i] = UINT32_T_MAX;
@@ -114,4 +114,7 @@ OK_SUCCESS CC::insertNewEdge(uint32_t nodeIdS, uint32_t nodeIdE, Index* indexExt
     }else{
         //diplasiasmos
     }
+}
+uint32_t CC::getCcCounter(){
+    return this->ccCounter;
 }
