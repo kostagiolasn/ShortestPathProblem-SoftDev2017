@@ -28,7 +28,6 @@ void freeVariables(Index* indexExternal, Buffer* bufferExternal, Index* indexInt
 
 void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal, Buffer*, Buffer*, CC*);
 
-int findShortestPath(uint32_t source, uint32_t target, Index* indexInternal, Index* indexExternal, Buffer* bufferInternal, Buffer* bufferExternal);
 
 using namespace std;
 
@@ -74,12 +73,12 @@ int main(int argc, char** argv) {
     else
         largest = largestExternal;
     CC* cc = new CC(largest + 1);
-    cout << indexExternal->getLargestNodeId() <<endl;
-    cc->findCCAll(indexInternal, indexExternal, bufferInternal, bufferExternal);
-    cc->print();
+    //cout << indexExternal->getLargestNodeId() <<endl;
+    //cc->findCCAll(indexInternal, indexExternal, bufferInternal, bufferExternal);
+    //cc->print();
     try {
       
-       //parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, bufferInternal, bufferExternal, cc);
+       parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, bufferInternal, bufferExternal, cc);
        //cc->print();
 
     } catch (std::string err) {
@@ -196,9 +195,16 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
     int idSource, idTarget, err = 0;
     ifstream file;
     std::string line;
-    
+    int version = 0;
     file.open(stream.c_str());
-    
+    uint32_t largestInternal = indexInternal->getLargestNodeId();
+    uint32_t largestExternal = indexExternal->getLargestNodeId();
+    uint32_t largest;
+    if(largestInternal >= largestExternal)
+        largest = largestInternal;
+    else
+        largest = largestExternal;
+    BFS* bfs = new BFS(largest + 1);
     while(std::getline(file, line)) {
         std::istringstream iss(line);
         
@@ -217,7 +223,15 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
           
             
             if(queryType == 'Q'){
-               cout << findShortestPath(idSource, idTarget, indexInternal, indexExternal,  bufferInternal, bufferExternal) << endl;
+                version++;
+                //cout << idSource << " " << idTarget << endl;
+               if(version == 2184){
+                    indexExternal->getNeighborsOfNode(bufferExternal, 16963)->print();
+                
+                //cout << bfs->findShortestPath(indexInternal, indexExternal, bufferInternal, bufferExternal, idSource, idTarget, version) << endl;
+                //if(version == 395)
+                  //  break;
+                }
             }
             if(queryType == 'A'){
                 indexInternal->insertNode(idTarget, idSource, bufferInternal);
@@ -233,12 +247,8 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
     if(err) {
         throw std::string("Work Load File input : unexpected format, a is : " + queryType);
     }
+    delete bfs;
+
 
 }
 
-int findShortestPath(uint32_t source, uint32_t target, Index* indexInternal, Index* indexExternal, Buffer* bufferInternal, Buffer* bufferExternal){
-   BFS* bfs = new BFS(indexInternal->get_overflowSize() + 1);
-   int result = bfs->findShortestPath(indexInternal, indexExternal, bufferInternal, bufferExternal, source, target);
-   delete bfs;
-   return result;
-}

@@ -13,16 +13,13 @@
 class BFS {
     
     private:
-        bool* visitedInternal;  
-        bool* inQueueInternal;
-        int* previousNodeInternal;
+        int* inQueueInternal;
         
-        bool* visitedExternal;
-        bool* inQueueExternal;
-        int* previousNodeExternal;
+        int* inQueueExternal;
         
         Queue* queueInternal;
         Queue* queueExternal;
+        
         
         size_t graphSize;
     
@@ -31,7 +28,7 @@ class BFS {
         BFS(size_t);
         ~BFS();
         
-        int findShortestPath(Index*, Index*, Buffer*, Buffer*, uint32_t, uint32_t);
+        int findShortestPath(Index*, Index*, Buffer*, Buffer*, uint32_t, uint32_t,  int);
         
 };
 

@@ -84,7 +84,7 @@ void CC::findCCAll(Index* indexInternal, Index* indexExternal, Buffer* bufferInt
 }
 
 OK_SUCCESS CC::insertNewEdge(uint32_t nodeIdS, uint32_t nodeIdE, Index* indexExternal){
-    cout << "testing " << nodeIdS << " " << nodeIdE << endl;
+    cout << "!testing " << nodeIdS << " " << nodeIdE << endl;
     
     if(nodeIdS <= this->graphSize && this->ccindex[nodeIdS] != UINT32_T_MAX && nodeIdE > this->graphSize ){
         if((this->ccindex = (uint32_t*) realloc(this->ccindex, sizeof(uint32_t) * this->graphSize * 2)) != NULL){
