@@ -24,6 +24,7 @@ class CC{
         void findCC(Index*, Index*, Buffer*, Buffer*, uint32_t, uint32_t);
         void findCCAll(Index* , Index* , Buffer* , Buffer*);
         OK_SUCCESS insertNewEdge(uint32_t, uint32_t, Index*);
+        uint32_t getCcCounter();
 
 };
 

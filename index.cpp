@@ -12,6 +12,7 @@
 
         initialSize = SIZE_INDEX;
         currentSize = 0;
+        largestNodeId = 0;
         overflowSize = SIZE_INDEX;
         external = ext;
         this->index = (NodeIndex*) malloc(sizeof(NodeList) * overflowSize);
@@ -131,6 +132,8 @@
             
         } else {
             this->currentSize++;
+            if(sourceNodeId > this->largestNodeId)
+                this->largestNodeId = sourceNodeId;
             // if the source node doesn't exist,
             // add it to the index
             
@@ -255,4 +258,8 @@
                 
         }
         return neighbors;
+    }
+
+    uint32_t Index::getLargestNodeId(){
+        return this->largestNodeId;
     }

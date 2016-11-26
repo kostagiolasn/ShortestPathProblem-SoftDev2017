@@ -17,6 +17,7 @@ class Index {
         size_t initialSize;     // the initial size of the index, default : 512
         size_t currentSize;     // the index's current size
         size_t overflowSize;    // the index's overflow size. If currentSize + 1 > overflowSize => double the table
+        uint32_t largestNodeId;
         bool external;
         
     public:
@@ -56,6 +57,7 @@ class Index {
         // bla bla
         size_t get_overflowSize();
         
+        uint32_t getLargestNodeId();
         // Checks if this index is external, i.e.
         // if the index keeps information about the
         // edge A -> B. If it is external, B must be

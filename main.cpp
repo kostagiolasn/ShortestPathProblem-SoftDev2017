@@ -66,14 +66,21 @@ int main(int argc, char** argv) {
         std::cerr << err << std::endl;
         state = 2;
     }
-    
-    CC* cc = new CC(indexExternal->get_currentSize() + 1);
-    cout << indexExternal->get_currentSize() <<endl;
+    uint32_t largestInternal = indexInternal->getLargestNodeId();
+    uint32_t largestExternal = indexExternal->getLargestNodeId();
+    uint32_t largest;
+    if(largestInternal >= largestExternal)
+        largest = largestInternal;
+    else
+        largest = largestExternal;
+    CC* cc = new CC(largest + 1);
+    cout << indexExternal->getLargestNodeId() <<endl;
     cc->findCCAll(indexInternal, indexExternal, bufferInternal, bufferExternal);
+    cc->print();
     try {
       
-       parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, bufferInternal, bufferExternal, cc);
-       cc->print();
+       //parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, bufferInternal, bufferExternal, cc);
+       //cc->print();
 
     } catch (std::string err) {
         std::cerr << err << std::endl;
@@ -210,12 +217,12 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
           
             
             if(queryType == 'Q'){
-               //cout << findShortestPath(idSource, idTarget, indexInternal, indexExternal,  bufferInternal, bufferExternal) << endl;
+               cout << findShortestPath(idSource, idTarget, indexInternal, indexExternal,  bufferInternal, bufferExternal) << endl;
             }
             if(queryType == 'A'){
                 indexInternal->insertNode(idTarget, idSource, bufferInternal);
                 indexExternal->insertNode(idSource, idTarget, bufferExternal);
-                cc->insertNewEdge(idSource, idTarget, indexExternal);
+                //cc->insertNewEdge(idSource, idTarget, indexExternal);
             }
 
         }
