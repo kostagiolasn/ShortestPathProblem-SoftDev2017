@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include "index.hpp"
 
+
   Index::Index(bool ext) {
 
         initialSize = SIZE_INDEX;

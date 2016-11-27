@@ -237,13 +237,13 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
             if(queryType == 'Q'){
                 version++;
                 //cout << idSource << " " << idTarget << endl;
-               if(version == 2184){
-                    indexExternal->getNeighborsOfNode(bufferExternal, 16963)->print();
+               //if(version == 2184){
+                    //indexExternal->getNeighborsOfNode(bufferExternal, 16963)->print();
                 
-                //cout << bfs->findShortestPath(indexInternal, indexExternal, bufferInternal, bufferExternal, idSource, idTarget, version) << endl;
+                cout << bfs->findShortestPath(indexInternal, indexExternal, bufferInternal, bufferExternal, idSource, idTarget, version) << endl;
                 //if(version == 395)
                   //  break;
-                }
+                
             }
             if(queryType == 'A'){
                 indexInternal->insertNode(idTarget, idSource, bufferInternal);

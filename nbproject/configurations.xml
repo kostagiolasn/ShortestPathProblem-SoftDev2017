@@ -7,6 +7,7 @@
       <itemPath>bfs.hpp</itemPath>
       <itemPath>buffer.hpp</itemPath>
       <itemPath>cc.hpp</itemPath>
+      <itemPath>hashTable.hpp</itemPath>
       <itemPath>index.hpp</itemPath>
       <itemPath>nodeIndex.hpp</itemPath>
       <itemPath>nodeList.hpp</itemPath>
@@ -23,6 +24,7 @@
       <itemPath>bfs.cpp</itemPath>
       <itemPath>buffer.cpp</itemPath>
       <itemPath>cc.cpp</itemPath>
+      <itemPath>hashTable.cpp</itemPath>
       <itemPath>index.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
       <itemPath>nodeIndex.cpp</itemPath>
@@ -112,6 +114,10 @@
           <output>${TESTDIR}/TestFiles/f2</output>
         </linkerTool>
       </folder>
+      <item path="hashTable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="hashTable.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="index.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="index.hpp" ex="false" tool="3" flavor2="0">
@@ -201,6 +207,10 @@
           <output>${TESTDIR}/TestFiles/f2</output>
         </linkerTool>
       </folder>
+      <item path="hashTable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="hashTable.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="index.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="index.hpp" ex="false" tool="3" flavor2="0">

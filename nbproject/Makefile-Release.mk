@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/bfs.o \
 	${OBJECTDIR}/buffer.o \
 	${OBJECTDIR}/cc.o \
+	${OBJECTDIR}/hashTable.o \
 	${OBJECTDIR}/index.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/nodeIndex.o \
@@ -96,6 +97,11 @@ ${OBJECTDIR}/cc.o: cc.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/cc.o cc.cpp
+
+${OBJECTDIR}/hashTable.o: hashTable.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/hashTable.o hashTable.cpp
 
 ${OBJECTDIR}/index.o: index.cpp
 	${MKDIR} -p ${OBJECTDIR}
@@ -192,6 +198,19 @@ ${OBJECTDIR}/cc_nomain.o: ${OBJECTDIR}/cc.o cc.cpp
 	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/cc_nomain.o cc.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/cc.o ${OBJECTDIR}/cc_nomain.o;\
+	fi
+
+${OBJECTDIR}/hashTable_nomain.o: ${OBJECTDIR}/hashTable.o hashTable.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/hashTable.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/hashTable_nomain.o hashTable.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/hashTable.o ${OBJECTDIR}/hashTable_nomain.o;\
 	fi
 
 ${OBJECTDIR}/index_nomain.o: ${OBJECTDIR}/index.o index.cpp 
