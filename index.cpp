@@ -385,7 +385,6 @@
             }
 
         } else {
-            this->currentSize++;
             if(sourceNodeId > this->largestNodeId)
                 this->largestNodeId = sourceNodeId;
             // if the source node doesn't exist,
