@@ -47,12 +47,12 @@ void CC::findCC(Index* indexExternal, Index* indexInternal, Buffer* bufferExtern
     while(!queue->isEmpty()){
         nodeId = queue->popFront();
         this->ccindex[nodeId] = ccId;
-       cout << "ethesa " << nodeId << " -> " << ccId << endl;
+       //cout << "ethesa " << nodeId << " -> " << ccId << endl;
         visited[nodeId] = true;
         Queue* neighbors = indexExternal->getNeighborsOfNode(bufferExternal, nodeId);
         Queue* neighbors2 = indexInternal->getNeighborsOfNode(bufferInternal, nodeId);
         
-       cout << "phra geitones tou " << nodeId << endl;
+       //cout << "phra geitones tou " << nodeId << endl;
         while(!neighbors->isEmpty()){
             uint32_t neighbor = neighbors->popFront();
             if(!visited[neighbor]){

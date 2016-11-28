@@ -76,15 +76,12 @@ int main(int argc, char** argv) {
     else
         largest = largestExternal;
     CC* cc = new CC(largest + 1);
-
     //cout << indexExternal->getLargestNodeId() <<endl;
     //cc->findCCAll(indexInternal, indexExternal, bufferInternal, bufferExternal);
     //cc->print();
     try {
       
-       parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, bufferInternal, bufferExternal, cc);
-
-       //cc->print();
+       parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, bufferInternal, bufferExternal, cc);//cc->print();
 
     } catch (std::string err) {
         std::cerr << err << std::endl;
@@ -240,7 +237,8 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
                //if(version == 2184){
                     //indexExternal->getNeighborsOfNode(bufferExternal, 16963)->print();
                 
-                cout << bfs->findShortestPath(indexInternal, indexExternal, bufferInternal, bufferExternal, idSource, idTarget, version) << endl;
+//                cout << bfs->findShortestPath(indexInternal, indexExternal, bufferInternal, bufferExternal, idSource, idTarget, version) << endl;
+                bfs->findShortestPath(indexInternal, indexExternal, bufferInternal, bufferExternal, idSource, idTarget, version);
                 //if(version == 395)
                   //  break;
                 
