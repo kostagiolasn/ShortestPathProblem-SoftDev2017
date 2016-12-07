@@ -4,12 +4,15 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Buffer.hpp</itemPath>
+      <itemPath>BufferNode.hpp</itemPath>
+      <itemPath>HashTable.hpp</itemPath>
+      <itemPath>Index.hpp</itemPath>
+      <itemPath>IndexNode.hpp</itemPath>
       <itemPath>bfs.hpp</itemPath>
-      <itemPath>buffer.hpp</itemPath>
+      <itemPath>bucket.hpp</itemPath>
       <itemPath>cc.hpp</itemPath>
-      <itemPath>index.hpp</itemPath>
-      <itemPath>nodeIndex.hpp</itemPath>
-      <itemPath>nodeList.hpp</itemPath>
+      <itemPath>graphLibrary.hpp</itemPath>
       <itemPath>queue.hpp</itemPath>
       <itemPath>updateIndex.hpp</itemPath>
     </logicalFolder>
@@ -20,13 +23,16 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>Buffer.cpp</itemPath>
+      <itemPath>BufferNode.cpp</itemPath>
+      <itemPath>HashTable.cpp</itemPath>
+      <itemPath>Index.cpp</itemPath>
+      <itemPath>IndexNode.cpp</itemPath>
       <itemPath>bfs.cpp</itemPath>
-      <itemPath>buffer.cpp</itemPath>
+      <itemPath>bucket.cpp</itemPath>
       <itemPath>cc.cpp</itemPath>
-      <itemPath>index.cpp</itemPath>
+      <itemPath>graphLibrary.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
-      <itemPath>nodeIndex.cpp</itemPath>
-      <itemPath>nodeList.cpp</itemPath>
       <itemPath>queue.cpp</itemPath>
       <itemPath>updateIndex.cpp</itemPath>
     </logicalFolder>
@@ -70,13 +76,33 @@
           <standard>8</standard>
         </ccTool>
       </compileType>
+      <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Buffer.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="BufferNode.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="BufferNode.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="HashTable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="HashTable.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Index.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Index.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="IndexNode.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="IndexNode.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="bfs.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="bfs.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="buffer.cpp" ex="false" tool="1" flavor2="0">
+      <item path="bucket.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="buffer.hpp" ex="false" tool="3" flavor2="0">
+      <item path="bucket.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="cc.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -112,19 +138,11 @@
           <output>${TESTDIR}/TestFiles/f2</output>
         </linkerTool>
       </folder>
-      <item path="index.cpp" ex="false" tool="1" flavor2="0">
+      <item path="graphLibrary.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="index.hpp" ex="false" tool="3" flavor2="0">
+      <item path="graphLibrary.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="nodeIndex.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="nodeIndex.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="nodeList.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="nodeList.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="queue.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -159,13 +177,33 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Buffer.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="BufferNode.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="BufferNode.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="HashTable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="HashTable.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Index.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Index.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="IndexNode.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="IndexNode.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="bfs.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="bfs.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="buffer.cpp" ex="false" tool="1" flavor2="0">
+      <item path="bucket.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="buffer.hpp" ex="false" tool="3" flavor2="0">
+      <item path="bucket.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="cc.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -201,19 +239,11 @@
           <output>${TESTDIR}/TestFiles/f2</output>
         </linkerTool>
       </folder>
-      <item path="index.cpp" ex="false" tool="1" flavor2="0">
+      <item path="graphLibrary.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="index.hpp" ex="false" tool="3" flavor2="0">
+      <item path="graphLibrary.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="nodeIndex.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="nodeIndex.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="nodeList.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="nodeList.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="queue.cpp" ex="false" tool="1" flavor2="0">
       </item>

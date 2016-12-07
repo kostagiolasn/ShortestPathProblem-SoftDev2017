@@ -35,13 +35,16 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/Buffer.o \
+	${OBJECTDIR}/BufferNode.o \
+	${OBJECTDIR}/HashTable.o \
+	${OBJECTDIR}/Index.o \
+	${OBJECTDIR}/IndexNode.o \
 	${OBJECTDIR}/bfs.o \
-	${OBJECTDIR}/buffer.o \
+	${OBJECTDIR}/bucket.o \
 	${OBJECTDIR}/cc.o \
-	${OBJECTDIR}/index.o \
+	${OBJECTDIR}/graphLibrary.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/nodeIndex.o \
-	${OBJECTDIR}/nodeList.o \
 	${OBJECTDIR}/queue.o \
 	${OBJECTDIR}/updateIndex.o
 
@@ -82,40 +85,55 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/shortestpathproblem-softdev2017: ${OB
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/shortestpathproblem-softdev2017 ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/Buffer.o: Buffer.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Buffer.o Buffer.cpp
+
+${OBJECTDIR}/BufferNode.o: BufferNode.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BufferNode.o BufferNode.cpp
+
+${OBJECTDIR}/HashTable.o: HashTable.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/HashTable.o HashTable.cpp
+
+${OBJECTDIR}/Index.o: Index.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Index.o Index.cpp
+
+${OBJECTDIR}/IndexNode.o: IndexNode.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/IndexNode.o IndexNode.cpp
+
 ${OBJECTDIR}/bfs.o: bfs.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/bfs.o bfs.cpp
 
-${OBJECTDIR}/buffer.o: buffer.cpp
+${OBJECTDIR}/bucket.o: bucket.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/buffer.o buffer.cpp
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/bucket.o bucket.cpp
 
 ${OBJECTDIR}/cc.o: cc.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/cc.o cc.cpp
 
-${OBJECTDIR}/index.o: index.cpp
+${OBJECTDIR}/graphLibrary.o: graphLibrary.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/index.o index.cpp
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/graphLibrary.o graphLibrary.cpp
 
 ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
-
-${OBJECTDIR}/nodeIndex.o: nodeIndex.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/nodeIndex.o nodeIndex.cpp
-
-${OBJECTDIR}/nodeList.o: nodeList.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/nodeList.o nodeList.cpp
 
 ${OBJECTDIR}/queue.o: queue.cpp
 	${MKDIR} -p ${OBJECTDIR}
@@ -155,6 +173,71 @@ ${TESTDIR}/tests/tinyGraphBFSTest.o: tests/tinyGraphBFSTest.cpp
 	$(COMPILE.cc) -g -I. -std=c++11 -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/tinyGraphBFSTest.o tests/tinyGraphBFSTest.cpp
 
 
+${OBJECTDIR}/Buffer_nomain.o: ${OBJECTDIR}/Buffer.o Buffer.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/Buffer.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Buffer_nomain.o Buffer.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/Buffer.o ${OBJECTDIR}/Buffer_nomain.o;\
+	fi
+
+${OBJECTDIR}/BufferNode_nomain.o: ${OBJECTDIR}/BufferNode.o BufferNode.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/BufferNode.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BufferNode_nomain.o BufferNode.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/BufferNode.o ${OBJECTDIR}/BufferNode_nomain.o;\
+	fi
+
+${OBJECTDIR}/HashTable_nomain.o: ${OBJECTDIR}/HashTable.o HashTable.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/HashTable.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/HashTable_nomain.o HashTable.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/HashTable.o ${OBJECTDIR}/HashTable_nomain.o;\
+	fi
+
+${OBJECTDIR}/Index_nomain.o: ${OBJECTDIR}/Index.o Index.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/Index.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Index_nomain.o Index.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/Index.o ${OBJECTDIR}/Index_nomain.o;\
+	fi
+
+${OBJECTDIR}/IndexNode_nomain.o: ${OBJECTDIR}/IndexNode.o IndexNode.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/IndexNode.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/IndexNode_nomain.o IndexNode.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/IndexNode.o ${OBJECTDIR}/IndexNode_nomain.o;\
+	fi
+
 ${OBJECTDIR}/bfs_nomain.o: ${OBJECTDIR}/bfs.o bfs.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/bfs.o`; \
@@ -168,17 +251,17 @@ ${OBJECTDIR}/bfs_nomain.o: ${OBJECTDIR}/bfs.o bfs.cpp
 	    ${CP} ${OBJECTDIR}/bfs.o ${OBJECTDIR}/bfs_nomain.o;\
 	fi
 
-${OBJECTDIR}/buffer_nomain.o: ${OBJECTDIR}/buffer.o buffer.cpp 
+${OBJECTDIR}/bucket_nomain.o: ${OBJECTDIR}/bucket.o bucket.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/buffer.o`; \
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/bucket.o`; \
 	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
 	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/buffer_nomain.o buffer.cpp;\
+	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/bucket_nomain.o bucket.cpp;\
 	else  \
-	    ${CP} ${OBJECTDIR}/buffer.o ${OBJECTDIR}/buffer_nomain.o;\
+	    ${CP} ${OBJECTDIR}/bucket.o ${OBJECTDIR}/bucket_nomain.o;\
 	fi
 
 ${OBJECTDIR}/cc_nomain.o: ${OBJECTDIR}/cc.o cc.cpp 
@@ -194,17 +277,17 @@ ${OBJECTDIR}/cc_nomain.o: ${OBJECTDIR}/cc.o cc.cpp
 	    ${CP} ${OBJECTDIR}/cc.o ${OBJECTDIR}/cc_nomain.o;\
 	fi
 
-${OBJECTDIR}/index_nomain.o: ${OBJECTDIR}/index.o index.cpp 
+${OBJECTDIR}/graphLibrary_nomain.o: ${OBJECTDIR}/graphLibrary.o graphLibrary.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/index.o`; \
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/graphLibrary.o`; \
 	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
 	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/index_nomain.o index.cpp;\
+	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/graphLibrary_nomain.o graphLibrary.cpp;\
 	else  \
-	    ${CP} ${OBJECTDIR}/index.o ${OBJECTDIR}/index_nomain.o;\
+	    ${CP} ${OBJECTDIR}/graphLibrary.o ${OBJECTDIR}/graphLibrary_nomain.o;\
 	fi
 
 ${OBJECTDIR}/main_nomain.o: ${OBJECTDIR}/main.o main.cpp 
@@ -218,32 +301,6 @@ ${OBJECTDIR}/main_nomain.o: ${OBJECTDIR}/main.o main.cpp
 	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main_nomain.o main.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/main.o ${OBJECTDIR}/main_nomain.o;\
-	fi
-
-${OBJECTDIR}/nodeIndex_nomain.o: ${OBJECTDIR}/nodeIndex.o nodeIndex.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/nodeIndex.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/nodeIndex_nomain.o nodeIndex.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/nodeIndex.o ${OBJECTDIR}/nodeIndex_nomain.o;\
-	fi
-
-${OBJECTDIR}/nodeList_nomain.o: ${OBJECTDIR}/nodeList.o nodeList.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/nodeList.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/nodeList_nomain.o nodeList.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/nodeList.o ${OBJECTDIR}/nodeList_nomain.o;\
 	fi
 
 ${OBJECTDIR}/queue_nomain.o: ${OBJECTDIR}/queue.o queue.cpp 

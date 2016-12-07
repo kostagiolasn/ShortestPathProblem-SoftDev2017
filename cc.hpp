@@ -4,8 +4,7 @@
 #define UINT32_T_MAX (0xffffffff)
 #include <iostream>
 #include "updateIndex.hpp"
-#include "index.hpp"
-#include "buffer.hpp"
+#include "Index.hpp"
 using namespace std;
 
 class CC{
@@ -21,13 +20,12 @@ class CC{
         void print();
         void insert(uint32_t, uint32_t);
         bool inComponent(uint32_t);
-        void findCC(Index*, Index*, Buffer*, Buffer*, uint32_t, uint32_t);
-        void findCCAll(Index* , Index* , Buffer* , Buffer*);
-        OK_SUCCESS insertNewEdge(uint32_t, uint32_t, Index*);
+        void findCC(Index*, Index*, uint32_t, uint32_t);
+        void findCCAll(Index* , Index* );
+        int insertNewEdge(uint32_t, uint32_t, Index*);
         uint32_t getCcCounter();
 
 };
 
 
 #endif /* CC_HPP */
-

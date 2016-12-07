@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   main.cpp
  * Author: nikos
  *
@@ -13,8 +13,9 @@
 #include <stdio.h>
 #include <sstream>
 #include <stdint.h>
+#include <time.h>
 
-#include "index.hpp"
+#include "Index.hpp"
 #include "bfs.hpp"
 #include "cc.hpp"
 
@@ -22,97 +23,95 @@ void printGraph(Index*, Buffer*);
 
 void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fileWorkLoad);
 
-void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBuffer, Index* internalIndex, Buffer* internalBuffer);
+void parseFileGraph(std::string stream, Index* externalIndex, Index* internalIndex);
 
-void freeVariables(Index* indexExternal, Buffer* bufferExternal, Index* indexInternal, Buffer* bufferInternal);
+void freeVariables(Index* indexExternal, Index* indexInternal);
 
-void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal, Buffer*, Buffer*, CC*);
+void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal);
 
-int findShortestPath(uint32_t source, uint32_t target, Index* indexInternal, Index* indexExternal, Buffer* bufferInternal, Buffer* bufferExternal);
 
 using namespace std;
 
-struct MyKeyHash {
-    unsigned long operator()(const int& k) const
-    {   
-        return k % 10;
-    }
-};
+
 int main(int argc, char** argv) {
+
+    clock_t tStart = clock();
 
     std::string fileGraph;
     std::string fileWorkLoad;
     int state = 0;
-    
+
     try {
         args_setup(argc, argv, fileGraph, fileWorkLoad);
     } catch (std::string err) {
         std::cerr << err << std::endl;
         state = 1;
     }
-    
-    
+
+
     // Initialize the class objects here
     Index* indexExternal = new Index(true);
-    Buffer* bufferExternal = new Buffer();
-    Index* indexInternal = new Index(false);
-    Buffer* bufferInternal = new Buffer();
-    
+	Index* indexInternal = new Index();
+
     // Parse the file for the graph creation
     try {
-        
-        parseFileGraph(fileGraph, indexExternal, bufferExternal, indexInternal, bufferInternal);
+
+        parseFileGraph(fileGraph, indexExternal, indexInternal);
     } catch (std::string err) {
         std::cerr << err << std::endl;
         state = 2;
     }
-    uint32_t largestInternal = indexInternal->getLargestNodeId();
-    uint32_t largestExternal = indexExternal->getLargestNodeId();
-    uint32_t largest;
-    if(largestInternal >= largestExternal)
-        largest = largestInternal;
-    else
-        largest = largestExternal;
-    CC* cc = new CC(largest + 1);
-    cout << indexExternal->getLargestNodeId() <<endl;
-    cc->findCCAll(indexInternal, indexExternal, bufferInternal, bufferExternal);
-    cc->print();
+//	for (int i = 0; i <= 19; i++) {
+//		Queue* queue = indexExternal->getNeighborsOfNode(i);
+//		queue->print();
+//	}
+
+//    fprintf(stderr, "Time taken for insert: %.2fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
+//	return 0;
+    //CC* cc = new CC(700000);
+
+
+
+    //cout << indexExternal->getLargestNodeId() <<endl;
+    //cc->findCCAll(indexInternal, indexExternal);
+    //cout << cc->getCcCounter() << endl;
+    //cc->print();
     try {
-      
-       //parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, bufferInternal, bufferExternal, cc);
-       //cc->print();
+
+       parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal);//cc->print();
 
     } catch (std::string err) {
         std::cerr << err << std::endl;
         state = 3;
     }
-   
-    
-    freeVariables(indexExternal, bufferExternal, indexInternal, bufferInternal);
 
-    
+    //indexExternal->print(bufferExternal);
+   fprintf(stderr, "Time taken: %.2fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
+    freeVariables(indexExternal, indexInternal);
+//delete cc;
+
 
     return state;
 }
 
 void printGraph(Index* indexExternal, Buffer* bufferExternal) {
-    indexExternal->print(bufferExternal);
+//    indexExternal->print(bufferExternal);
 }
 
-void freeVariables(Index* indexExternal, Buffer* bufferExternal, Index* indexInternal, Buffer* bufferInternal) {
+void freeVariables(Index* indexExternal, Index* indexInternal) {
     delete indexExternal;
-    delete bufferExternal;
+
     delete indexInternal;
-    delete bufferInternal;
+
 }
 
 void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fileWorkLoad) {
     /* Does main's dirty job */
     int i, err = 0;
-    
+
     fileGraph = "";
     fileWorkLoad = "";
-    
+
     for(i = 1; i < argc; i++) {
         if( ! strcmp(argv[i], "-fGraph")) {
             if( i > (argc - 2) ) {
@@ -139,17 +138,17 @@ void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fil
 }
 
 
-void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBuffer, Index* internalIndex, Buffer* internalBuffer) {
+void parseFileGraph(std::string stream, Index* externalIndex, Index* internalIndex) {
     std::string line;
     char a;
     int idSource, idTarget, err = 0;
     ifstream file;
 
     file.open(stream.c_str());
-    
+
     while(std::getline(file, line)) {
         std::istringstream iss(line);
-        
+
         a = iss.peek();
         if(a == 'S')
             break;
@@ -157,32 +156,25 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
             if(!isdigit(a)) {
                 err = 1;
                 break;
-            } 
+            }
             else if(!(iss >> idSource >> idTarget)) {
                 err = 1;
                 break;
             }
-           
-            if( externalIndex->insertNode(idSource, idTarget, externalBuffer) ) {
-                err = 2;
-                break;
-            }
-            
-            
-            
-            
-            if( internalIndex->insertNode(idTarget, idSource, internalBuffer) ) {
-               err = 2;
-                break;
-            }
-            
-           
-        
+
+            externalIndex->addEdge(idSource, idTarget);
+
+
+
+
+
+            internalIndex->addEdge(idTarget, idSource);
+
         }
-    }   
-    
+    }
+
     file.close();
-    
+
     if(err == 1) {
         throw std::string("Graph File input : unexpected format, value for a is :" + a);
     }
@@ -191,17 +183,19 @@ void parseFileGraph(std::string stream, Index* externalIndex, Buffer* externalBu
     }
 }
 
-void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal, Buffer* bufferInternal, Buffer* bufferExternal, CC* cc) {
+void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal) {
     char queryType;
     int idSource, idTarget, err = 0;
     ifstream file;
     std::string line;
-    
+    int version = 0;
     file.open(stream.c_str());
-    
+
+    BFS* bfs = new BFS(2700000);
+
     while(std::getline(file, line)) {
         std::istringstream iss(line);
-        
+
         queryType = iss.peek();
         if(queryType == 'F'){
             // Process queries here
@@ -209,36 +203,40 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
             if(isdigit(queryType)) {
                 err = 1;
                 break;
-            } 
+            }
             else if(!(iss >> queryType >> idSource >> idTarget)) {
                 err = 1;
                 break;
             }
-          
-            
+
+
             if(queryType == 'Q'){
-               cout << findShortestPath(idSource, idTarget, indexInternal, indexExternal,  bufferInternal, bufferExternal) << endl;
+//                cout << version << endl;
+//                version++;
+//                cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, version) << endl;
+                version++;
+            //  if (version > 54184){
+              //      cout << idSource << " " << idTarget << endl;
+                    cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, version) << endl;
+                //}
+//                 bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, version);
+
             }
             if(queryType == 'A'){
-                indexInternal->insertNode(idTarget, idSource, bufferInternal);
-                indexExternal->insertNode(idSource, idTarget, bufferExternal);
+                indexInternal->addEdge(idTarget, idSource);
+                indexExternal->addEdge(idSource, idTarget);
                 //cc->insertNewEdge(idSource, idTarget, indexExternal);
             }
 
         }
-    }   
-    
+    }
+
     file.close();
-    
+
     if(err) {
         throw std::string("Work Load File input : unexpected format, a is : " + queryType);
     }
+    delete bfs;
 
-}
 
-int findShortestPath(uint32_t source, uint32_t target, Index* indexInternal, Index* indexExternal, Buffer* bufferInternal, Buffer* bufferExternal){
-   BFS* bfs = new BFS(indexInternal->get_overflowSize() + 1);
-   int result = bfs->findShortestPath(indexInternal, indexExternal, bufferInternal, bufferExternal, source, target);
-   delete bfs;
-   return result;
 }

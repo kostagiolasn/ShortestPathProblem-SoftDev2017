@@ -24,7 +24,6 @@
       </nativedebugger>
       <runprofile version="9">
         <runcommandpicklist>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph testGraph3.txt -fWorkLoad testWorkload_FINAL3txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph smallGraph.txt -fWorkLoad smallWorkload_FINAL.txt > output.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph testGraph.txt -fWorkLoad testWorkload_FINAL.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph mediumGraph.txt -fWorkLoad mediumWorkload_FINAL.txt</runcommandpicklistitem>
@@ -34,8 +33,9 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph tinyGraph.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph tinyGraph2.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph smallGraph.txt -fWorkLoad smallWorkload_FINAL.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph ./small/smallGraph.txt -fWorkLoad ./small/smallWorkload_FINAL.txt</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}" -fGraph smallGraph.txt -fWorkLoad smallWorkload_FINAL.txt</runcommand>
+        <runcommand>"${OUTPUT_PATH}" -fGraph ./small/smallGraph.txt -fWorkLoad ./small/smallWorkload_FINAL.txt</runcommand>
         <rundir></rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>
