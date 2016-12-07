@@ -12,14 +12,9 @@
       <itemPath>bfs.hpp</itemPath>
       <itemPath>bucket.hpp</itemPath>
       <itemPath>cc.hpp</itemPath>
-<<<<<<< HEAD
+
       <itemPath>graphLibrary.hpp</itemPath>
-=======
-      <itemPath>hashTable.hpp</itemPath>
-      <itemPath>index.hpp</itemPath>
-      <itemPath>nodeIndex.hpp</itemPath>
-      <itemPath>nodeList.hpp</itemPath>
->>>>>>> 85ce7bd0df8eaba6a9d55261ea063bfae0615288
+
       <itemPath>queue.hpp</itemPath>
       <itemPath>updateIndex.hpp</itemPath>
     </logicalFolder>
@@ -37,13 +32,9 @@
       <itemPath>IndexNode.cpp</itemPath>
       <itemPath>bfs.cpp</itemPath>
       <itemPath>bucket.cpp</itemPath>
-      <itemPath>cc.cpp</itemPath>
-<<<<<<< HEAD
+  
       <itemPath>graphLibrary.cpp</itemPath>
-=======
-      <itemPath>hashTable.cpp</itemPath>
-      <itemPath>index.cpp</itemPath>
->>>>>>> 85ce7bd0df8eaba6a9d55261ea063bfae0615288
+
       <itemPath>main.cpp</itemPath>
       <itemPath>queue.cpp</itemPath>
       <itemPath>updateIndex.cpp</itemPath>
@@ -150,15 +141,9 @@
           <output>${TESTDIR}/TestFiles/f2</output>
         </linkerTool>
       </folder>
-<<<<<<< HEAD
+
       <item path="graphLibrary.cpp" ex="false" tool="1" flavor2="0">
-=======
-      <item path="hashTable.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="hashTable.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="index.cpp" ex="false" tool="1" flavor2="0">
->>>>>>> 85ce7bd0df8eaba6a9d55261ea063bfae0615288
+
       </item>
       <item path="graphLibrary.hpp" ex="false" tool="3" flavor2="0">
       </item>
@@ -259,15 +244,9 @@
           <output>${TESTDIR}/TestFiles/f2</output>
         </linkerTool>
       </folder>
-<<<<<<< HEAD
+
       <item path="graphLibrary.cpp" ex="false" tool="1" flavor2="0">
-=======
-      <item path="hashTable.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="hashTable.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="index.cpp" ex="false" tool="1" flavor2="0">
->>>>>>> 85ce7bd0df8eaba6a9d55261ea063bfae0615288
+
       </item>
       <item path="graphLibrary.hpp" ex="false" tool="3" flavor2="0">
       </item>

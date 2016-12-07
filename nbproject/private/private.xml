@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-<<<<<<< 2a8c30f317a3fdbdf69a64906b7f7f555e5761fd
     <data xmlns="http://www.netbeans.org/ns/make-project-private/1">
         <activeConfTypeElem>1</activeConfTypeElem>
         <activeConfIndexElem>0</activeConfIndexElem>
@@ -11,22 +10,9 @@
             <file>file:/home/yiota/Coding%20Projects/ShortestPathProblem-SoftDev2017/main.cpp</file>
             <file>file:/home/yiota/Coding%20Projects/ShortestPathProblem-SoftDev2017/cc.cpp</file>
             <file>file:/home/yiota/Coding%20Projects/ShortestPathProblem-SoftDev2017/queue.cpp</file>
-=======
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Users/Panos/NetBeansProjects/ShortestPathProblem-SoftDev2017/hashTable.hpp</file>
-            <file>file:/Users/Panos/NetBeansProjects/ShortestPathProblem-SoftDev2017/main.cpp</file>
-            <file>file:/Users/Panos/NetBeansProjects/ShortestPathProblem-SoftDev2017/bfs.cpp</file>
-            <file>file:/Users/Panos/NetBeansProjects/ShortestPathProblem-SoftDev2017/nodeIndex.hpp</file>
-            <file>file:/Users/Panos/NetBeansProjects/ShortestPathProblem-SoftDev2017/buffer.hpp</file>
-            <file>file:/Users/Panos/NetBeansProjects/ShortestPathProblem-SoftDev2017/nodeList.hpp</file>
-            <file>file:/Users/Panos/NetBeansProjects/ShortestPathProblem-SoftDev2017/index.cpp</file>
-            <file>file:/Users/Panos/NetBeansProjects/ShortestPathProblem-SoftDev2017/hashTable.cpp</file>
-            <file>file:/Users/Panos/NetBeansProjects/ShortestPathProblem-SoftDev2017/nodeIndex.cpp</file>
-            <file>file:/Users/Panos/NetBeansProjects/ShortestPathProblem-SoftDev2017/buffer.cpp</file>
-            <file>file:/Users/Panos/NetBeansProjects/ShortestPathProblem-SoftDev2017/nodeList.cpp</file>
-            <file>file:/Users/Panos/NetBeansProjects/ShortestPathProblem-SoftDev2017/index.hpp</file>
->>>>>>> reset me
+            <file>file:/home/yiota/Coding%20Projects/ShortestPathProblem-SoftDev2017/bfs.cpp</file>
+            <file>file:/home/yiota/Coding%20Projects/ShortestPathProblem-SoftDev2017/bfs.hpp</file>
+            <file>file:/home/yiota/Coding%20Projects/ShortestPathProblem-SoftDev2017/queue.hpp</file>
         </group>
     </open-files>
 </project-private>
