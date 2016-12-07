@@ -61,6 +61,7 @@ int main(int argc, char** argv) {
         std::cerr << err << std::endl;
         state = 2;
     }
+
 //	for (int i = 0; i <= 19; i++) {
 //		Queue* queue = indexExternal->getNeighborsOfNode(i);
 //		queue->print();
@@ -80,10 +81,12 @@ int main(int argc, char** argv) {
 
        parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal);//cc->print();
 
+
     } catch (std::string err) {
         std::cerr << err << std::endl;
         state = 3;
     }
+
 
     //indexExternal->print(bufferExternal);
    fprintf(stderr, "Time taken: %.2fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
@@ -170,6 +173,7 @@ void parseFileGraph(std::string stream, Index* externalIndex, Index* internalInd
 
             internalIndex->addEdge(idTarget, idSource);
 
+
         }
     }
 
@@ -191,7 +195,8 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
     int version = 0;
     file.open(stream.c_str());
 
-    BFS* bfs = new BFS(2700000);
+ BFS* bfs = new BFS(2700000);
+
 
     while(std::getline(file, line)) {
         std::istringstream iss(line);
@@ -211,6 +216,7 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
 
 
             if(queryType == 'Q'){
+
 //                cout << version << endl;
 //                version++;
 //                cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, version) << endl;
@@ -220,6 +226,7 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
                     cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, version) << endl;
                 //}
 //                 bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, version);
+
 
             }
             if(queryType == 'A'){
@@ -240,3 +247,4 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
 
 
 }
+

@@ -16,6 +16,7 @@ BFS::BFS(size_t graphSize){
     //Space Allocation
     this->inQueueInternal = new int[this->graphSize];
 
+
     this->inQueueExternal = new int[this->graphSize];
     //Array Initialization
     int i;
@@ -33,9 +34,11 @@ BFS::~BFS(){
     delete[] this->inQueueExternal;
 }
 
+
 int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, uint32_t startNodeId, uint32_t targetNodeId, int version){
     int edges = 0;
     //cout << " version " << version << endl;
+
     uint32_t levelInt;
     uint32_t levelExt;
     Queue* neighborsExt = NULL;
@@ -46,12 +49,15 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, uint32_t s
     this->queueExternal->pushBack(startNodeId);
     this->queueExternal->setLevelBack(0);
 
+
     inQueueExternal[startNodeId] = version;
+
 
     this->queueInternal = new Queue();
     this->queueInternal->pushBack(targetNodeId);
     this->queueInternal->setLevelBack(0);
     inQueueInternal[targetNodeId] = version;
+
 
     while(!this->queueExternal->isEmpty() && !this->queueInternal->isEmpty()){
         //std::cout << "he" << std::endl;
@@ -88,13 +94,17 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, uint32_t s
             uint32_t markedNodeExt = this->queueExternal->popFront();
             inQueueExternal[markedNodeExt] = version;
 
+
             while(!neighborsExt->isEmpty()){
 
                 uint32_t neighbourExt = neighborsExt->popFront();
                 if(neighbourExt != UINT32_T_MAX){
+
+
                     if(inQueueExternal[neighbourExt] != version){
                         queueExternal->pushBack(neighbourExt);
                         queueExternal->setLevelBack(levelExt + 1);
+
 
                         inQueueExternal[neighbourExt] = version;
                         if(inQueueInternal[neighbourExt] == version){
@@ -111,6 +121,7 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, uint32_t s
                                 if(neighborsExt != NULL)
                                     delete neighborsExt;
                             return edges;
+
                         }
 
                     }
@@ -118,6 +129,7 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, uint32_t s
             }
 
         }
+
 
         //cout << "int " << endl;
         //neighborsInt->print();
@@ -129,15 +141,18 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, uint32_t s
             uint32_t markedNodeInt = this->queueInternal->popFront();
             inQueueInternal[markedNodeInt] = version ;
             //cout << "Int: I popped " << markedNodeInt << endl;
+
             while(!neighborsInt->isEmpty()){
               //cout << "tha valw tous geitones tou " << endl;
                 uint32_t neighbourInt = neighborsInt->popFront();
                 if(neighbourInt != UINT32_T_MAX){
 
+
                     if(inQueueInternal[neighbourInt] != version){
 
                         queueInternal->pushBack(neighbourInt);
                         queueInternal->setLevelBack(levelInt + 1);
+
                         //cout << "Int: I pushed " << neighbourInt << endl;
                         inQueueInternal[neighbourInt] = version;
                         if(inQueueExternal[neighbourInt] == version){
@@ -154,6 +169,7 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, uint32_t s
                                     delete neighborsInt;
                                 if(neighborsExt != NULL)
                                     delete neighborsExt;
+
                             return edges;
                         }
 
@@ -164,6 +180,7 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, uint32_t s
         }
 
     }
+
     if(this->queueInternal != NULL)
         delete this->queueInternal;
     if(this->queueExternal != NULL)
@@ -173,6 +190,7 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, uint32_t s
         delete neighborsInt;
     if(neighborsExt != NULL)
         delete neighborsExt;
+
     levelInt = levelExt = 0;
 
     return -1;

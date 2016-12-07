@@ -53,6 +53,7 @@ void CC::findCC(Index* indexExternal, Index* indexInternal,  uint32_t nodeId, ui
         Queue* neighbors2 = indexInternal->getNeighborsOfNode( nodeId);
 
        cout << "phra geitones tou " << nodeId << endl;
+
         while(!neighbors->isEmpty()){
             uint32_t neighbor = neighbors->popFront();
             if(!visited[neighbor]){
@@ -87,6 +88,7 @@ void CC::findCCAll(Index* indexInternal, Index* indexExternal){
 int CC::insertNewEdge(uint32_t nodeIdS, uint32_t nodeIdE, Index* indexExternal){
 
     cout << "!testing " << nodeIdS << " " << nodeIdE << endl;
+
 
 
     if(nodeIdS <= this->graphSize && this->ccindex[nodeIdS] != UINT32_T_MAX && nodeIdE > this->graphSize ){

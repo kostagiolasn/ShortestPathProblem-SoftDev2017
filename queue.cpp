@@ -41,9 +41,11 @@ uint32_t Queue::popFront(){
     }
 }
 
+
 uint32_t Queue::getIdFront(){
     return this->head->nodeId;
 }
+
 
 uint32_t Queue::getLevelFront(){
     uint32_t returnValue;
@@ -149,7 +151,7 @@ uint32_t Queue::getLevelOf(uint32_t nodeId){
     }
     return -1;
 
-}
+
 
 int Queue::getSizeOfLevel(int level){
     QueueNode * temp = this->head;

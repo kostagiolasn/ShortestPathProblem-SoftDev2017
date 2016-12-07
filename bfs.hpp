@@ -11,6 +11,7 @@
 
 class BFS {
 
+
 private:
     int* inQueueInternal;
 
@@ -28,6 +29,7 @@ public:
     ~BFS();
 
     int findShortestPath(Index*, Index*,  uint32_t, uint32_t,  int);
+
 
 };
 
