@@ -12,6 +12,7 @@
     NodeList::NodeList(){
         this->neighborsSize = 0;
         this->offset = -1;
+        depth = 0;
     }
     bool NodeList::neighborsFull() {
         return this->neighborsSize == SIZE_NEIGHBORS;
@@ -40,13 +41,22 @@
     void NodeList::increment_neighborsSize() {
         neighborsSize++;
     }
+
+    void NodeList::incrementDepth() {
+        depth++;
+    }
     
     OK_SUCCESS NodeList::insertNeighborAtPosition(uint32_t neighborId, int position) {
         neighbors[position] = neighborId;
         increment_neighborsSize();
         return 0;
     }
-    
+
+    void NodeList::resetNeighbors() {
+        memset(neighbors, UINT32_MAX, sizeof(uint32_t)*SIZE_NEIGHBORS);
+        neighborsSize = 0 ;
+    }
+
     OK_SUCCESS NodeList::insertEdgePropertyAtPosition(uint32_t neighborId, int position) {
             edgeProperty[position] = neighborId;
             return 0;
@@ -65,7 +75,16 @@
         
         return false;
     }
-    
+
+    OK_SUCCESS NodeList::setDepth(uint32_t depth){
+        this->depth = depth;
+        return 0;
+    }
+
+    uint32_t NodeList::getDepth(){
+        return this->depth;
+    }
+
     uint32_t* NodeList::getNeighbors(){
         return this->neighbors;
     }
