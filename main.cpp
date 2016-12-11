@@ -75,7 +75,7 @@ int main(int argc, char** argv) {
     cc->findCCAll(indexInternal, indexExternal);
     
     
-    try {
+    /*try {
 
        parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, largestNodeId, cc);//cc->print();
 
@@ -83,7 +83,7 @@ int main(int argc, char** argv) {
     } catch (std::string err) {
         std::cerr << err << std::endl;
         state = 3;
-    }
+    }*/
     
     SCC* scc = new SCC(11);
     scc->Tarjan(11, indexExternal, indexInternal);

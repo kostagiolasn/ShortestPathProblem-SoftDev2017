@@ -77,6 +77,9 @@ void SCC::dfs(int u, Index* indexExternal, Index* indexInternal) {
     
     if(this->lowlink[u] == this->disc[u]) {
         uint32_t w = UINT32_MAX;
+        
+        this->components =  (Component*) realloc(this->components, sizeof(Component) * (this->currentComponentsCount + 1));
+        
         this->components[this->currentComponentsCount].setComponentId(this->currentComponentId);
         this->components[this->currentComponentsCount].setIncludedNodesCount(0);
         this->components[this->currentComponentsCount].setComponentSize(1);
@@ -106,7 +109,6 @@ void SCC::iterateStronglyConnectedComponentID() {
         std::cout << "Its nodes are:" << std::endl;
         for(int i = 0; i < cursor->getCurrentComponent().getIncludedNodesCount(); i++) {
             std::cout << cursor->getCurrentComponent().getIncludedNodeIdAtPosition(i) << std::endl;
-            this->id_belongs_to_component[cursor->getCurrentComponent().getIncludedNodeIdAtPosition(i)] = cursor->getCurrentComponent().getComponentId();
         }
     }
     
