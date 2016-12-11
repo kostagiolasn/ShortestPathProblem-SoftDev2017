@@ -4,7 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>Buffer.hpp</itemPath>
+      <itemPath>../../Desktop/Project New/Buffer.hpp</itemPath>
       <itemPath>BufferNode.hpp</itemPath>
       <itemPath>HashTable.hpp</itemPath>
       <itemPath>Index.hpp</itemPath>
@@ -12,9 +12,7 @@
       <itemPath>bfs.hpp</itemPath>
       <itemPath>bucket.hpp</itemPath>
       <itemPath>cc.hpp</itemPath>
-
       <itemPath>graphLibrary.hpp</itemPath>
-
       <itemPath>queue.hpp</itemPath>
       <itemPath>updateIndex.hpp</itemPath>
     </logicalFolder>
@@ -32,9 +30,8 @@
       <itemPath>IndexNode.cpp</itemPath>
       <itemPath>bfs.cpp</itemPath>
       <itemPath>bucket.cpp</itemPath>
-  
+      <itemPath>cc.cpp</itemPath>
       <itemPath>graphLibrary.cpp</itemPath>
-
       <itemPath>main.cpp</itemPath>
       <itemPath>queue.cpp</itemPath>
       <itemPath>updateIndex.cpp</itemPath>
@@ -79,9 +76,12 @@
           <standard>8</standard>
         </ccTool>
       </compileType>
-      <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
+      <item path="../../Desktop/Project New/Buffer.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
-      <item path="Buffer.hpp" ex="false" tool="3" flavor2="0">
+      <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="BufferNode.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -141,9 +141,7 @@
           <output>${TESTDIR}/TestFiles/f2</output>
         </linkerTool>
       </folder>
-
       <item path="graphLibrary.cpp" ex="false" tool="1" flavor2="0">
-
       </item>
       <item path="graphLibrary.hpp" ex="false" tool="3" flavor2="0">
       </item>
@@ -182,9 +180,12 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
+      <item path="../../Desktop/Project New/Buffer.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
-      <item path="Buffer.hpp" ex="false" tool="3" flavor2="0">
+      <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="BufferNode.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -244,9 +245,7 @@
           <output>${TESTDIR}/TestFiles/f2</output>
         </linkerTool>
       </folder>
-
       <item path="graphLibrary.cpp" ex="false" tool="1" flavor2="0">
-
       </item>
       <item path="graphLibrary.hpp" ex="false" tool="3" flavor2="0">
       </item>

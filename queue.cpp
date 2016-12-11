@@ -150,7 +150,7 @@ uint32_t Queue::getLevelOf(uint32_t nodeId){
         temp = temp->next;
     }
     return -1;
-
+}
 
 
 int Queue::getSizeOfLevel(int level){

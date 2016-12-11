@@ -43,12 +43,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/bfs.o \
 	${OBJECTDIR}/bucket.o \
 	${OBJECTDIR}/cc.o \
-<<<<<<< HEAD
 	${OBJECTDIR}/graphLibrary.o \
-=======
-	${OBJECTDIR}/hashTable.o \
-	${OBJECTDIR}/index.o \
->>>>>>> 85ce7bd0df8eaba6a9d55261ea063bfae0615288
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/queue.o \
 	${OBJECTDIR}/updateIndex.o
@@ -105,16 +100,7 @@ ${OBJECTDIR}/HashTable.o: HashTable.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/HashTable.o HashTable.cpp
 
-<<<<<<< HEAD
 ${OBJECTDIR}/Index.o: Index.cpp
-=======
-${OBJECTDIR}/hashTable.o: hashTable.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/hashTable.o hashTable.cpp
-
-${OBJECTDIR}/index.o: index.cpp
->>>>>>> 85ce7bd0df8eaba6a9d55261ea063bfae0615288
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Index.o Index.cpp
@@ -226,24 +212,7 @@ ${OBJECTDIR}/HashTable_nomain.o: ${OBJECTDIR}/HashTable.o HashTable.cpp
 	    ${CP} ${OBJECTDIR}/HashTable.o ${OBJECTDIR}/HashTable_nomain.o;\
 	fi
 
-<<<<<<< HEAD
 ${OBJECTDIR}/Index_nomain.o: ${OBJECTDIR}/Index.o Index.cpp 
-=======
-${OBJECTDIR}/hashTable_nomain.o: ${OBJECTDIR}/hashTable.o hashTable.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/hashTable.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/hashTable_nomain.o hashTable.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/hashTable.o ${OBJECTDIR}/hashTable_nomain.o;\
-	fi
-
-${OBJECTDIR}/index_nomain.o: ${OBJECTDIR}/index.o index.cpp 
->>>>>>> 85ce7bd0df8eaba6a9d55261ea063bfae0615288
 	${MKDIR} -p ${OBJECTDIR}
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/Index.o`; \
 	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
