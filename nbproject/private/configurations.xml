@@ -38,6 +38,13 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph ./test/testGraph.txt -fWorkLoad ./small/smallWorkload_FINAL.txt</runcommandpicklistitem>
         </runcommandpicklist>
         <runcommand>"${OUTPUT_PATH}" -fGraph ./test/testGraph.txt -fWorkLoad ./small/smallWorkload_FINAL.txt</runcommand>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph tinyGraph.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph mediumGraph.txt -fWorkLoad mediumWorkload_FINAL.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph ./medium/mediumGraph.txt -fWorkLoad ./medium/mediumWorkload_FINAL.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph ./small/smallGraph.txt -fWorkLoad ./small/smallWorkload_FINAL.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph ./tiny/tinyGraph.txt -fWorkLoad ./tiny/tinyWorkload_FINAL.txt</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}" -fGraph ./tiny/tinyGraph.txt -fWorkLoad ./tiny/tinyWorkload_FINAL.txt</runcommand>
         <rundir></rundir>
         <buildfirst>false</buildfirst>
         <terminal-type>0</terminal-type>

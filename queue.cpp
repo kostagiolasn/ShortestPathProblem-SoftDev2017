@@ -153,7 +153,6 @@ uint32_t Queue::getLevelOf(uint32_t nodeId){
 }
 
 
-
 int Queue::getSizeOfLevel(int level){
     QueueNode * temp = this->head;
     int size = 0;

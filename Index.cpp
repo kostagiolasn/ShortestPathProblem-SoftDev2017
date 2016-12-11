@@ -88,7 +88,11 @@ Queue* Index::getNeighborsOfNode(uint32_t nodeId) {
     }
 
 		bool Index::isAllocated(uint32_t nodeId){
+<<<<<<< HEAD
 				if(this->indexNodes[nodeId].getOffsetFirst() != -1)
+=======
+				if(this->indexNodes[nodeId].getOffsetFirst() == -1)
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
 					return false;
 				else return true;
 		}

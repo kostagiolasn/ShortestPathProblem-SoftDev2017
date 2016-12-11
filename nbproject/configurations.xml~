@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="95">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+<<<<<<< HEAD
+      <itemPath>Buffer.hpp</itemPath>
+      <itemPath>BufferNode.hpp</itemPath>
+      <itemPath>Component.hpp</itemPath>
+      <itemPath>ComponentCursor.hpp</itemPath>
+=======
+      <itemPath>../../Desktop/Project New/Buffer.hpp</itemPath>
+      <itemPath>BufferNode.hpp</itemPath>
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
+      <itemPath>HashTable.hpp</itemPath>
+      <itemPath>Index.hpp</itemPath>
+      <itemPath>IndexNode.hpp</itemPath>
+      <itemPath>bfs.hpp</itemPath>
+      <itemPath>bucket.hpp</itemPath>
+      <itemPath>cc.hpp</itemPath>
+      <itemPath>graphLibrary.hpp</itemPath>
+      <itemPath>queue.hpp</itemPath>
+      <itemPath>scc.hpp</itemPath>
+      <itemPath>stack.hpp</itemPath>
+      <itemPath>updateIndex.hpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>Buffer.cpp</itemPath>
+      <itemPath>BufferNode.cpp</itemPath>
+<<<<<<< HEAD
+      <itemPath>Component.cpp</itemPath>
+      <itemPath>ComponentCursor.cpp</itemPath>
+=======
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
+      <itemPath>HashTable.cpp</itemPath>
+      <itemPath>Index.cpp</itemPath>
+      <itemPath>IndexNode.cpp</itemPath>
+      <itemPath>bfs.cpp</itemPath>
+      <itemPath>bucket.cpp</itemPath>
+<<<<<<< HEAD
+=======
+      <itemPath>cc.cpp</itemPath>
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
+      <itemPath>graphLibrary.cpp</itemPath>
+      <itemPath>main.cpp</itemPath>
+      <itemPath>queue.cpp</itemPath>
+      <itemPath>scc.cpp</itemPath>
+      <itemPath>stack.cpp</itemPath>
+      <itemPath>updateIndex.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f2"
+                     displayName="TestStructureAndInsertion"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/newsimpletest1.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1"
+                     displayName="TinyGraphBFSTest"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/tinyGraphBFSTest.cpp</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <standard>10</standard>
+        </cTool>
+        <ccTool>
+          <standard>8</standard>
+        </ccTool>
+      </compileType>
+<<<<<<< HEAD
+      <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Buffer.hpp" ex="false" tool="3" flavor2="0">
+=======
+      <item path="../../Desktop/Project New/Buffer.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
+      </item>
+      <item path="BufferNode.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="BufferNode.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+<<<<<<< HEAD
+      <item path="Component.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Component.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ComponentCursor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ComponentCursor.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+=======
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
+      <item path="HashTable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="HashTable.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Index.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Index.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="IndexNode.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="IndexNode.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="bfs.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="bfs.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="bucket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="bucket.hpp" ex="false" tool="3" flavor2="0">
+<<<<<<< HEAD
+=======
+      </item>
+      <item path="cc.cpp" ex="false" tool="1" flavor2="0">
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
+      </item>
+      <item path="cc.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f2">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f2</output>
+        </linkerTool>
+      </folder>
+      <item path="graphLibrary.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="graphLibrary.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="queue.cpp" ex="false" tool="1" flavor2="0">
+<<<<<<< HEAD
+      </item>
+      <item path="queue.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="scc.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="scc.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="stack.cpp" ex="false" tool="1" flavor2="0">
+=======
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
+      </item>
+      <item path="stack.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/newsimpletest1.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/tinyGraphBFSTest.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="updateIndex.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="updateIndex.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+<<<<<<< HEAD
+      <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Buffer.hpp" ex="false" tool="3" flavor2="0">
+=======
+      <item path="../../Desktop/Project New/Buffer.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
+      </item>
+      <item path="BufferNode.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="BufferNode.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+<<<<<<< HEAD
+      <item path="Component.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Component.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ComponentCursor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ComponentCursor.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+=======
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
+      <item path="HashTable.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="HashTable.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Index.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Index.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="IndexNode.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="IndexNode.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="bfs.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="bfs.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="bucket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="bucket.hpp" ex="false" tool="3" flavor2="0">
+<<<<<<< HEAD
+=======
+      </item>
+      <item path="cc.cpp" ex="false" tool="1" flavor2="0">
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
+      </item>
+      <item path="cc.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f2">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f2</output>
+        </linkerTool>
+      </folder>
+      <item path="graphLibrary.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="graphLibrary.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="queue.cpp" ex="false" tool="1" flavor2="0">
+<<<<<<< HEAD
+      </item>
+      <item path="queue.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="scc.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="scc.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="stack.cpp" ex="false" tool="1" flavor2="0">
+=======
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
+      </item>
+      <item path="stack.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/newsimpletest1.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/tinyGraphBFSTest.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="updateIndex.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="updateIndex.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

@@ -8,6 +8,8 @@
       <itemPath>BufferNode.hpp</itemPath>
       <itemPath>Component.hpp</itemPath>
       <itemPath>ComponentCursor.hpp</itemPath>
+      <itemPath>../../Desktop/Project New/Buffer.hpp</itemPath>
+      <itemPath>BufferNode.hpp</itemPath>
       <itemPath>HashTable.hpp</itemPath>
       <itemPath>Index.hpp</itemPath>
       <itemPath>IndexNode.hpp</itemPath>
@@ -36,6 +38,7 @@
       <itemPath>IndexNode.cpp</itemPath>
       <itemPath>bfs.cpp</itemPath>
       <itemPath>bucket.cpp</itemPath>
+      <itemPath>cc.cpp</itemPath>
       <itemPath>graphLibrary.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
       <itemPath>queue.cpp</itemPath>
@@ -86,6 +89,12 @@
       <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Buffer.hpp" ex="false" tool="3" flavor2="0">
+      <item path="../../Desktop/Project New/Buffer.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="BufferNode.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -118,6 +127,8 @@
       <item path="bucket.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="bucket.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="cc.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="cc.hpp" ex="false" tool="3" flavor2="0">
       </item>
@@ -201,6 +212,12 @@
       <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Buffer.hpp" ex="false" tool="3" flavor2="0">
+      <item path="../../Desktop/Project New/Buffer.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="BufferNode.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -233,6 +250,8 @@
       <item path="bucket.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="bucket.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="cc.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="cc.hpp" ex="false" tool="3" flavor2="0">
       </item>
