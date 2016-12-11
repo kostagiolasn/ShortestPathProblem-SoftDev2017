@@ -14,7 +14,7 @@ class CC{
         uint32_t metricVal;
         uint32_t graphSize;
         uint32_t ccCounter;
-        uint32_t components;
+        uint32_t updateIndexSize;
         
         int* visited;
     public:
@@ -26,11 +26,7 @@ class CC{
         bool inComponent(uint32_t);
         void findCC(Index*, Index*, uint32_t, uint32_t);
         void findCCAll(Index* , Index* );
-<<<<<<< HEAD
-        int insertNewEdge(uint32_t, uint32_t, Index*);
-=======
         int insertNewEdge(uint32_t, uint32_t, uint32_t);
->>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
         uint32_t getCcCounter();
         bool sameComponent(uint32_t , uint32_t );
 

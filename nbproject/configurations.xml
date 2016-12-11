@@ -4,7 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>Buffer.hpp</itemPath>
+      <itemPath>../../Desktop/Project New/Buffer.hpp</itemPath>
       <itemPath>BufferNode.hpp</itemPath>
       <itemPath>Component.hpp</itemPath>
       <itemPath>ComponentCursor.hpp</itemPath>
@@ -84,6 +84,11 @@
           <standard>8</standard>
         </ccTool>
       </compileType>
+      <item path="../../Desktop/Project New/Buffer.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="BufferNode.cpp" ex="false" tool="1" flavor2="0">
@@ -199,6 +204,11 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="../../Desktop/Project New/Buffer.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="BufferNode.cpp" ex="false" tool="1" flavor2="0">

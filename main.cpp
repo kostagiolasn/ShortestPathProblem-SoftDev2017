@@ -24,16 +24,12 @@ void printGraph(Index*, Buffer*);
 
 void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fileWorkLoad);
 
-void parseFileGraph(std::string stream, Index* externalIndex, Index* internalIndex);
-
-void freeVariables(Index* indexExternal, Index* indexInternal);
-
-void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal);
 int parseFileGraph(std::string stream, Index* externalIndex, Index* internalIndex);
 
 void freeVariables(Index* indexExternal, Index* indexInternal);
 
 void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal, int, CC*);
+
 
 using namespace std;
 
@@ -56,8 +52,6 @@ int main(int argc, char** argv) {
 
     // Initialize the class objects here
     Index* indexExternal = new Index(true);
-	Index* indexInternal = new Index();
-
     Index* indexInternal = new Index();
 
         
@@ -65,32 +59,11 @@ int main(int argc, char** argv) {
     int largestNodeId;
     try {
 
-        parseFileGraph(fileGraph, indexExternal, indexInternal);
         largestNodeId = parseFileGraph(fileGraph, indexExternal, indexInternal);
     } catch (std::string err) {
         std::cerr << err << std::endl;
         state = 2;
     }
-
-//	for (int i = 0; i <= 19; i++) {
-//		Queue* queue = indexExternal->getNeighborsOfNode(i);
-//		queue->print();
-//	}
-
-//    fprintf(stderr, "Time taken for insert: %.2fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
-//	return 0;
-    //CC* cc = new CC(700000);
-
-
-
-    //cout << indexExternal->getLargestNodeId() <<endl;
-    //cc->findCCAll(indexInternal, indexExternal);
-    //cout << cc->getCcCounter() << endl;
-    //cc->print();
-    /*try {
-
-       parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal);//cc->print();
-
     
     
 
@@ -110,19 +83,12 @@ int main(int argc, char** argv) {
     } catch (std::string err) {
         std::cerr << err << std::endl;
         state = 3;
-    }*/
-    
-        SCC* scc = new SCC(11);
-        scc->Tarjan(11, indexExternal, indexInternal);
-        scc->iterateStronglyConnectedComponentID();
-        std::cout << scc->estimateShortestPathStronglyConnectedComponents(indexInternal, indexExternal, 0, 2);
-        //scc->iterateStronglyConnectedComponentID();
-    //indexExternal->print(bufferExternal);
-   fprintf(stderr, "Time taken: %.2fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
-    freeVariables(indexExternal, indexInternal);
-//delete cc;
     }
     
+    SCC* scc = new SCC(11);
+    scc->Tarjan(11, indexExternal, indexInternal);
+    scc->iterateStronglyConnectedComponentID();
+    std::cout << scc->estimateShortestPathStronglyConnectedComponents(indexInternal, indexExternal, 0, 2);
     
     fprintf(stderr, "Time taken: %.2fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
 
@@ -134,7 +100,6 @@ int main(int argc, char** argv) {
 }
 
 void printGraph(Index* indexExternal, Buffer* bufferExternal) {
-   // indexExternal->print(bufferExternal);
 //    indexExternal->print(bufferExternal);
 }
 
@@ -178,7 +143,6 @@ void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fil
 }
 
 
-void parseFileGraph(std::string stream, Index* externalIndex, Index* internalIndex) {
 int parseFileGraph(std::string stream, Index* externalIndex, Index* internalIndex) {
     int largestNodeId = 0;
     std::string line;
@@ -209,19 +173,12 @@ int parseFileGraph(std::string stream, Index* externalIndex, Index* internalInde
                 largestNodeId = idTarget;
             externalIndex->addEdge(idSource, idTarget);
 
-            externalIndex->addEdge(idSource, idTarget);
-
-
-
-
-
-            internalIndex->addEdge(idTarget, idSource);
-
 
 
 
 
             internalIndex->addEdge(idTarget, idSource);
+
 
         }
     }
@@ -237,7 +194,6 @@ int parseFileGraph(std::string stream, Index* externalIndex, Index* internalInde
     return largestNodeId;
 }
 
-void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal) {
 void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal, int largestNode, CC* cc) {
     char queryType;
     int posaUpdates = 0;
@@ -247,8 +203,6 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
     int version = 0;
     uint32_t ccVersion = 0;
     file.open(stream.c_str());
-
- BFS* bfs = new BFS(2700000);
 
     BFS* bfs = new BFS(largestNode + 1);
     cc->setUpdateIndex();
@@ -272,16 +226,6 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
 
             if(queryType == 'Q'){
 
-//                cout << version << endl;
-//                version++;
-//                cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, version) << endl;
-                version++;
-            //  if (version > 54184){
-              //      cout << idSource << " " << idTarget << endl;
-                    cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, version) << endl;
-                //}
-//                 bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, version);
-
                
                 version++;
                if(cc->sameComponent(idSource, idTarget))
@@ -295,10 +239,6 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
             if(queryType == 'A'){
                 indexInternal->addEdge(idTarget, idSource);
                 indexExternal->addEdge(idSource, idTarget);
-                //cc->insertNewEdge(idSource, idTarget, indexExternal);
-            }
-
-        }
                 cc->insertNewEdge(idSource, idTarget, ccVersion);
                 ccVersion++;
             }
