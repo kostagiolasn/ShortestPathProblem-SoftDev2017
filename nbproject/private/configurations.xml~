@@ -28,6 +28,8 @@
         <runcommandpicklist>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph mediumGraph.txt -fWorkLoad mediumWorkload_FINAL.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph ccGraph.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommandpicklistitem>
+=======
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph ccGraph.txt -fWorkLoad ccWorkload.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph smallGraph.txt -fWorkLoad smallWorkload_FINAL2.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph testGraph.txt -fWorkLoad testWorkload_FINAL.txt</runcommandpicklistitem>

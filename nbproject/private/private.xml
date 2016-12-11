@@ -7,14 +7,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/yiota/Coding%20Projects/ShortestPathProblem-SoftDev2017/cc.hpp</file>
-            <file>file:/home/yiota/Coding%20Projects/ShortestPathProblem-SoftDev2017/main.cpp</file>
-            <file>file:/home/yiota/Coding%20Projects/ShortestPathProblem-SoftDev2017/cc.cpp</file>
-            <file>file:/home/yiota/Coding%20Projects/ShortestPathProblem-SoftDev2017/queue.cpp</file>
-            <file>file:/home/yiota/Coding%20Projects/ShortestPathProblem-SoftDev2017/bfs.cpp</file>
-            <file>file:/home/yiota/Coding%20Projects/ShortestPathProblem-SoftDev2017/Index.hpp</file>
-            <file>file:/home/yiota/Coding%20Projects/ShortestPathProblem-SoftDev2017/bfs.hpp</file>
-            <file>file:/home/yiota/Coding%20Projects/ShortestPathProblem-SoftDev2017/queue.hpp</file>
+            <file>file:/home/nikos/NetBeansProjects/ShortestPathProblem/bfs.cpp</file>
+            <file>file:/home/nikos/NetBeansProjects/ShortestPathProblem/scc.hpp</file>
+            <file>file:/home/nikos/NetBeansProjects/ShortestPathProblem/Component.cpp</file>
+            <file>file:/home/nikos/NetBeansProjects/ShortestPathProblem/scc.cpp</file>
+            <file>file:/home/nikos/NetBeansProjects/ShortestPathProblem/stack.cpp</file>
+            <file>file:/home/nikos/NetBeansProjects/ShortestPathProblem/ComponentCursor.cpp</file>
+            <file>file:/home/nikos/NetBeansProjects/ShortestPathProblem/ComponentCursor.hpp</file>
+            <file>file:/home/nikos/NetBeansProjects/ShortestPathProblem/main.cpp</file>
+            <file>file:/home/nikos/NetBeansProjects/ShortestPathProblem/queue.cpp</file>
+            <file>file:/home/nikos/NetBeansProjects/ShortestPathProblem/Index.hpp</file>
+            <file>file:/home/nikos/NetBeansProjects/ShortestPathProblem/Component.hpp</file>
         </group>
     </open-files>
 </project-private>

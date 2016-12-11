@@ -4,12 +4,15 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+<<<<<<< HEAD
       <itemPath>Buffer.hpp</itemPath>
       <itemPath>BufferNode.hpp</itemPath>
       <itemPath>Component.hpp</itemPath>
       <itemPath>ComponentCursor.hpp</itemPath>
+=======
       <itemPath>../../Desktop/Project New/Buffer.hpp</itemPath>
       <itemPath>BufferNode.hpp</itemPath>
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
       <itemPath>HashTable.hpp</itemPath>
       <itemPath>Index.hpp</itemPath>
       <itemPath>IndexNode.hpp</itemPath>
@@ -31,14 +34,20 @@
                    projectFiles="true">
       <itemPath>Buffer.cpp</itemPath>
       <itemPath>BufferNode.cpp</itemPath>
+<<<<<<< HEAD
       <itemPath>Component.cpp</itemPath>
       <itemPath>ComponentCursor.cpp</itemPath>
+=======
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
       <itemPath>HashTable.cpp</itemPath>
       <itemPath>Index.cpp</itemPath>
       <itemPath>IndexNode.cpp</itemPath>
       <itemPath>bfs.cpp</itemPath>
       <itemPath>bucket.cpp</itemPath>
+<<<<<<< HEAD
+=======
       <itemPath>cc.cpp</itemPath>
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
       <itemPath>graphLibrary.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
       <itemPath>queue.cpp</itemPath>
@@ -86,20 +95,24 @@
           <standard>8</standard>
         </ccTool>
       </compileType>
+<<<<<<< HEAD
       <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Buffer.hpp" ex="false" tool="3" flavor2="0">
+=======
       <item path="../../Desktop/Project New/Buffer.hpp"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
       <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
       </item>
       <item path="BufferNode.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="BufferNode.hpp" ex="false" tool="3" flavor2="0">
       </item>
+<<<<<<< HEAD
       <item path="Component.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Component.hpp" ex="false" tool="3" flavor2="0">
@@ -108,6 +121,8 @@
       </item>
       <item path="ComponentCursor.hpp" ex="false" tool="3" flavor2="0">
       </item>
+=======
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
       <item path="HashTable.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="HashTable.hpp" ex="false" tool="3" flavor2="0">
@@ -127,8 +142,11 @@
       <item path="bucket.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="bucket.hpp" ex="false" tool="3" flavor2="0">
+<<<<<<< HEAD
+=======
       </item>
       <item path="cc.cpp" ex="false" tool="1" flavor2="0">
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
       </item>
       <item path="cc.hpp" ex="false" tool="3" flavor2="0">
       </item>
@@ -169,6 +187,7 @@
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="queue.cpp" ex="false" tool="1" flavor2="0">
+<<<<<<< HEAD
       </item>
       <item path="queue.hpp" ex="false" tool="3" flavor2="0">
       </item>
@@ -177,6 +196,8 @@
       <item path="scc.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="stack.cpp" ex="false" tool="1" flavor2="0">
+=======
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
       </item>
       <item path="stack.hpp" ex="false" tool="3" flavor2="0">
       </item>
@@ -209,20 +230,24 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+<<<<<<< HEAD
       <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Buffer.hpp" ex="false" tool="3" flavor2="0">
+=======
       <item path="../../Desktop/Project New/Buffer.hpp"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
       <item path="Buffer.cpp" ex="false" tool="1" flavor2="0">
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
       </item>
       <item path="BufferNode.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="BufferNode.hpp" ex="false" tool="3" flavor2="0">
       </item>
+<<<<<<< HEAD
       <item path="Component.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Component.hpp" ex="false" tool="3" flavor2="0">
@@ -231,6 +256,8 @@
       </item>
       <item path="ComponentCursor.hpp" ex="false" tool="3" flavor2="0">
       </item>
+=======
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
       <item path="HashTable.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="HashTable.hpp" ex="false" tool="3" flavor2="0">
@@ -250,8 +277,11 @@
       <item path="bucket.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="bucket.hpp" ex="false" tool="3" flavor2="0">
+<<<<<<< HEAD
+=======
       </item>
       <item path="cc.cpp" ex="false" tool="1" flavor2="0">
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
       </item>
       <item path="cc.hpp" ex="false" tool="3" flavor2="0">
       </item>
@@ -292,6 +322,7 @@
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="queue.cpp" ex="false" tool="1" flavor2="0">
+<<<<<<< HEAD
       </item>
       <item path="queue.hpp" ex="false" tool="3" flavor2="0">
       </item>
@@ -300,6 +331,8 @@
       <item path="scc.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="stack.cpp" ex="false" tool="1" flavor2="0">
+=======
+>>>>>>> 779dac4661bc2ddf5ac78fd0dcc9a2646c710e32
       </item>
       <item path="stack.hpp" ex="false" tool="3" flavor2="0">
       </item>

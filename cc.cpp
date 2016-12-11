@@ -5,9 +5,14 @@
 CC::CC(uint32_t graphSize){
     this->graphSize = graphSize;
     this->ccCounter = 0;
+
     this->updateIndexSize = 0;
+
+
+    this->ccindex = (uint32_t*) malloc(sizeof(uint32_t)*graphSize);
+
     this->visited = (int*) malloc(sizeof(int)*graphSize);
-    this->ccindex = (uint32_t*) malloc(sizeof(uint32_t)* this->graphSize);
+
     for(int i = 0; i < graphSize; i++){
         this->ccindex[i] = UINT32_T_MAX;
         this->visited[i] = -1;
@@ -16,10 +21,12 @@ CC::CC(uint32_t graphSize){
     this->updateIndex = NULL;
 }
 CC::~CC(){
+
     //delete this->updateIndex;
     free(this->ccindex);
     free(this->visited);
     free(this->updateIndex);
+
 }
 
 void CC::print(){
@@ -40,7 +47,7 @@ void CC::insert(uint32_t nodeId, uint32_t componentId){
 bool CC::inComponent(uint32_t nodeId){
     if(this->ccindex[nodeId] == UINT32_T_MAX)
         return false;
-    else 
+    else
         return true;
 }
 
@@ -49,15 +56,17 @@ void CC::findCC(Index* indexExternal, Index* indexInternal, uint32_t nodeId, uin
     uint32_t version = ccId;
     Queue* queue = new Queue();
     queue->pushBack(nodeId);
-    
+
     while(!queue->isEmpty()){
         nodeId = queue->popFront();
         this->ccindex[nodeId] = ccId;
+
         //cout << "i popped " << nodeId << " with version " << version << endl;
         Queue* neighbors = indexExternal->getNeighborsOfNode(nodeId);
         Queue* neighbors2 = indexInternal->getNeighborsOfNode( nodeId);
         
        
+
         while(!neighbors->isEmpty()){
             uint32_t neighbor = neighbors->popFront();
             //cout << visited[neighbor] << endl;
@@ -67,13 +76,15 @@ void CC::findCC(Index* indexExternal, Index* indexInternal, uint32_t nodeId, uin
                 visited[neighbor] = version;
             }
         }
-        
+
          while(!neighbors2->isEmpty()){
             uint32_t neighbor = neighbors2->popFront();
             if(visited[neighbor] != version){
                 queue->pushBack(neighbor);
+
                 //cout << "I pushed i" << neighbor << endl;
                 visited[neighbor] = version;
+
             }
         }
     }
@@ -82,6 +93,7 @@ void CC::findCC(Index* indexExternal, Index* indexInternal, uint32_t nodeId, uin
 
 void CC::findCCAll(Index* indexInternal, Index* indexExternal){
     uint32_t ccCounter = 0;
+
     this->ccCounter = 0;
     for(int i = 0; i < this->graphSize; i++){
         
@@ -89,6 +101,7 @@ void CC::findCCAll(Index* indexInternal, Index* indexExternal){
             
             findCC(indexExternal, indexInternal, i, ccCounter);
             this->ccCounter = ccCounter;
+
             ccCounter++;
         }
     }
@@ -115,6 +128,7 @@ int CC::insertNewEdge(uint32_t nodeIdS, uint32_t nodeIdT, uint32_t version){
             this->updateIndex[componentT] = version;
                   
 
+
         }else if(this->updateIndex[componentS] != UINT32_T_MAX && this->updateIndex[componentT] == UINT32_T_MAX){
             uint32_t toUpdate1 = this->updateIndex[componentS];
 
@@ -128,6 +142,7 @@ int CC::insertNewEdge(uint32_t nodeIdS, uint32_t nodeIdT, uint32_t version){
             
         }else if(this->updateIndex[componentS] == UINT32_T_MAX && this->updateIndex[componentT] != UINT32_T_MAX){
             uint32_t toUpdate1 = this->updateIndex[componentT];
+
 
             for(int i = 0 ; i < ccCounter; i++){
                 if(this->updateIndex[i] == toUpdate1){
@@ -150,8 +165,9 @@ int CC::insertNewEdge(uint32_t nodeIdS, uint32_t nodeIdT, uint32_t version){
 
         }
 
+
         
-                    return 1;
+        return 1;
 
         
         
@@ -181,5 +197,7 @@ void CC::setUpdateIndex(){
     this->updateIndex = (uint32_t*) malloc(sizeof(uint32_t)*ccCounter);
     for(int i = 0 ; i < ccCounter; i++)
         this->updateIndex[i] = UINT32_T_MAX;
+
     this->updateIndexSize = this->ccCounter;
 }
+
