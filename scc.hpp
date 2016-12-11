@@ -22,8 +22,9 @@ class SCC {
     private:
         Component* components;
         uint32_t* id_belongs_to_component;
-        uint32_t currentComponentsCount;
-        uint32_t maxComponentsCount;
+        int currentComponentsCount;
+        uint32_t currentComponentId;
+        int maxComponentsCount;
         bool* visited;
         Stack* stack;
         int time;
@@ -37,8 +38,8 @@ class SCC {
         void setIdToComponent(uint32_t, Component);
         bool SCCisFull();
         void SCCDoubleMaxComponentsCount();
-        uint32_t getCurrentComponentsCount();
-        uint32_t getMaxComponentsCount();
+        int getCurrentComponentsCount();
+        int getMaxComponentsCount();
         Component getComponentAtIndex(uint32_t);
         
         ~SCC();
@@ -47,8 +48,7 @@ class SCC {
         void dfs(int u, Index*, Index*);
         uint32_t findNodeStronglyConnectedComponentID(uint32_t);
         void iterateStronglyConnectedComponentID();
-        bool next_StronglyConnectedComponentID();
-        int estimateShortestPathStronglyConnectedComponents(IndexNode*, uint32_t, uint32_t);
+        int estimateShortestPathStronglyConnectedComponents(Index*, Index*, uint32_t, uint32_t);
         
 };
 

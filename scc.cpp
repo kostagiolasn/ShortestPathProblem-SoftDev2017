@@ -1,4 +1,6 @@
 #include "scc.hpp"
+#include "ComponentCursor.hpp"
+#include "bfs.hpp"
 
 
 // This function is the equivalent to destroyStronglyConnectedComponents
@@ -14,6 +16,7 @@ SCC::SCC(int graphSize) {
     
     // First, initialize the SCC structure
     this->currentComponentsCount = 0;
+    this->currentComponentId = 0;
     this->maxComponentsCount = 1;
     this->components = (Component*) malloc(sizeof(Component));
     this->id_belongs_to_component = (uint32_t*) malloc(sizeof(uint32_t) * graphSize);
@@ -74,7 +77,7 @@ void SCC::dfs(int u, Index* indexExternal, Index* indexInternal) {
     
     if(this->lowlink[u] == this->disc[u]) {
         uint32_t w = UINT32_MAX;
-        this->components[this->currentComponentsCount].setComponentId(this->currentComponentsCount);
+        this->components[this->currentComponentsCount].setComponentId(this->currentComponentId);
         this->components[this->currentComponentsCount].setIncludedNodesCount(0);
         this->components[this->currentComponentsCount].setComponentSize(1);
         std::cout << "Found component" << std::endl;
@@ -83,25 +86,33 @@ void SCC::dfs(int u, Index* indexExternal, Index* indexInternal) {
             w = this->stack->peek();
             this->components[this->currentComponentsCount].addIncludedNode(w);
             std::cout << w << std::endl;
-            this->setIdToComponent(w, this->components[this->currentComponentsCount]);
+            //this->setIdToComponent(w, this->components[this->currentComponentsCount]);
+            this->id_belongs_to_component[w] = this->currentComponentId;
             this->visited[w] = false;
             this->stack->pop();
             
         }while(w != u);
+        this->currentComponentsCount++;
+        this->currentComponentId++;
     }
 }
 
 /* This function initializes the cursor object ComponentCursor of the SCC
  * structure appropriately */
 void SCC::iterateStronglyConnectedComponentID() {
+    ComponentCursor* cursor = new ComponentCursor(this);
+    while(cursor->moveComponent()) {
+        std::cout << "Found component with ID: " << cursor->getCurrentComponent().getComponentId() << std::endl;
+        std::cout << "Its nodes are:" << std::endl;
+        for(int i = 0; i < cursor->getCurrentComponent().getIncludedNodesCount(); i++) {
+            std::cout << cursor->getCurrentComponent().getIncludedNodeIdAtPosition(i) << std::endl;
+            this->id_belongs_to_component[cursor->getCurrentComponent().getIncludedNodeIdAtPosition(i)] = cursor->getCurrentComponent().getComponentId();
+        }
+    }
     
-}
-
-/* This function moves the cursor object to the next available component
- * in the SCC object. If there is an available it returns true, if not,
- * it returns false. */
-bool SCC::next_StronglyConnectedComponentID() {
-    
+    for(int i = 0; i < 11; i++) {
+        std::cout <<  "The id of node " << i << "is: " << this->id_belongs_to_component[i] << std::endl;
+    }
 }
 
 /* This function estimates the shortest path between two nodes belonging to
@@ -109,8 +120,13 @@ bool SCC::next_StronglyConnectedComponentID() {
  * if the nodes are not in the same component. The paths must be pruned accordingly
  * because we need to extend only the paths that exist in the same strongly 
  * connected component. */
-int SCC::estimateShortestPathStronglyConnectedComponents(IndexNode*, uint32_t, uint32_t) {
-    
+int SCC::estimateShortestPathStronglyConnectedComponents(Index* indexInternal, Index* indexExternal, uint32_t sourceNode, uint32_t targetNode) {
+    if(this->id_belongs_to_component[sourceNode] == this->id_belongs_to_component[targetNode]) {
+        BFS* bfs = new BFS(2700000);
+        return bfs->findShortestPath(indexInternal, indexExternal, sourceNode, targetNode, 0);
+    }
+    else
+        return -1;
 }
 
 uint32_t SCC::findNodeStronglyConnectedComponentID(uint32_t nodeId) {
@@ -124,7 +140,7 @@ void SCC::increaseCurrentComponentsCount() {
     this->currentComponentsCount++;
 }
 
-uint32_t SCC::getCurrentComponentsCount() {
+int SCC::getCurrentComponentsCount() {
     return this->currentComponentsCount;
 }
 
@@ -132,7 +148,7 @@ void SCC::SCCDoubleMaxComponentsCount() {
     this->maxComponentsCount *=2;
 }
 
-uint32_t SCC::getMaxComponentsCount() {
+int SCC::getMaxComponentsCount() {
     return this->maxComponentsCount;
 }
 
@@ -172,7 +188,6 @@ void SCC::setIdToComponent(uint32_t nodeId, Component c) {
     // both in the SCC structure and the equivalent
     // Component structure.
     this->id_belongs_to_component[nodeId] = c.getComponentId();
-    c.addIncludedNode(nodeId);
     
 }
 

@@ -17,19 +17,20 @@ class Component {
     
     private:
         uint32_t component_id;
-        uint32_t included_nodes_count;
+        int included_nodes_count;
         uint32_t* included_node_ids;
-        uint32_t componentSize;
+        int componentSize;
     public:
         Component(uint32_t);
         ~Component();
         void increaseIncludedNodesCount();
         int addIncludedNode(uint32_t);
         uint32_t getComponentId();
-        uint32_t getIncludedNodeIdAtPosition(uint32_t);
-        uint32_t getComponentSize();
-        void setComponentSize(uint32_t);
-        void setIncludedNodesCount(uint32_t);
+        int getIncludedNodeIdAtPosition(int);
+        int getComponentSize();
+        int getIncludedNodesCount();
+        void setComponentSize(int);
+        void setIncludedNodesCount(int);
         void doubleComponentSize();
         bool isFullComponent();
         void setComponentId(uint32_t);

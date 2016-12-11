@@ -14,6 +14,10 @@ Component::~Component() {
     
 }
 
+int Component::getIncludedNodesCount() {
+    return this->included_nodes_count;
+}
+
 void Component::increaseIncludedNodesCount() {
     this->included_nodes_count++;
 }
@@ -61,15 +65,15 @@ uint32_t Component::getComponentId() {
     return this->component_id;
 }
 
- uint32_t Component::getIncludedNodeIdAtPosition(uint32_t position) {
+ int Component::getIncludedNodeIdAtPosition(int position) {
      return this->included_node_ids[position];
  }
  
- void Component::setComponentSize(uint32_t newSize) {
+ void Component::setComponentSize(int newSize) {
      this->componentSize = newSize;
  }
  
- uint32_t Component::getComponentSize() {
+ int Component::getComponentSize() {
      return this->componentSize;
  }
  
@@ -77,7 +81,7 @@ uint32_t Component::getComponentId() {
      this->componentSize *= 2;
  }
  
- void Component::setIncludedNodesCount(uint32_t nodesCount) {
+ void Component::setIncludedNodesCount(int nodesCount) {
     this->included_nodes_count = nodesCount;
 }
  

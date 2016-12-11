@@ -18,14 +18,15 @@
 class ComponentCursor {
     private:
         Component* component_ptr;
-        uint32_t total_components;
-        uint32_t current_component_index;
+        int total_components;
+        int current_component_index;
     public:
         ComponentCursor(SCC*);
         ~ComponentCursor();
         void setTotalComponents(uint32_t);
-        uint32_t getTotalComponents();
-        Component getCurrentComponent(int32_t);
+        int getTotalComponents();
+        Component getCurrentComponent();
+        bool moveComponent();
 };
 
 #endif	/* COMPONENTCURSOR_HPP */

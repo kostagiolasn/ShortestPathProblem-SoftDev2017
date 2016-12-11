@@ -90,6 +90,9 @@ int main(int argc, char** argv) {
     
         SCC* scc = new SCC(11);
         scc->Tarjan(11, indexExternal, indexInternal);
+        scc->iterateStronglyConnectedComponentID();
+        std::cout << scc->estimateShortestPathStronglyConnectedComponents(indexInternal, indexExternal, 0, 2);
+        //scc->iterateStronglyConnectedComponentID();
     //indexExternal->print(bufferExternal);
    fprintf(stderr, "Time taken: %.2fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
     freeVariables(indexExternal, indexInternal);
