@@ -14,7 +14,7 @@ class CC{
         uint32_t metricVal;
         uint32_t graphSize;
         uint32_t ccCounter;
-        uint32_t components;
+        uint32_t updateIndexSize;
         
         int* visited;
     public:
