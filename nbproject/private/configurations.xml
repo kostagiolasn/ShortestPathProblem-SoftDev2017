@@ -26,18 +26,18 @@
       </nativedebugger>
       <runprofile version="9">
         <runcommandpicklist>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph smallGraph.txt -fWorkLoad smallWorkload_FINAL2.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph testGraph.txt -fWorkLoad testWorkload_FINAL.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph tinyGraph2.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph smallGraph.txt -fWorkLoad smallWorkload_FINAL.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph tinyGraph.txt -fWorkLoad tinyWorkload_FINAL.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph mediumGraph.txt -fWorkLoad mediumWorkload_FINAL.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph ./medium/mediumGraph.txt -fWorkLoad ./medium/mediumWorkload_FINAL.txt</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph ./small/smallGraph.txt -fWorkLoad ./small/smallWorkload_FINAL.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph ./tiny/tinyGraph.txt -fWorkLoad ./tiny/tinyWorkload_FINAL.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph ./test/testGraph.txt -fWorkLoad ./tiny/tinyWorkload_FINAL.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph ./test/testGraph.txt -fWorkLoad ./small/smallWorkload_FINAL.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" -fGraph ./small/smallGraph.txt -fWorkLoad ./small/smallWorkload_FINAL.txt</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}" -fGraph ./test/testGraph.txt -fWorkLoad ./tiny/tinyWorkload_FINAL.txt</runcommand>
+        <runcommand>"${OUTPUT_PATH}" -fGraph ./small/smallGraph.txt -fWorkLoad ./small/smallWorkload_FINAL.txt</runcommand>
         <rundir></rundir>
         <buildfirst>false</buildfirst>
         <terminal-type>0</terminal-type>

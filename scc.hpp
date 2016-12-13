@@ -48,7 +48,7 @@ class SCC {
         void dfs(int u, Index*, Index*);
         uint32_t findNodeStronglyConnectedComponentID(uint32_t);
         void iterateStronglyConnectedComponentID();
-        int estimateShortestPathStronglyConnectedComponents(Index*, Index*, uint32_t, uint32_t);
+        int estimateShortestPathStronglyConnectedComponents(Index*, Index*, uint32_t, uint32_t, int);
         
 };
 
