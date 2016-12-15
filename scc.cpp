@@ -83,12 +83,12 @@ void SCC::dfs(int u, Index* indexExternal, Index* indexInternal) {
         this->components[this->currentComponentsCount].setComponentId(this->currentComponentId);
         this->components[this->currentComponentsCount].setIncludedNodesCount(0);
         this->components[this->currentComponentsCount].setComponentSize(1);
-        std::cout << "Found component" << std::endl;
-        std::cout << "Its nodes are:" << std::endl;
+        //std::cout << "Found component" << std::endl;
+        //std::cout << "Its nodes are:" << std::endl;
         do {
             w = this->stack->peek();
             this->components[this->currentComponentsCount].addIncludedNode(w);
-            std::cout << w << std::endl;
+            //std::cout << w << std::endl;
             //this->setIdToComponent(w, this->components[this->currentComponentsCount]);
             this->id_belongs_to_component[w] = this->currentComponentId;
             this->visited[w] = false;
@@ -122,10 +122,10 @@ void SCC::iterateStronglyConnectedComponentID() {
  * if the nodes are not in the same component. The paths must be pruned accordingly
  * because we need to extend only the paths that exist in the same strongly 
  * connected component. */
-int SCC::estimateShortestPathStronglyConnectedComponents(Index* indexInternal, Index* indexExternal, uint32_t sourceNode, uint32_t targetNode) {
+int SCC::estimateShortestPathStronglyConnectedComponents(Index* indexInternal, Index* indexExternal, uint32_t sourceNode, uint32_t targetNode, int version) {
     if(this->id_belongs_to_component[sourceNode] == this->id_belongs_to_component[targetNode]) {
         BFS* bfs = new BFS(2700000);
-        return bfs->findShortestPath(indexInternal, indexExternal, sourceNode, targetNode, 0);
+        return bfs->findShortestPath(indexInternal, indexExternal, sourceNode, targetNode, version);
     }
     else
         return -1;

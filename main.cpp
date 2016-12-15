@@ -31,6 +31,8 @@ void freeVariables(Index* indexExternal, Index* indexInternal);
 
 void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal, int, CC*);
 
+void parseFileWorkLoadStatic(std::string stream, Index*, Index*, int, SCC*);
+
 
 using namespace std;
 
@@ -88,10 +90,29 @@ int main(int argc, char** argv) {
         state = 3;
     }*/
     
-    SCC* scc = new SCC(11);
-    scc->Tarjan(11, indexExternal, indexInternal);
-    scc->iterateStronglyConnectedComponentID();
-    std::cout << scc->estimateShortestPathStronglyConnectedComponents(indexInternal, indexExternal, 0, 2);
+    SCC* scc = new SCC(largestNodeId + 1);
+    scc->Tarjan(largestNodeId + 1, indexExternal, indexInternal);
+    /*try {
+
+       parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, largestNodeId, cc);//cc->print();
+
+
+    } catch (std::string err) {
+        std::cerr << err << std::endl;
+        state = 3;
+    }*/
+    //scc->iterateStronglyConnectedComponentID();
+    //std::cout << scc->estimateShortestPathStronglyConnectedComponents(indexInternal, indexExternal, 0, 2);
+    
+    try {
+
+       parseFileWorkLoadStatic(fileWorkLoad, indexInternal, indexExternal, largestNodeId, scc);//cc->print();
+
+
+    } catch (std::string err) {
+        std::cerr << err << std::endl;
+        state = 3;
+    }
     
     fprintf(stderr, "Time taken: %.2fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
 
@@ -260,3 +281,63 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
 
 }
 
+void parseFileWorkLoadStatic(std::string stream, Index* indexInternal, Index* indexExternal, int largestNode, SCC* scc) {
+    char queryType;
+    int idSource, idTarget, err = 0;
+    ifstream file;
+    std::string line;
+    int version = 0;
+    file.open(stream.c_str());
+
+    BFS* bfs = new BFS(largestNode + 1);
+
+    ofstream myfile;
+    myfile.open("example.txt");
+    
+    while(std::getline(file, line)) {
+        std::istringstream iss(line);
+
+        queryType = iss.peek();
+        if(queryType == 'F'){
+            // Process queries here
+        }else {
+            if(isdigit(queryType)) {
+                err = 1;
+                break;
+            }
+            else if(!(iss >> queryType >> idSource >> idTarget)) {
+                err = 1;
+                break;
+            }
+
+
+            if(queryType == 'Q'){
+
+               
+                version++;
+                //std::cout << scc->estimateShortestPathStronglyConnectedComponents(indexInternal, indexExternal, idSource, idTarget, version) << std::endl;
+                myfile << scc->estimateShortestPathStronglyConnectedComponents(indexInternal, indexExternal, idSource, idTarget, version);
+                myfile << "\n";
+                
+            }
+            if(queryType == 'A'){
+                //indexInternal->addEdge(idTarget, idSource);
+                //indexExternal->addEdge(idSource, idTarget);
+                //cc->insertNewEdge(idSource, idTarget, ccVersion);
+                //ccVersion++;
+            }
+
+        }
+        
+    }
+    myfile.close();
+
+    file.close();
+
+    if(err) {
+        throw std::string("Work Load File input : unexpected format, a is : " + queryType);
+    }
+    delete bfs;
+
+
+}
