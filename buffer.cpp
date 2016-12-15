@@ -1,112 +1,47 @@
+#include <stdlib.h>
 #include <iostream>
-#include <string>
-#include <cstring>
-#include <cstdlib>
-#include <fstream>
-#include <stdio.h>
-#include <sstream>
-#include <stdint.h>
-#include "buffer.hpp"
+#include "Buffer.hpp"
+#include "BufferNode.hpp"
 
-    Buffer::Buffer() {
-        createBuffer();
-    }
-    
-    Buffer::~Buffer() {
-        free(this->buffer);
-    }
-    
-    Buffer* Buffer::createBuffer() {
 
-        initialSize = SIZE_BUFFER;
-        currentSize = 0;
-        overflowSize = SIZE_BUFFER;
-      
-        firstListAvailable = 0;
-        
-        this->buffer = (NodeList*) malloc(sizeof(NodeList) * overflowSize);
-        
-        for(int i = 0; i < overflowSize; i++) {
+Buffer::Buffer() {
+	bufferNodes = (BufferNode*) malloc(sizeof(BufferNode) * BUFFER_SIZE);
+	size = BUFFER_SIZE;
+	nextAvailable = 0;
+	for (int i = 0; i < size; i++)
+		bufferNodes[i].initialize();
+}
 
-            // the default offset is initialized at 0
-            this->buffer[i].set_offset(-1);
-            this->buffer[i].set_neighborsSize(0);
-            this->buffer[i].setDepth(0);
-        }
-        return this;
-    }
-    
-    OK_SUCCESS Buffer::destroyBuffer( Buffer* buffer ) {
-        delete buffer;
-    }
-    
-    OK_SUCCESS Buffer::doubleBuffer() {
-        if( ( this->buffer = (NodeList*) realloc(this->buffer, sizeof(NodeList)*this->overflowSize*2) ) != NULL) {
-            
-            for(int i = this->overflowSize; i < this->overflowSize * 2; i++) {
+Buffer::~Buffer() {
+	free(bufferNodes);
+}
 
-                // the default offset is initialized at 0
-                this->buffer[i].set_offset(-1);
-                this->buffer[i].set_neighborsSize(0);
-                this->buffer[i].setDepth(0);
-            }
-            
-            this->overflowSize *= 2;
-            
-            return 0;
-        }
-        else
-            return 1;
-    
-    }
-    
-    NodeList* Buffer::getListNode(uint32_t index) {
-        return &(this->buffer[index]);
-    }
-    
-    NodeList* Buffer::allocNewNode() {
-        return &(this->buffer[firstListAvailable]);
-    }
-            
-    void Buffer::set_currentSize(size_t currentSize) {
-        this->currentSize = currentSize;
-    }
+int Buffer::getSize() {
+	return size;
+}
 
-    size_t Buffer::get_currentSize() {
-        return this->currentSize;
-    }
+int Buffer::getNextAvailable() {
+	return nextAvailable;
+}
 
-    void Buffer::set_overflowSize(size_t overflowSize) {
-        this->overflowSize = overflowSize;
-    }
+void Buffer::setNextAvailable(int nextAvailable) {
+	this->nextAvailable = nextAvailable;
+} 
 
-    size_t Buffer::get_overflowSize() {
-        return this->overflowSize;
-    }
-    
-    void Buffer::incrementFirstAvailable() {
-        firstListAvailable += 1;
-    }
-    
-    uint32_t Buffer::get_firstListAvailable() {
-        return firstListAvailable;
-    }
-    
-    bool Buffer::isFull() {
-        return firstListAvailable == overflowSize;
-    }
+void Buffer::doubleBuffer() {
+	bufferNodes = (BufferNode*) realloc(bufferNodes, sizeof(BufferNode) * size * 2);
+	for (int i = size; i < size * 2; i++)
+		bufferNodes[i].initialize();
+	size <<= 1;
+}
 
-    NodeList* Buffer::getBuffer(){
-        return this->buffer;
-    }
-    
-    void Buffer::printBuffer(){
-        int i, j;
-        for(i = 0; i < this->get_overflowSize(); i++){
-            for(j = 0; j < 2; j++){
-                std::cout << this->buffer[i].get_neighborAtIndex(j) << " ";
-               
-            }
-            std::cout << "offset of next: " << this->buffer[i].get_offset() << std::endl;
-        }
-    }
+int Buffer::fetchNewBufferNode() {
+	if (nextAvailable == size)
+		doubleBuffer();
+
+	return nextAvailable++;
+}
+
+BufferNode* Buffer::getBufferNodeByOffset(int offset) {
+	return bufferNodes + offset;
+}

@@ -3,7 +3,6 @@
 
 #define UINT32_T_MAX (0xffffffff)
 #include <iostream>
-#include "updateIndex.hpp"
 #include "Index.hpp"
 using namespace std;
 

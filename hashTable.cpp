@@ -1,136 +1,92 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   hashTable.cpp
- * Author: Panos
- * 
- * Created on November 15, 2016, 5:58 PM
- */
-
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>  
 #include <iostream>
-#include <math.h>
+#include <cstdlib>
+#include <cassert>
+#include "HashTable.hpp"
 
-#include "hashTable.hpp"
+HashTable::HashTable(int tablesize, int bucketsize, int ptr, int Round)
+	: nodeCount(0), tableSize(tablesize), realTableSize(tablesize), bucketSize(bucketsize), pointer(ptr), round(Round) {
 
+	assert(buckets = (Bucket**)malloc(sizeof(Bucket*) * tableSize));
 
-// Constructs the empty Hash Table object.
-// Array length is set to 13 by default.
-HashTable::HashTable( uint32_t tableLength )
-{
-    //std::cout << "Creating hash table with length: "<< tableLength << std::endl;
-    if (tableLength <= 0) tableLength = 1;
-    array = (uint32_t *) malloc(sizeof(uint32_t) * tableLength);
-    length = tableLength;
-    depth = 0;
+	for (int i = 0; i < realTableSize; ++i)
+		assert(buckets[i] = new Bucket(bucketSize));
+
 }
 
-void HashTable::increment_depth() {
-    depth++;
-    //std::cout << "Incrementing depth." << std::endl;
+HashTable::~HashTable() {
+	for (int i = 0; i < realTableSize; ++i) {
+		delete buckets[i];
+		buckets[i] = NULL;
+	}
+
+	free(buckets);
+	buckets = NULL;
 }
 
-uint32_t HashTable::get_depth(){
-    return depth;
+void HashTable::setTableSize(int tableSize) {
+	this->tableSize = tableSize;
 }
 
-uint32_t HashTable::hash( uint32_t key )
-{
-
-    uint32_t size = length;
-    //std::cout << "Length: " << length << "." << std::endl;
-    
-    //std::cout << "Hashed " << key << " to:";
-    
-    key = ((key >> 16) ^ key) * 0x45d9f3b;
-    key = ((key >> 16) ^ key) * 0x45d9f3b;
-    key = (key >> 16) ^ key;
-
-    return key % size;
-}
-//
-//void HashTable::doubleHashTable(){
-//    if( ( array = realloc(array, sizeof(uint32_t)*this->tableLength*2) ) != NULL) {
-//}
-
-// Adds an item to the Hash Table.
-void HashTable::insertItem( uint32_t newItem, uint32_t offset )
-{
-    uint32_t index = hash( newItem );
-    array[ index ] =  offset ;
+int HashTable::getNodeCount() const {
+	return nodeCount;
 }
 
-
-void HashTable::doubleHashTable(uint32_t overflowNode, uint32_t newNode, uint32_t bucketDepth)
-{
-
-    uint32_t index = hash( overflowNode );
-    uint32_t newIndex = index + pow(2, bucketDepth); // FIXME: This could be wrong.
-
-
-
-    if( ( array = (uint32_t *) realloc(array, sizeof(uint32_t)*length*2) ) != NULL) {
-        for (uint32_t i=0; i<length; i++){
-            array[length+i] = array[i];
-        }
-        length = length * 2;
-        depth++;
-        //std::cout << "Doubled HashTable size." << std::endl;
-    }
-    else {
-//        std::cout << "Failed to double HashTable size." << std::endl;
-    }
-
-    array[newIndex] = newNode;
+int HashTable::getTableSize() const {
+	return tableSize;
 }
 
-void HashTable::splitPointers(uint32_t overflowNode, uint32_t newNode, uint32_t bucketDepth){
-
-
-
-    uint32_t index = hash( overflowNode );
-//    uint32_t newIndex = index + pow(2, bucketDepth); // FIXME: This could be wrong.
-
-//    std::cout << "Spliting pointers " << index << " points to: " << newNode << std::endl;
-
-    array[index] = newNode;
+int HashTable::getBucketSize() const {
+	return bucketSize;
 }
 
-// Returns an item from the Hash Table by key.
-// If the item isn't found, a null pointer is returned.
-uint32_t HashTable::getItemByKey( uint32_t itemKey )
-{
-    uint32_t index = hash( itemKey );
-    return array[ index ];
+int HashTable::hashFunction(int round, uint32_t id) const {
+	return id % ((1 << round) * tableSize);
 }
 
-// Returns the number of locations in the Hash Table.
-uint32_t HashTable::getLength()
-{
-    return length;
+void HashTable::increaseHashTable() {
+	assert(buckets = (Bucket**)realloc(buckets,sizeof(Bucket*) * realTableSize));
+	assert(buckets[realTableSize - 1] = new Bucket(bucketSize));
 }
 
-// Returns the number of Items in the Hash Table.
-uint32_t HashTable::getNumberOfItems()
-{
-//    int itemCount = 0;
-//    for ( int i = 0; i < length; i++ )
-//    {
-//        itemCount += array[i].getLength();
-//    }
-//    return itemCount;
-    return 0;
+bool HashTable::insertId(const uint32_t id) {
+	int toBePlaced = hashFunction(round, id) >= pointer ? hashFunction(round, id) : hashFunction(round + 1, id);
+
+	nodeCount++;
+	if (buckets[toBePlaced]->emptyCell() == true)	//There is place in bucket
+		return buckets[toBePlaced]->insertIdSorted(id);
+	else {
+		buckets[toBePlaced]->doubleCells();	//Adding a new chain bucket
+		buckets[toBePlaced]->insertIdSorted(id);	//Adding node in the right place
+		realTableSize += 1;		
+		increaseHashTable();
+		splitBucket(pointer);			//Spliting the bucket where the pointer was
+		if (pointer == realTableSize / 2) {	//Pointer ends up, reset back to start
+			pointer = 0;
+			round++;
+		}
+		else					//Or just increase pointer
+			pointer++;
+
+		return true;
+	}
 }
 
-// De-allocates all memory used for the Hash Table.
-HashTable::~HashTable()
-{
-    delete [] array;
+void HashTable::splitBucket(int toSplit) {
+	Bucket* oldBucket = buckets[toSplit];
+	uint32_t toAdd;
+
+	buckets[toSplit] = new Bucket(bucketSize);
+
+	while ((toAdd = oldBucket->getFirst()) != UINT32_MAX)
+		if (!buckets[hashFunction(round+1, toAdd)]->insertIdSorted(toAdd)) {	//Case everything goes to the new bucket
+			buckets[hashFunction(round+1, toAdd)]->doubleCells();
+			buckets[hashFunction(round+1, toAdd)]->insertIdSorted(toAdd);
+		}
+
+	delete oldBucket;
+	oldBucket = NULL;
 }
 
+uint32_t HashTable::lookupId(uint32_t id) const {
+	return hashFunction(round, id) >= pointer ? buckets[hashFunction(round, id)]->lookupId(id) : buckets[hashFunction(round+1, id)]->lookupId(id);
+}

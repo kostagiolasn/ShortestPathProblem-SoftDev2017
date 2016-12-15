@@ -109,11 +109,11 @@ void CC::findCCAll(Index* indexInternal, Index* indexExternal){
     
 }
 int CC::insertNewEdge(uint32_t nodeIdS, uint32_t nodeIdT, uint32_t version){
-    while(nodeIdS > this->graphSize || nodeIdT > this->graphSize){
+    while(nodeIdS > this->graphSize || nodeIdT > this->graphSize) {
         uint32_t oldSize = this->graphSize;
         uint32_t newSize = this->graphSize * 2;
-        this->ccindex = (uint32_t*) realloc(this->ccindex, newSize);
-        for(int i = oldSize; i < newSize; i ++){
+        this->ccindex = (uint32_t *) realloc(this->ccindex, newSize);
+        for (int i = oldSize; i < newSize; i++) {
             this->ccindex[i] = UINT32_T_MAX;
         }
         this->graphSize = newSize;

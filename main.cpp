@@ -19,6 +19,7 @@
 #include "bfs.hpp"
 #include "cc.hpp"
 #include "scc.hpp"
+#include "Grails.h"
 
 void printGraph(Index*, Buffer*);
 
@@ -66,8 +67,10 @@ int main(int argc, char** argv) {
     }
     
     
+    Grails* grailsIndex = new Grails(indexExternal, 6);
 
-    
+    grailsIndex->buildIndex();
+
     CC* cc = new CC(largestNodeId + 1);
 
    
