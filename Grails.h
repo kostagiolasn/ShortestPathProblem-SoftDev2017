@@ -23,6 +23,11 @@ public:
     void DoubleIndex();
     GrailsNode* getNodesWithOffset(uint32_t);
     uint32_t getCurrentRank();
+
+    bool isReachableGrailIndex(uint32_t, uint32_t);
+    bool isSubset(GrailsNode*, GrailsNode*);
+
+    void calculateMinRank(uint32_t);
     void setCurrentRank(uint32_t);
 };
 

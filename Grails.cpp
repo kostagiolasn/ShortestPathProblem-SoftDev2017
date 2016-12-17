@@ -23,15 +23,34 @@ void Grails::buildIndex(){
     expandNode(0);
     nodes[0].setRank(this->currentRank);
     std::cout << "Return from: 0" << std::endl;
+    this->calculateMinRank(0);
     this->setCurrentRank(this->currentRank + 1);
     for(uint32_t i=0; i<size; i++){
         if(!nodes[i].getVisited()){
             expandNode(i);
-            std::cout << "Return from: " << i << std::endl;
+            //std::cout << "Return from: " << i << std::endl;
             nodes[i].setRank(this->currentRank);
+            this->calculateMinRank(i);
             this->setCurrentRank(this->currentRank + 1);
 
         }
+    }
+}
+
+void Grails::calculateMinRank(uint32_t node_id){
+    QueueNode* temp2 = index->getNeighborsOfNode(node_id)->getHead();
+    if(index->getNeighborsOfNode(node_id)->getSize() == 0){
+        nodes[node_id].setMinRank(this->currentRank );
+    }
+    else{
+        uint32_t smallest_rank = nodes[temp2->nodeId].getMinRank();
+        while(temp2 != NULL){
+            if(nodes[temp2->nodeId].getMinRank() != -1 && nodes[temp2->nodeId].getMinRank() < smallest_rank){
+                smallest_rank = nodes[temp2->nodeId].getMinRank();
+            }
+            temp2 = temp2->next;
+        }
+        nodes[node_id].setMinRank(smallest_rank);
     }
 }
 
@@ -43,8 +62,10 @@ void Grails::expandNode(uint32_t node){
     while(temp != NULL){
         if(!nodes[temp->nodeId].getVisited()){
             this->expandNode(temp->nodeId);
-            std::cout << "Return from: " << temp->nodeId << std::endl;
+            //std::cout << "Return from: " << temp->nodeId << std::endl;
             nodes[temp->nodeId].setRank(this->currentRank);
+
+            this->calculateMinRank(temp->nodeId);
             this->setCurrentRank(this->currentRank + 1);
         }
         temp = temp->next;
@@ -64,6 +85,14 @@ uint32_t Grails::getCurrentRank() {
 
 void Grails::setCurrentRank(uint32_t rank){
     this->currentRank = rank;
+}
+
+bool Grails::isReachableGrailIndex(uint32_t source_node, uint32_t target_node){
+    return isSubset(getNodesWithOffset(target_node), getNodesWithOffset(source_node));
+}
+
+bool Grails::isSubset(GrailsNode* node1, GrailsNode* node2) {
+    return node1->getMinRank() >= node2->getMinRank() && node1->getRank() <= node2->getRank();
 }
 
 Grails::~Grails(){
