@@ -139,7 +139,7 @@ int main(int argc, char** argv) {
 
     freeVariables(indexExternal, indexInternal, indexSCC);
     delete cc;
-
+    delete scc;
 
     return state;
 }

@@ -5,7 +5,12 @@
 
 // This function is the equivalent to destroyStronglyConnectedComponents
 SCC::~SCC() {
-    
+    free(this->components);
+    free(this->id_belongs_to_component);
+    delete this->stack;
+    delete[] this->visited;
+    delete[] this->lowlink;
+    delete[] this->disc;
 }
 
 /* This function is the equivalent to estimateStronglyConnectedComponents
@@ -43,6 +48,7 @@ void SCC::Tarjan(int graphSize, Index* indexExternal, Index* indexInternal) {
         if(disc[i] == -1)
             this->dfs(i, indexExternal, indexInternal);
     }
+    
     
 }
 
@@ -98,6 +104,8 @@ void SCC::dfs(int u, Index* indexExternal, Index* indexInternal) {
         this->currentComponentsCount++;
         this->currentComponentId++;
     }
+    
+    delete neighborsExt;
 }
 
 /* This function initializes the cursor object ComponentCursor of the SCC
