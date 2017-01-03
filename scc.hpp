@@ -21,8 +21,7 @@
 class SCC {
     private:
         Component* components;
-        uint32_t* id_belongs_to_component;
-        int currentComponentsCount;
+    int currentComponentsCount;
         uint32_t currentComponentId;
         int maxComponentsCount;
         bool* visited;
@@ -49,7 +48,8 @@ class SCC {
         uint32_t findNodeStronglyConnectedComponentID(uint32_t);
         void iterateStronglyConnectedComponentID();
         int estimateShortestPathStronglyConnectedComponents(Index*, Index*, uint32_t, uint32_t, int);
-        
+
+    uint32_t* id_belongs_to_component;
 };
 
 #endif	/* SCC_HPP */
