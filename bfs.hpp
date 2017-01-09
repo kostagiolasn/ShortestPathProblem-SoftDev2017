@@ -17,9 +17,10 @@ private:
 
     int* inQueueExternal;
 
-    Queue* queueInternal;
-    Queue* queueExternal;
-
+    ArrayQueue* queueInternal;
+    ArrayQueue* queueExternal;
+    ArrayQueue* neighborsExt;
+    ArrayQueue* neighborsInt;
 
     size_t graphSize;
 

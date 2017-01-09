@@ -27,9 +27,9 @@ void args_setup(int argc, char* argv[], std::string& fileGraph, std::string& fil
 
 int parseFileGraph(std::string stream, Index* externalIndex, Index* internalIndex);
 
-void freeVariables(Index* indexExternal, Index* indexInternal, Index* indexSCC);
+void freeVariables(Index* indexExternal, Index* indexInternal);
 
-void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal, int, CC*,Grails*,SCC*);
+void parseFileWorkLoad(std::string stream1, std::string stream, Index* indexInternal, Index* indexExternal, int);
 
 void parseFileWorkLoadStatic(std::string stream, Index*, Index*, int, SCC*);
 
@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
     Index* indexExternal = new Index(true);
     Index* indexInternal = new Index();
 
-        
+
     // Parse the file for the graph creation
     int largestNodeId;
     try {
@@ -71,38 +71,17 @@ int main(int argc, char** argv) {
     }
 
     //
-    SCC* scc = new SCC(largestNodeId + 1);
-    scc->Tarjan(largestNodeId + 1, indexExternal, indexInternal);
-
-    Index* indexSCC = new Index(true);
-
-    try {
-
-        createSccIndex(fileGraph, indexSCC, scc);
-    } catch (std::string err) {
-        std::cerr << err << std::endl;
-        state = 2;
-    }
-
-
-    Grails* grailsIndex = new Grails(indexSCC, scc->getCurrentComponentsCount());
-
-    grailsIndex->buildIndex();
 
     //std::cout << grailsIndex->isReachableGrailIndex(0, 1) << std::endl;
     //std::cout << grailsIndex->isReachableGrailIndex(5, 1) << std::endl;
 
-    CC* cc = new CC(largestNodeId + 1);
-
-   
-    
-    cc->findCCAll(indexInternal, indexExternal);
 
 
-    
+
+
     try {
 
-       parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, largestNodeId, cc, grailsIndex, scc);//cc->print();
+       parseFileWorkLoad(fileGraph, fileWorkLoad, indexInternal, indexExternal, largestNodeId);//cc->print();
 
 
     } catch (std::string err) {
@@ -111,35 +90,11 @@ int main(int argc, char** argv) {
     }
 
 
-//    SCC* scc = new SCC(largestNodeId + 1);
-//    scc->Tarjan(largestNodeId + 1, indexExternal, indexInternal);
-    /*try {
 
-       parseFileWorkLoad(fileWorkLoad, indexInternal, indexExternal, largestNodeId, cc);//cc->print();
-
-
-    } catch (std::string err) {
-        std::cerr << err << std::endl;
-        state = 3;
-    }*/
-    //scc->iterateStronglyConnectedComponentID();
-    //std::cout << scc->estimateShortestPathStronglyConnectedComponents(indexInternal, indexExternal, 0, 2);
-    
-//    try {
-//
-//       parseFileWorkLoadStatic(fileWorkLoad, indexInternal, indexExternal, largestNodeId, scc);//cc->print();
-//
-//
-//    } catch (std::string err) {
-//        std::cerr << err << std::endl;
-//        state = 3;
-//    }
-    
     fprintf(stderr, "Time taken: %.2fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
 
-    freeVariables(indexExternal, indexInternal, indexSCC);
-    delete cc;
-    delete scc;
+    freeVariables(indexExternal, indexInternal);
+
 
     return state;
 }
@@ -148,12 +103,12 @@ void printGraph(Index* indexExternal, Buffer* bufferExternal) {
 //    indexExternal->print(bufferExternal);
 }
 
-void freeVariables(Index* indexExternal, Index* indexInternal, Index* indexSCC) {
+void freeVariables(Index* indexExternal, Index* indexInternal) {
     delete indexExternal;
 
     delete indexInternal;
 
-    delete indexSCC;
+
 
 }
 
@@ -291,10 +246,14 @@ void createSccIndex(std::string stream, Index* index, SCC* scc) {
     }
 }
 
-void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExternal, int largestNode, CC* cc, Grails* grailsIndex, SCC* scc) {
+void parseFileWorkLoad(std::string fileGraph, std::string stream, Index* indexInternal, Index* indexExternal, int largestNodeId) {
     char queryType;
+    bool dynamic = true;
     int posaUpdates = 0;
-
+SCC* scc;
+Index* indexSCC;
+Grails* grailsIndex;
+CC* cc;
     int grailsNo = 0;
 
     int idSource, idTarget, err = 0;
@@ -304,13 +263,39 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
     uint32_t ccVersion = 0;
     file.open(stream.c_str());
 
-    BFS* bfs = new BFS(largestNode + 1);
-    cc->setUpdateIndex();
+    BFS* bfs = new BFS(largestNodeId + 1);
 
     while(std::getline(file, line)) {
         std::istringstream iss(line);
-
         queryType = iss.peek();
+        if(queryType == 'S'){
+          dynamic = false;
+          scc = new SCC(largestNodeId + 1);
+          scc->Tarjan(largestNodeId + 1, indexExternal, indexInternal);
+
+          indexSCC = new Index(true);
+
+          try {
+
+              createSccIndex(fileGraph, indexSCC, scc);
+          } catch (std::string err) {
+              std::cerr << err << std::endl;
+          }
+
+          grailsIndex = new Grails(indexSCC, scc->getCurrentComponentsCount());
+
+          grailsIndex->buildIndex();
+          continue;
+        }
+        if(queryType == 'D'){
+          cc = new CC(largestNodeId + 1);
+
+
+
+          cc->findCCAll(indexInternal, indexExternal);
+          cc->setUpdateIndex();
+          continue;
+        }
         if(queryType == 'F'){
             // Process queries here
         }else {
@@ -326,9 +311,8 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
 
             if(queryType == 'Q'){
 
-
+              if(!dynamic){
                 version++;
-               if(cc->sameComponent(idSource, idTarget)) {
 
                    if (grailsIndex->isReachableGrailIndex(scc->id_belongs_to_component[idSource],
                                                           scc->id_belongs_to_component[idTarget])) {
@@ -338,14 +322,19 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
                        posaUpdates++;
                        grailsNo++;
                    }
-               }
-                else {
-                    cout << "-1" << endl;
-                    posaUpdates++;
-                }
+              }else{
 
+                version++;
+                if(cc->sameComponent(idSource, idTarget)){
+                  cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, version) << endl;
+                }else
+                  cout << "-1" << endl;
+
+              }
             }
+
             if(queryType == 'A'){
+
                 indexInternal->addEdge(idTarget, idSource);
                 indexExternal->addEdge(idSource, idTarget);
                 cc->insertNewEdge(idSource, idTarget, ccVersion);
@@ -353,12 +342,10 @@ void parseFileWorkLoad(std::string stream, Index* indexInternal, Index* indexExt
             }
 
         }
-        
+
     }
 
-    cout << "Total Q: " << grailsNo << endl;
-    cout << "No rate: " << posaUpdates << endl;
-    cout << "Grails rate: " << grailsNo << endl;
+
 
     file.close();
 
@@ -382,7 +369,7 @@ void parseFileWorkLoadStatic(std::string stream, Index* indexInternal, Index* in
 
     ofstream myfile;
     myfile.open("example.txt");
-    
+
     while(std::getline(file, line)) {
         std::istringstream iss(line);
 
@@ -402,12 +389,12 @@ void parseFileWorkLoadStatic(std::string stream, Index* indexInternal, Index* in
 
             if(queryType == 'Q'){
 
-               
+
                 version++;
                 //std::cout << scc->estimateShortestPathStronglyConnectedComponents(indexInternal, indexExternal, idSource, idTarget, version) << std::endl;
                 myfile << scc->estimateShortestPathStronglyConnectedComponents(indexInternal, indexExternal, idSource, idTarget, version);
                 myfile << "\n";
-                
+
             }
             if(queryType == 'A'){
                 //indexInternal->addEdge(idTarget, idSource);
@@ -417,7 +404,7 @@ void parseFileWorkLoadStatic(std::string stream, Index* indexInternal, Index* in
             }
 
         }
-        
+
     }
     myfile.close();
 

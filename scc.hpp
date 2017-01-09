@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   scc.hpp
  * Author: nikos
  *
@@ -21,7 +21,7 @@
 class SCC {
     private:
         Component* components;
-    int currentComponentsCount;
+        int currentComponentsCount;
         uint32_t currentComponentId;
         int maxComponentsCount;
         bool* visited;
@@ -29,6 +29,7 @@ class SCC {
         int time;
         int* lowlink;
         int* disc;
+        
     public:
         // Auxiliary functions
 
@@ -40,7 +41,7 @@ class SCC {
         int getCurrentComponentsCount();
         int getMaxComponentsCount();
         Component getComponentAtIndex(uint32_t);
-        
+
         ~SCC();
         SCC(int);
         void Tarjan(int, Index*, Index*);
@@ -53,4 +54,3 @@ class SCC {
 };
 
 #endif	/* SCC_HPP */
-

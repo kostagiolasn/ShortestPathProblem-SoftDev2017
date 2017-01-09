@@ -4,6 +4,7 @@
 #define UINT32_T_MAX (0xffffffff)
 #include <iostream>
 #include "Index.hpp"
+#include "ArrayQueue.hpp"
 using namespace std;
 
 class CC{
@@ -14,7 +15,10 @@ class CC{
         uint32_t graphSize;
         uint32_t ccCounter;
         uint32_t updateIndexSize;
-        
+        ArrayQueue* queue;
+        ArrayQueue* neighbors;
+        ArrayQueue* neighbors2;
+
         int* visited;
     public:
         CC(uint32_t);

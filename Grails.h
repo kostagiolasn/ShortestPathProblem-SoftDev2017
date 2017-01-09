@@ -15,6 +15,7 @@ private:
     GrailsNode* nodes;
     uint32_t size;
     uint32_t currentRank;
+  
 public:
     Grails(Index* index, uint32_t size);
     ~Grails();

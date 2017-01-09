@@ -10,9 +10,10 @@
 
 BFS::BFS(size_t graphSize){
     this->graphSize = graphSize;
-    this->queueInternal = NULL;
-    this->queueExternal = NULL;
-
+    this->queueInternal = new ArrayQueue(graphSize);
+    this->queueExternal = new ArrayQueue(graphSize);
+    this->neighborsExt = new ArrayQueue(graphSize);
+    this->neighborsInt = new ArrayQueue(graphSize);
     //Space Allocation
     this->inQueueInternal = new int[this->graphSize];
 
@@ -32,53 +33,59 @@ BFS::BFS(size_t graphSize){
 BFS::~BFS(){
     delete[] this->inQueueInternal;
     delete[] this->inQueueExternal;
+    delete this->neighborsExt;
+    delete this->neighborsInt;
+    delete this->queueExternal;
+    delete this->queueInternal;
+
 }
 
 
 int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, uint32_t startNodeId, uint32_t targetNodeId, int version){
     int edges = 0;
-    //cout << " version " << version << endl;
+  //  cout << " version " << version << " " << startNodeId << " " << targetNodeId << endl;
 
     uint32_t levelInt;
     uint32_t levelExt;
-    Queue* neighborsExt = NULL;
-    Queue* neighborsInt = NULL;
+    this->queueExternal->Reset();
+    this->queueInternal->Reset();
     int previousInternal = 0;
     int previousExternal = 0;
-    this->queueExternal = new Queue();
-    this->queueExternal->pushBack(startNodeId);
-    this->queueExternal->setLevelBack(0);
-
+    this->queueExternal->Enqueue(startNodeId);
+    this->queueExternal->setLevel(0, startNodeId);
+//cout << this->queueExternal->getLevel(startNodeId) << endl;
 
     inQueueExternal[startNodeId] = version;
 
 
-    this->queueInternal = new Queue();
-    this->queueInternal->pushBack(targetNodeId);
-    this->queueInternal->setLevelBack(0);
+    this->queueInternal->Enqueue(targetNodeId);
+    this->queueInternal->setLevel(0, targetNodeId);
     inQueueInternal[targetNodeId] = version;
 
 
-    while(!this->queueExternal->isEmpty() && !this->queueInternal->isEmpty()){
-        //std::cout << "he" << std::endl;
+    while(!this->queueExternal->IsEmpty() && !this->queueInternal->IsEmpty()){
+      //  std::cout << "he" << std::endl;
 
 
 //        int sizeExt = this->queueExternal->getSizeOfLevel(this->queueExternal->getLevelFront());
 //        int sizeInt = this->queueInternal->getSizeOfLevel(this->queueExternal->getLevelFront());
-        int sizeExt = indexExternal->getNeighborsOfLevel( this->queueExternal, this->queueExternal->getLevelFront());
-        int sizeInt = indexInternal->getNeighborsOfLevel( this->queueInternal, this->queueInternal->getLevelFront());
+        int sizeExt = indexExternal->getNeighborsOfLevel( this->queueExternal, this->queueExternal->getLevel(this->queueExternal->getIdFront()));
+    //   std::cout << "hoss" << std::endl;
+
+        int sizeInt = indexInternal->getNeighborsOfLevel( this->queueInternal, this->queueInternal->getLevel(this->queueInternal->getIdFront()));
+    //   std::cout << "hoss3" << std::endl;
+
         //cout << this->queueExternal->getIdFront() << " has " << sizeExt << endl;
         //cout << this->queueInternal->getIdFront() << " has  " << sizeInt << endl;
-
-        if(neighborsExt != NULL)
-            delete neighborsExt;
-        neighborsExt = indexExternal->getNeighborsOfNode( this->queueExternal->getIdFront());
-
+      // cout << sizeExt << " " << sizeInt << endl;
+        neighborsExt->Reset();
+        indexExternal->getNeighborsOfNode(this->neighborsExt, this->queueExternal->getIdFront());
 
 
-        if(neighborsInt != NULL)
-            delete neighborsInt;
-        neighborsInt = indexInternal->getNeighborsOfNode(this->queueInternal->getIdFront());
+
+
+        neighborsInt->Reset();
+        indexInternal->getNeighborsOfNode(this->neighborsInt, this->queueInternal->getIdFront());
         //if(this->queueInternal->getIdFront() == 229111)
           //neighborsInt->print();
         bool internal = false;
@@ -87,39 +94,32 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, uint32_t s
 
 
 
-        if(internal && !this->queueExternal->isEmpty()){
+        if(internal && !this->queueExternal->IsEmpty()){
             int i;
             previousExternal++;
-            levelExt = this->queueExternal->getLevelFront();
-            uint32_t markedNodeExt = this->queueExternal->popFront();
+            levelExt = this->queueExternal->getLevel(this->queueExternal->getIdFront());
+            uint32_t markedNodeExt = this->queueExternal->Dequeue();
+    //    cout << "o " << markedNodeExt << "  exei level " << levelExt << endl;
             inQueueExternal[markedNodeExt] = version;
 
 
-            while(!neighborsExt->isEmpty()){
+            while(!neighborsExt->IsEmpty()){
 
-                uint32_t neighbourExt = neighborsExt->popFront();
+                uint32_t neighbourExt = neighborsExt->Dequeue();
                 if(neighbourExt != UINT32_T_MAX){
 
 
                     if(inQueueExternal[neighbourExt] != version){
-                        queueExternal->pushBack(neighbourExt);
-                        queueExternal->setLevelBack(levelExt + 1);
+                        queueExternal->Enqueue(neighbourExt);
+                        queueExternal->setLevel(levelExt + 1, neighbourExt);
 
 
                         inQueueExternal[neighbourExt] = version;
                         if(inQueueInternal[neighbourExt] == version){
-                            edges = queueExternal->getLevelOf(neighbourExt) + queueInternal->getLevelOf(neighbourExt);
+                            edges = queueExternal->getLevel(neighbourExt) + queueInternal->getLevel(neighbourExt);
 
                             levelInt = levelExt = 0;
-                            if(this->queueInternal != NULL)
-                                delete this->queueInternal;
-                            if(this->queueExternal != NULL)
-                                delete this->queueExternal;
 
-                                if(neighborsInt != NULL)
-                                    delete neighborsInt;
-                                if(neighborsExt != NULL)
-                                    delete neighborsExt;
                             return edges;
 
                         }
@@ -133,42 +133,34 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, uint32_t s
 
         //cout << "int " << endl;
         //neighborsInt->print();
-        if(!internal && !this->queueInternal->isEmpty() ){
+        if(!internal && !this->queueInternal->IsEmpty() ){
             int i;
             //cout << "mphka gia to deutero" << endl;
             previousInternal++;
-            levelInt = this->queueInternal->getLevelFront();
-            uint32_t markedNodeInt = this->queueInternal->popFront();
-            inQueueInternal[markedNodeInt] = version ;
-            //cout << "Int: I popped " << markedNodeInt << endl;
+            levelInt = this->queueInternal->getLevel(this->queueInternal->getIdFront());
+            uint32_t markedNodeInt = this->queueInternal->Dequeue();
+           //cout << "o " << markedNodeInt << "  exei level " << levelInt << " " << targetNodeId<< endl;
 
-            while(!neighborsInt->isEmpty()){
-              //cout << "tha valw tous geitones tou " << endl;
-                uint32_t neighbourInt = neighborsInt->popFront();
+            inQueueInternal[markedNodeInt] = version ;
+            while(!neighborsInt->IsEmpty()){
+          //    cout << "tha valw tous geitones tou " << markedNodeInt << endl;
+
+                uint32_t neighbourInt = neighborsInt->Dequeue();
                 if(neighbourInt != UINT32_T_MAX){
 
 
                     if(inQueueInternal[neighbourInt] != version){
 
-                        queueInternal->pushBack(neighbourInt);
-                        queueInternal->setLevelBack(levelInt + 1);
+                        queueInternal->Enqueue(neighbourInt);
+                        queueInternal->setLevel(levelInt + 1, neighbourInt);
 
-                        //cout << "Int: I pushed " << neighbourInt << endl;
                         inQueueInternal[neighbourInt] = version;
                         if(inQueueExternal[neighbourInt] == version){
-                            edges = queueExternal->getLevelOf(neighbourInt) + queueInternal->getLevelOf(neighbourInt);
+                            edges = queueExternal->getLevel(neighbourInt) + queueInternal->getLevel(neighbourInt);
 
                             previousInternal = previousExternal = 0;
                             levelInt = levelExt = 0;
-                            if(this->queueInternal != NULL)
-                                delete this->queueInternal;
-                            if(this->queueExternal != NULL)
-                                delete this->queueExternal;
 
-                                if(neighborsInt != NULL)
-                                    delete neighborsInt;
-                                if(neighborsExt != NULL)
-                                    delete neighborsExt;
 
                             return edges;
                         }
@@ -181,17 +173,7 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, uint32_t s
 
     }
 
-    if(this->queueInternal != NULL)
-        delete this->queueInternal;
-    if(this->queueExternal != NULL)
-        delete this->queueExternal;
 
-    if(neighborsInt != NULL)
-        delete neighborsInt;
-    if(neighborsExt != NULL)
-        delete neighborsExt;
-
-    levelInt = levelExt = 0;
 
     return -1;
 }
