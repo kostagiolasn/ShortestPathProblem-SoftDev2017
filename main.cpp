@@ -326,7 +326,7 @@ void parseFileWorkLoad(std::string fileGraph, std::string stream, Index* indexIn
 
                     if (grailsIndex->isReachableGrailIndex(scc->id_belongs_to_component[idSource],
                                                            scc->id_belongs_to_component[idTarget])) {
-                        cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, jobNumber) << endl;
+                        cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, jobNumber, -1) << endl;
                     } else {
                         cout << "-1" << endl;
                     }
@@ -334,7 +334,7 @@ void parseFileWorkLoad(std::string fileGraph, std::string stream, Index* indexIn
 
                     jobNumber++;
                     if(cc->sameComponent(idSource, idTarget)){
-                        cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, jobNumber) << endl;
+                        cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, jobNumber, currVersion) << endl;
                     }else
                         cout << "-1" << endl;
 

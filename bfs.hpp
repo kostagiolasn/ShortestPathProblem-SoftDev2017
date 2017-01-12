@@ -20,7 +20,9 @@ private:
     ArrayQueue* queueInternal;
     ArrayQueue* queueExternal;
     ArrayQueue* neighborsExt;
+    ArrayQueue* neighborsExtEdge;
     ArrayQueue* neighborsInt;
+    ArrayQueue* neighborsIntEdge;
 
     size_t graphSize;
 
@@ -29,7 +31,7 @@ public:
     BFS(size_t);
     ~BFS();
 
-    int findShortestPath(Index*, Index*,  uint32_t, uint32_t,  int);
+    int findShortestPath(Index*, Index*,  uint32_t, uint32_t,  int, int);
 
 
 };
