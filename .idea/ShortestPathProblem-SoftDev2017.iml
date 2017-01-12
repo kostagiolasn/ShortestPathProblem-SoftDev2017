@@ -5,36 +5,44 @@
       <sourceFolder url="file://$MODULE_DIR$/bucket.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/cc.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Buffer.hpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/bucket.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/bfs.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/HashTable.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/IndexNode.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Buffer.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/stack.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Grails.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Job.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GrailsNode.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/graphLibrary.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Index.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Grails.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/IndexNode.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/queue.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ArrayQueue.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/stack.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/scc.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Component.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Job.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/graphLibrary.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ArrayQueue.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/HashTable.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/scc.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Component.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ComponentCursor.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Index.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/ComponentCursor.hpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/BufferNode.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/queue.hpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/HashTable.hpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/scc.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GrailsNode.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BufferNode.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/JobQueue.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/JobScheduler.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/IndexNode.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/bfs.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ComponentCursor.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/queue.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Index.hpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/bucket.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BufferNode.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/cc.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/JobQueue.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/JobScheduler.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/bfs.cpp" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />

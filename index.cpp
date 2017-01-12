@@ -20,7 +20,7 @@ Index::~Index() {
 	delete buffer;
 }
 
-void Index::addEdge(uint32_t sourceId, uint32_t targetId) {
+void Index::addEdge(uint32_t sourceId, uint32_t targetId, uint32_t currentVersion) {
 
 	int newSize = size;
 	while (sourceId >= newSize)
@@ -49,7 +49,7 @@ void Index::addEdge(uint32_t sourceId, uint32_t targetId) {
         indexNodes[sourceId].setOffsetLast(newPosInBuffer);
     }
 
-	bufferNode->addNodeId(targetId);
+	bufferNode->addNodeId(targetId, currentVersion);
 }
 
 void Index::increaseIndex(int newSize) {
@@ -94,3 +94,40 @@ Queue* Index::getNeighborsOfNode(uint32_t nodeId) {
 					return false;
 				else return true;
 		}
+//////////////////
+		void Index::getNeighborsOfNode(ArrayQueue* queue, uint32_t nodeId) {
+			int posInBuffer = indexNodes[nodeId].getOffsetFirst();
+
+			while (posInBuffer != -1) {
+				BufferNode* bufferNode = buffer->getBufferNodeByOffset(posInBuffer);
+				for (int i = 0; i < bufferNode->getNextAvailable(); i++)
+					queue->Enqueue(bufferNode->getNodeIdInArray(i));
+
+				posInBuffer = bufferNode->getNextOffset();
+			}
+
+		}
+
+		int Index::getNeighborsOfNodeSize(ArrayQueue* queue, uint32_t nodeId) {
+			int posInBuffer = indexNodes[nodeId].getOffsetFirst();
+			int size = 0;
+			while (posInBuffer != -1) {
+				BufferNode* bufferNode = buffer->getBufferNodeByOffset(posInBuffer);
+				for (int i = 0; i < bufferNode->getNextAvailable(); i++)
+					size++;
+				posInBuffer = bufferNode->getNextOffset();
+			}
+		return size;
+		}
+		int Index::getNeighborsOfLevel( ArrayQueue* queue, int level){
+					//	cout << "level " << level << endl;
+		        int size = 0;
+						int front = queue->getFrontPointer(), rear = queue->getRearPointer();
+
+		        for(int i = front; i < rear + 1; i++){
+						//	cout << "node: " << queue->getLevel(i) << endl;
+								if(queue->getLevel(queue->getNodeId(i)) == level)
+									size  =  size + this->getNeighborsOfNodeSize(queue, queue->getNodeId(i));
+		        }
+		        return size;
+		    }

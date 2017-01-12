@@ -18,7 +18,7 @@ public:
 	int getNextOffset();
 	void setNextOffset(int);	
 	void initialize();
-	void addNodeId(uint32_t);
+	void addNodeId(uint32_t,uint32_t);
 };
 
 

@@ -1,4 +1,4 @@
- #ifndef __INDEX_HPP__
+#ifndef __INDEX_HPP__
 #define __INDEX_HPP__
 
 #define INDEX_SIZE 10000
@@ -7,6 +7,7 @@
 #include "IndexNode.hpp"
 #include "Buffer.hpp"
 #include "queue.hpp"
+#include "ArrayQueue.hpp"
 
 class Index {
 private:
@@ -19,9 +20,12 @@ private:
 public:
 	Index(bool = 0);
 	~Index();
-	void addEdge(uint32_t, uint32_t);
+	void addEdge(uint32_t, uint32_t, uint32_t);
 	Queue* getNeighborsOfNode(uint32_t);
 	uint32_t getNeighborsOfLevel(Queue*, uint32_t);
+	void getNeighborsOfNode(ArrayQueue* , uint32_t);
+	int getNeighborsOfNodeSize(ArrayQueue*, uint32_t);
+	int getNeighborsOfLevel(ArrayQueue*, int);
 	bool isAllocated(uint32_t nodeId);
 };
 
