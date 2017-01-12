@@ -4,6 +4,10 @@ uint32_t BufferNode::getNodeIdInArray(int pos) {
 	return nodeIds[pos];
 }
 
+uint32_t BufferNode::getPropertyInArray(int pos) {
+    return propertyIds[pos];
+}
+
 int BufferNode::getNextAvailable() {
 	return nextAvailable;
 }
@@ -25,6 +29,8 @@ void BufferNode::initialize() {
 	nextOffset = -1;
 }
 
-void BufferNode::addNodeId(uint32_t nodeId) {
-	nodeIds[nextAvailable++] = nodeId;
+void BufferNode::addNodeId(uint32_t nodeId, uint32_t currentVersion) {
+	nodeIds[nextAvailable] = nodeId;
+	propertyIds[nextAvailable] = currentVersion;
+	nextAvailable++;
 }

@@ -4,6 +4,8 @@ project(ShortestPathProblem_SoftDev2017)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES
+    ArrayQueue.cpp
+    ArrayQueue.hpp
     bfs.cpp
     bfs.hpp
     bucket.cpp
@@ -30,6 +32,10 @@ set(SOURCE_FILES
     Index.hpp
     IndexNode.cpp
     IndexNode.hpp
+    Job.cpp
+    Job.hpp
+    JobQueue.cpp
+    JobQueue.hpp
     main.cpp
     queue.cpp
     queue.hpp
@@ -37,6 +43,6 @@ set(SOURCE_FILES
     scc.hpp
     stack.cpp
     stack.hpp
-        )
+        Job.cpp Job.hpp JobScheduler.cpp JobScheduler.hpp)
 
 add_executable(ShortestPathProblem_SoftDev2017 ${SOURCE_FILES})

@@ -20,6 +20,7 @@
 #include "cc.hpp"
 #include "scc.hpp"
 #include "Grails.h"
+#include "JobScheduler.hpp"
 
 void printGraph(Index*, Buffer*);
 
@@ -81,7 +82,7 @@ int main(int argc, char** argv) {
 
     try {
 
-       parseFileWorkLoad(fileGraph, fileWorkLoad, indexInternal, indexExternal, largestNodeId);//cc->print();
+        parseFileWorkLoad(fileGraph, fileWorkLoad, indexInternal, indexExternal, largestNodeId);//cc->print();
 
 
     } catch (std::string err) {
@@ -174,13 +175,13 @@ int parseFileGraph(std::string stream, Index* externalIndex, Index* internalInde
             if(idTarget > largestNodeId)
                 largestNodeId = idTarget;
             //std::cout << idSource << " --> " << idTarget << std::endl;
-            externalIndex->addEdge(idSource, idTarget);
+            externalIndex->addEdge(idSource, idTarget, 0);
 
 
 
 
 
-            internalIndex->addEdge(idTarget, idSource);
+            internalIndex->addEdge(idTarget, idSource, 0);
 
 
         }
@@ -227,7 +228,7 @@ void createSccIndex(std::string stream, Index* index, SCC* scc) {
             idTarget = scc->id_belongs_to_component[idTarget];
 
             if (! (idSource == idTarget)){
-                index->addEdge(idSource, idTarget);
+                index->addEdge(idSource, idTarget, 0);
             }
 
 
@@ -248,53 +249,55 @@ void createSccIndex(std::string stream, Index* index, SCC* scc) {
 
 void parseFileWorkLoad(std::string fileGraph, std::string stream, Index* indexInternal, Index* indexExternal, int largestNodeId) {
     char queryType;
+    char previousQueryType = '-';
     bool dynamic = true;
-    int posaUpdates = 0;
-SCC* scc;
-Index* indexSCC;
-Grails* grailsIndex;
-CC* cc;
-    int grailsNo = 0;
+    int currVersion = 0;
+    SCC* scc;
+    Index* indexSCC;
+    Grails* grailsIndex;
+    CC* cc;
 
     int idSource, idTarget, err = 0;
     ifstream file;
     std::string line;
-    int version = 0;
+    int jobNumber = 0;
     uint32_t ccVersion = 0;
     file.open(stream.c_str());
 
     BFS* bfs = new BFS(largestNodeId + 1);
 
+    JobScheduler* scheduler = new JobScheduler(1);
+
     while(std::getline(file, line)) {
         std::istringstream iss(line);
         queryType = iss.peek();
         if(queryType == 'S'){
-          dynamic = false;
-          scc = new SCC(largestNodeId + 1);
-          scc->Tarjan(largestNodeId + 1, indexExternal, indexInternal);
+            dynamic = false;
+            scc = new SCC(largestNodeId + 1);
+            scc->Tarjan(largestNodeId + 1, indexExternal, indexInternal);
 
-          indexSCC = new Index(true);
+            indexSCC = new Index(true);
 
-          try {
+            try {
 
-              createSccIndex(fileGraph, indexSCC, scc);
-          } catch (std::string err) {
-              std::cerr << err << std::endl;
-          }
+                createSccIndex(fileGraph, indexSCC, scc);
+            } catch (std::string err) {
+                std::cerr << err << std::endl;
+            }
 
-          grailsIndex = new Grails(indexSCC, scc->getCurrentComponentsCount());
+            grailsIndex = new Grails(indexSCC, scc->getCurrentComponentsCount());
 
-          grailsIndex->buildIndex();
-          continue;
+            grailsIndex->buildIndex();
+            continue;
         }
         if(queryType == 'D'){
-          cc = new CC(largestNodeId + 1);
+            cc = new CC(largestNodeId + 1);
 
 
 
-          cc->findCCAll(indexInternal, indexExternal);
-          cc->setUpdateIndex();
-          continue;
+            cc->findCCAll(indexInternal, indexExternal);
+            cc->setUpdateIndex();
+            continue;
         }
         if(queryType == 'F'){
             // Process queries here
@@ -310,35 +313,47 @@ CC* cc;
 
 
             if(queryType == 'Q'){
+                Job* job = new Job();
+                job->setType('Q');
+                job->setNodeFrom(idSource);
+                job->setNodeTo(idTarget);
+                job->setJobNumber(jobNumber);
 
-              if(!dynamic){
-                version++;
+                scheduler->pushJob(job);
 
-                   if (grailsIndex->isReachableGrailIndex(scc->id_belongs_to_component[idSource],
-                                                          scc->id_belongs_to_component[idTarget])) {
-                       cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, version) << endl;
-                   } else {
-                       cout << "-1" << endl;
-                       posaUpdates++;
-                       grailsNo++;
-                   }
-              }else{
+                if(!dynamic){
+                    jobNumber++;
 
-                version++;
-                if(cc->sameComponent(idSource, idTarget)){
-                  cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, version) << endl;
-                }else
-                  cout << "-1" << endl;
+                    if (grailsIndex->isReachableGrailIndex(scc->id_belongs_to_component[idSource],
+                                                           scc->id_belongs_to_component[idTarget])) {
+                        cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, jobNumber) << endl;
+                    } else {
+                        cout << "-1" << endl;
+                    }
+                }else{
 
-              }
+                    jobNumber++;
+                    if(cc->sameComponent(idSource, idTarget)){
+                        cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, jobNumber) << endl;
+                    }else
+                        cout << "-1" << endl;
+
+                }
+                previousQueryType = 'Q';
             }
+
 
             if(queryType == 'A'){
 
-                indexInternal->addEdge(idTarget, idSource);
-                indexExternal->addEdge(idSource, idTarget);
+                if(previousQueryType == 'Q'){
+                    currVersion++;
+                }
+
+                indexInternal->addEdge(idTarget, idSource,currVersion);
+                indexExternal->addEdge(idSource, idTarget,currVersion);
                 cc->insertNewEdge(idSource, idTarget, ccVersion);
                 ccVersion++;
+                previousQueryType = 'A';
             }
 
         }
@@ -348,11 +363,13 @@ CC* cc;
 
 
     file.close();
+//    scheduler->printQueue();
 
     if(err) {
         throw std::string("Work Load File input : unexpected format, a is : " + queryType);
     }
     delete bfs;
+    delete scheduler;
 
 
 }
