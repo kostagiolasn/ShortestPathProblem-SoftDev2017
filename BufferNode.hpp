@@ -13,6 +13,7 @@ private:
 	int nextOffset;
 public:
 	uint32_t getNodeIdInArray(int);
+	uint32_t getPropertyInArray(int);
 	int getNextAvailable();
 	void setNextAvailable(int);
 	int getNextOffset();

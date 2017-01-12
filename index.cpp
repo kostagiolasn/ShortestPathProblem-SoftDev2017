@@ -108,6 +108,20 @@ Queue* Index::getNeighborsOfNode(uint32_t nodeId) {
 
 		}
 
+
+    void Index::getNeighborsPropertyOfNode(ArrayQueue* queue, uint32_t nodeId) {
+        int posInBuffer = indexNodes[nodeId].getOffsetFirst();
+
+        while (posInBuffer != -1) {
+            BufferNode* bufferNode = buffer->getBufferNodeByOffset(posInBuffer);
+            for (int i = 0; i < bufferNode->getNextAvailable(); i++)
+                queue->Enqueue(bufferNode->getPropertyInArray(i));
+
+            posInBuffer = bufferNode->getNextOffset();
+        }
+
+    }
+
 		int Index::getNeighborsOfNodeSize(ArrayQueue* queue, uint32_t nodeId) {
 			int posInBuffer = indexNodes[nodeId].getOffsetFirst();
 			int size = 0;
@@ -117,8 +131,10 @@ Queue* Index::getNeighborsOfNode(uint32_t nodeId) {
 					size++;
 				posInBuffer = bufferNode->getNextOffset();
 			}
-		return size;
+
+			return size;
 		}
+
 		int Index::getNeighborsOfLevel( ArrayQueue* queue, int level){
 					//	cout << "level " << level << endl;
 		        int size = 0;

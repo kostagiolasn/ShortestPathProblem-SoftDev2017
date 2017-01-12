@@ -22,8 +22,10 @@ public:
 	~Index();
 	void addEdge(uint32_t, uint32_t, uint32_t);
 	Queue* getNeighborsOfNode(uint32_t);
+
 	uint32_t getNeighborsOfLevel(Queue*, uint32_t);
 	void getNeighborsOfNode(ArrayQueue* , uint32_t);
+	void getNeighborsPropertyOfNode(ArrayQueue* queue, uint32_t nodeId);
 	int getNeighborsOfNodeSize(ArrayQueue*, uint32_t);
 	int getNeighborsOfLevel(ArrayQueue*, int);
 	bool isAllocated(uint32_t nodeId);
