@@ -119,7 +119,7 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, uint32_t s
                   neighbourExtEdge = neighborsExtEdge->Dequeue();
                 if(neighbourExt != UINT32_T_MAX){
 
-                  if(currVersion != -1 && neighborsExtEdge == currVersion){
+                  if(currVersion != -1 && neighbourExtEdge == currVersion){
                     if(inQueueExternal[neighbourExt] != version){
                         queueExternal->Enqueue(neighbourExt);
                         queueExternal->setLevel(levelExt + 1, neighbourExt);
