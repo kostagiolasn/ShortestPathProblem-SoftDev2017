@@ -18,11 +18,12 @@ public:
     JobScheduler(int execution_threads);
 
     int getExecution_threads() const;
-
     void setExecution_threads(int execution_threads);
 
     void pushJob(Job* job);
     Job* popJob();
+
+    bool queueIsEmpty();
 
     void printQueue();
 };

@@ -18,4 +18,7 @@ all:
 	g++ -c -g -std=c++11 main.cpp
 	g++ -c -g -std=c++11 stack.cpp
 	g++ -c -g -std=c++11 ArrayQueue.cpp
-	g++ main.o cc.o Grails.o stack.o ArrayQueue.o GrailsNode.o Component.o ComponentCursor.o scc.o queue.o bfs.o bucket.o Buffer.o BufferNode.o graphLibrary.o HashTable.o Index.o IndexNode.o
+	g++ -c -g -std=c++11 Job.cpp
+	g++ -c -g -std=c++11 JobQueue.cpp
+	g++ -c -g -std=c++11 JobScheduler.cpp
+	g++ main.o cc.o Grails.o Job.o JobQueue.o JobScheduler.o stack.o ArrayQueue.o GrailsNode.o Component.o ComponentCursor.o scc.o queue.o bfs.o bucket.o Buffer.o BufferNode.o graphLibrary.o HashTable.o Index.o IndexNode.o
