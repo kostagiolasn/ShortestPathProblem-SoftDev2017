@@ -25,6 +25,11 @@ Job* JobScheduler::popJob() {
 }
 
 
+bool JobScheduler::queueIsEmpty() {
+    return queue->isEmpty();
+}
+
+
 void JobScheduler::printQueue() {
     queue->print();
 }

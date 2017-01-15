@@ -318,27 +318,30 @@ void parseFileWorkLoad(std::string fileGraph, std::string stream, Index* indexIn
                 job->setNodeFrom(idSource);
                 job->setNodeTo(idTarget);
                 job->setJobNumber(jobNumber);
+                job->setVersion(currVersion);
 
                 scheduler->pushJob(job);
 
-                if(!dynamic){
-                    jobNumber++;
+                jobNumber++;
 
-                    if (grailsIndex->isReachableGrailIndex(scc->id_belongs_to_component[idSource],
-                                                           scc->id_belongs_to_component[idTarget])) {
-                        cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, jobNumber, -1) << endl;
-                    } else {
-                        cout << "-1" << endl;
-                    }
-                }else{
-
-                    jobNumber++;
-                    if(cc->sameComponent(idSource, idTarget)){
-                        cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, jobNumber, currVersion) << endl;
-                    }else
-                        cout << "-1" << endl;
-
-                }
+//                if(!dynamic){
+//                    jobNumber++;
+//
+//                    if (grailsIndex->isReachableGrailIndex(scc->id_belongs_to_component[idSource],
+//                                                           scc->id_belongs_to_component[idTarget])) {
+//                        cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, jobNumber, -1) << endl;
+//                    } else {
+//                        cout << "-1" << endl;
+//                    }
+//                }else{
+//
+//                    jobNumber++;
+//                    if(cc->sameComponent(idSource, idTarget)){
+//                        cout << bfs->findShortestPath(indexInternal, indexExternal, idSource, idTarget, jobNumber, currVersion) << endl;
+//                    }else
+//                        cout << "-1" << endl;
+//
+//                }
                 previousQueryType = 'Q';
             }
 
@@ -365,72 +368,34 @@ void parseFileWorkLoad(std::string fileGraph, std::string stream, Index* indexIn
     file.close();
 //    scheduler->printQueue();
 
+    while(!scheduler->queueIsEmpty()){
+        Job* job;
+        job = scheduler->popJob();
+
+        if(!dynamic){
+
+            if (grailsIndex->isReachableGrailIndex(scc->id_belongs_to_component[job->getNodeFrom()],
+                                                   scc->id_belongs_to_component[job->getNodeTo()])) {
+                cout << bfs->findShortestPath(indexInternal, indexExternal, job->getNodeFrom(), job->getNodeTo(), job->getJobNumber(), 0) << endl;
+            } else {
+                cout << "-1" << endl;
+            }
+        }else{
+
+            if(cc->sameComponent(job->getNodeFrom(), job->getNodeTo())){
+                cout << bfs->findShortestPath(indexInternal, indexExternal, job->getNodeFrom(), job->getNodeTo(), job->getJobNumber(), job->getVersion()) << endl;
+            }else
+                cout << "-1" << endl;
+
+        }
+
+    }
+
     if(err) {
         throw std::string("Work Load File input : unexpected format, a is : " + queryType);
     }
     delete bfs;
     delete scheduler;
-
-
-}
-
-void parseFileWorkLoadStatic(std::string stream, Index* indexInternal, Index* indexExternal, int largestNode, SCC* scc) {
-    char queryType;
-    int idSource, idTarget, err = 0;
-    ifstream file;
-    std::string line;
-    int version = 0;
-    file.open(stream.c_str());
-
-    BFS* bfs = new BFS(largestNode + 1);
-
-    ofstream myfile;
-    myfile.open("example.txt");
-
-    while(std::getline(file, line)) {
-        std::istringstream iss(line);
-
-        queryType = iss.peek();
-        if(queryType == 'F'){
-            // Process queries here
-        }else {
-            if(isdigit(queryType)) {
-                err = 1;
-                break;
-            }
-            else if(!(iss >> queryType >> idSource >> idTarget)) {
-                err = 1;
-                break;
-            }
-
-
-            if(queryType == 'Q'){
-
-
-                version++;
-                //std::cout << scc->estimateShortestPathStronglyConnectedComponents(indexInternal, indexExternal, idSource, idTarget, version) << std::endl;
-                myfile << scc->estimateShortestPathStronglyConnectedComponents(indexInternal, indexExternal, idSource, idTarget, version);
-                myfile << "\n";
-
-            }
-            if(queryType == 'A'){
-                //indexInternal->addEdge(idTarget, idSource);
-                //indexExternal->addEdge(idSource, idTarget);
-                //cc->insertNewEdge(idSource, idTarget, ccVersion);
-                //ccVersion++;
-            }
-
-        }
-
-    }
-    myfile.close();
-
-    file.close();
-
-    if(err) {
-        throw std::string("Work Load File input : unexpected format, a is : " + queryType);
-    }
-    delete bfs;
 
 
 }

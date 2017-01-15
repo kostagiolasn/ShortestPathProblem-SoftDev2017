@@ -133,7 +133,7 @@ void SCC::iterateStronglyConnectedComponentID() {
 int SCC::estimateShortestPathStronglyConnectedComponents(Index* indexInternal, Index* indexExternal, uint32_t sourceNode, uint32_t targetNode, int version) {
     if(this->id_belongs_to_component[sourceNode] == this->id_belongs_to_component[targetNode]) {
         BFS* bfs = new BFS(2700000);
-        return bfs->findShortestPath(indexInternal, indexExternal, sourceNode, targetNode, version);
+        return bfs->findShortestPath(indexInternal, indexExternal, sourceNode, targetNode, version, 0);
     }
     else
         return -1;

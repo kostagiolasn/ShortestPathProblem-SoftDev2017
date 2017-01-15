@@ -93,7 +93,7 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, uint32_t s
         indexInternal->getNeighborsOfNode(this->neighborsInt, this->queueInternal->getIdFront());
         if(currVersion != -1){
           neighborsIntEdge->Reset();
-          indexInternal>getNeighborsPropertyOfNode(this->neighborsIntEdge, this->queueInternal->getIdFront());
+          indexInternal->getNeighborsPropertyOfNode(this->neighborsIntEdge, this->queueInternal->getIdFront());
         }
         //if(this->queueInternal->getIdFront() == 229111)
           //neighborsInt->print();
@@ -119,7 +119,7 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, uint32_t s
                   neighbourExtEdge = neighborsExtEdge->Dequeue();
                 if(neighbourExt != UINT32_T_MAX){
 
-                  if(currVersion != -1 && neighbourExtEdge == currVersion){
+                  if(currVersion != -1 && neighbourExtEdge <= currVersion){
                     if(inQueueExternal[neighbourExt] != version){
                         queueExternal->Enqueue(neighbourExt);
                         queueExternal->setLevel(levelExt + 1, neighbourExt);
@@ -163,7 +163,7 @@ int BFS::findShortestPath(Index* indexInternal, Index* indexExternal, uint32_t s
                   neighbourIntEdge = neighborsIntEdge->Dequeue();
                 if(neighbourInt != UINT32_T_MAX){
 
-                  if(currVersion != -1 && neighbourIntEdge == currVersion){
+                  if(currVersion != -1 && neighbourIntEdge <= currVersion){
                     if(inQueueInternal[neighbourInt] != version){
 
                         queueInternal->Enqueue(neighbourInt);
