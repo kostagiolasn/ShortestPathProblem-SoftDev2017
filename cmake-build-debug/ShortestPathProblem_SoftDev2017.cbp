@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="ShortestPathProblem_SoftDev2017"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ShortestPathProblem_SoftDev2017">
+				<Option output="/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/ShortestPathProblem_SoftDev2017" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/8.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 ShortestPathProblem_SoftDev2017"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ShortestPathProblem_SoftDev2017/fast">
+				<Option output="/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/ShortestPathProblem_SoftDev2017" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/8.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 ShortestPathProblem_SoftDev2017/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Panos/src/ShortestPathProblem-SoftDev2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/ArrayQueue.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/ArrayQueue.hpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/Buffer.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/Buffer.hpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/BufferNode.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/BufferNode.hpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/Component.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/Component.hpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/ComponentCursor.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/ComponentCursor.hpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/Grails.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/Grails.h">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/GrailsNode.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/GrailsNode.h">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/HashTable.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/HashTable.hpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/Index.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/Index.hpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/IndexNode.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/IndexNode.hpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/Job.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/Job.hpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/JobQueue.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/JobQueue.hpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/JobScheduler.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/JobScheduler.hpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/bfs.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/bfs.hpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/bucket.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/bucket.hpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/cc.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/cc.hpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/graphLibrary.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/graphLibrary.hpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/main.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/queue.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/queue.hpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/scc.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/scc.hpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/stack.cpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/stack.hpp">
+			<Option target="ShortestPathProblem_SoftDev2017"/>
+		</Unit>
+		<Unit filename="/Users/Panos/src/ShortestPathProblem-SoftDev2017/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

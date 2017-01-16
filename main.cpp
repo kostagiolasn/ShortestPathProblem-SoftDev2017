@@ -32,8 +32,6 @@ void freeVariables(Index* indexExternal, Index* indexInternal);
 
 void parseFileWorkLoad(std::string stream1, std::string stream, Index* indexInternal, Index* indexExternal, int);
 
-void parseFileWorkLoadStatic(std::string stream, Index*, Index*, int, SCC*);
-
 void createSccIndex(std::string, Index*, SCC*);
 
 
@@ -266,7 +264,7 @@ void parseFileWorkLoad(std::string fileGraph, std::string stream, Index* indexIn
 
     BFS* bfs = new BFS(largestNodeId + 1);
 
-    JobScheduler* scheduler = new JobScheduler(1);
+    JobScheduler* scheduler = new JobScheduler(2);
 
     while(std::getline(file, line)) {
         std::istringstream iss(line);
@@ -366,30 +364,30 @@ void parseFileWorkLoad(std::string fileGraph, std::string stream, Index* indexIn
 
 
     file.close();
-//    scheduler->printQueue();
-
-    while(!scheduler->queueIsEmpty()){
-        Job* job;
-        job = scheduler->popJob();
-
-        if(!dynamic){
-
-            if (grailsIndex->isReachableGrailIndex(scc->id_belongs_to_component[job->getNodeFrom()],
-                                                   scc->id_belongs_to_component[job->getNodeTo()])) {
-                cout << bfs->findShortestPath(indexInternal, indexExternal, job->getNodeFrom(), job->getNodeTo(), job->getJobNumber(), 0) << endl;
-            } else {
-                cout << "-1" << endl;
-            }
-        }else{
-
-            if(cc->sameComponent(job->getNodeFrom(), job->getNodeTo())){
-                cout << bfs->findShortestPath(indexInternal, indexExternal, job->getNodeFrom(), job->getNodeTo(), job->getJobNumber(), job->getVersion()) << endl;
-            }else
-                cout << "-1" << endl;
-
-        }
-
-    }
+    scheduler->printQueue();
+//
+//    while(!scheduler->queueIsEmpty()){
+//        Job* job;
+//        job = scheduler->popJob();
+//
+//        if(!dynamic){
+//
+//            if (grailsIndex->isReachableGrailIndex(scc->id_belongs_to_component[job->getNodeFrom()],
+//                                                   scc->id_belongs_to_component[job->getNodeTo()])) {
+//                cout << bfs->findShortestPath(indexInternal, indexExternal, job->getNodeFrom(), job->getNodeTo(), job->getJobNumber(), 0) << endl;
+//            } else {
+//                cout << "-1" << endl;
+//            }
+//        }else{
+//
+//            if(cc->sameComponent(job->getNodeFrom(), job->getNodeTo())){
+//                cout << bfs->findShortestPath(indexInternal, indexExternal, job->getNodeFrom(), job->getNodeTo(), job->getJobNumber(), job->getVersion()) << endl;
+//            }else
+//                cout << "-1" << endl;
+//
+//        }
+//
+//    }
 
     if(err) {
         throw std::string("Work Load File input : unexpected format, a is : " + queryType);
@@ -399,3 +397,4 @@ void parseFileWorkLoad(std::string fileGraph, std::string stream, Index* indexIn
 
 
 }
+
