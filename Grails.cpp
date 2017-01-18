@@ -22,7 +22,6 @@ Grails::Grails(Index* index, uint32_t size) {
 void Grails::buildIndex(){
     expandNode(0);
     nodes[0].setRank(this->currentRank);
-    std::cout << "Return from: 0" << std::endl;
     this->calculateMinRank(0);
     this->setCurrentRank(this->currentRank + 1);
     for(uint32_t i=0; i<size; i++){

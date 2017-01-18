@@ -6,7 +6,33 @@
 
 JobScheduler::JobScheduler(int execution_threads){
     this->queue = new JobQueue();
+
+    tids = (pthread_t*) malloc(sizeof(pthread_t)*execution_threads);
+    for(int i = 0; i < execution_threads; i++)
+    {
+        pthread_create(&tids[i], NULL, JobScheduler::runJob, this);
+    }
+
 }
+
+
+void* JobScheduler::runJob(void* schedulerPtr){
+    JobScheduler* scheduler = (JobScheduler*) schedulerPtr;
+
+    if(!scheduler->queueIsEmpty()){
+        Job* job = scheduler->popJob();
+
+        cout << "Running da job: " << job->getJobNumber() << endl;
+    }
+    else{
+        cout << "This thread will die!" << endl;
+    }
+
+
+    pthread_exit(NULL);
+
+}
+
 
 int JobScheduler::getExecution_threads() const {
     return execution_threads;
@@ -32,6 +58,10 @@ bool JobScheduler::queueIsEmpty() {
 
 void JobScheduler::printQueue() {
     queue->print();
+}
+
+JobScheduler::~JobScheduler() {
+    delete [] tids;
 }
 
 
